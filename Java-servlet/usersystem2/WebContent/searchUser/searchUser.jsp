@@ -11,7 +11,8 @@
 
 <%--入力フォームの作成 --%>
 <form action = "/usersystem2/SearchUserCheck" method = "post">
-<p>ユーザーID：<input type ="text" name ="userId"><p>
+<p>ユーザーID：<input type ="text" name ="userId" minlength="8" maxlength="8"><p>
+<p>パスワード：<input type = "password" name = "password" minlength="8" maxlength="20"></p>
 <%--//検索内容を確認するページへ移動(SearchUserCheck.java) --%>
 <input type = "submit" value ="検索結果画面へ">
 </form>
