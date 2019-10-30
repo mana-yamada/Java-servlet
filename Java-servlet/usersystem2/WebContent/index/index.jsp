@@ -1,6 +1,6 @@
 ﻿<%--jspファイルの設定スニペット --%>
 <%@ page contentType="text/html; charset=UTF-8"%>
-<% indexフォルダ %>
+<%--indexフォルダ --%>
 
 <!DOCTYPE html>
 <html lang="ja">

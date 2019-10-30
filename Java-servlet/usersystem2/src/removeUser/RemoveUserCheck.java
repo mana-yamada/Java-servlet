@@ -54,8 +54,22 @@ public class RemoveUserCheck extends HttpServlet {
 			//ユーザーIDが全く入力されていないときのエラー文かつ
 			//ユーザーIDで文字入力されたときかつ
 			//ユーザーIDがint型の範囲を超えたとき
-			userIdError += "<p>ユーザーIDが正しく入力されていません。</p>";
-			stateErrorUserId(userIdError, out);
+			out.println("<!DOCTYPE html>\r\n" +
+					"<html lang=\"ja\">\r\n" +
+					"<head>\r\n" +
+					"<meta charset=\"UTF-8\">\r\n" +
+					"<title></title>\r\n" +
+					"<meta name=\"viewport\" content=\"width=device-width initial-scale=1\">\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+					"<p>ユーザーIDが正しく入力されていません。</p>" + "\r\n" +
+					"<form action = \"/usersystem2/searchUser/searchUser.jsp\" method = \"get\">" +
+					"<input type = \"submit\" value =\"ユーザー検索をやり直す\">"+"\r\n" +
+					"</form>" +
+					"<a href =\"/usersystem2/index/index.jsp\"><input type = \"submit\" value = \"TOPへ戻る\"></a>"+
+					"</body>\r\n" +
+					"</html>\r\n" +
+					"");
 		}
 	}
 
@@ -126,35 +140,29 @@ public class RemoveUserCheck extends HttpServlet {
 		if(r != 0) {
 			outputHTML(out);
 		}else {
-			userIdError += "<p> ・入力したユーザーはユーザー登録されていません</p>";
-			stateErrorUserId(userIdError, out);
+			out.println("<!DOCTYPE html>\r\n" +
+					"<html lang=\"ja\">\r\n" +
+					"<head>\r\n" +
+					"<meta charset=\"UTF-8\">\r\n" +
+					"<title></title>\r\n" +
+					"<meta name=\"viewport\" content=\"width=device-width initial-scale=1\">\r\n" +
+					"</head>\r\n" +
+					"<body>\r\n" +
+					 "<p> ・入力したユーザーはユーザー登録されていません</p>" + "\r\n" +
+					"<form action = \"/usersystem2/searchUser/searchUser.jsp\" method = \"get\">" +
+					"<input type = \"submit\" value =\"ユーザー検索をやり直す\">"+"\r\n" +
+					"</form>" +
+					"<a href =\"/usersystem2/index/index.jsp\"><input type = \"submit\" value = \"TOPへ戻る\"></a>"+
+					"</body>\r\n" +
+					"</html>\r\n" +
+					"");
+
 		}
 
 		//後片付け
 		pstmt.close();
 		//送信済みの処理要求の確定（コミット）
 		con.commit();
-	}
-
-	//userIdがないか正しく入力されていなかったら出力するHTML
-	public void stateErrorUserId(String userIdError , PrintWriter out){
-		out.println("<!DOCTYPE html>\r\n" +
-				"<html lang=\"ja\">\r\n" +
-				"<head>\r\n" +
-				"<meta charset=\"UTF-8\">\r\n" +
-				"<title></title>\r\n" +
-				"<meta name=\"viewport\" content=\"width=device-width initial-scale=1\">\r\n" +
-				"</head>\r\n" +
-				"<body>\r\n" +
-				userIdError + "\r\n" +
-				"<form action = \"/usersystem2/removeUser/removeUser.jsp\" method = \"get\">" +
-				"<input type = \"submit\" value =\"削除画面へ戻る\">"+"\r\n" +
-				"</form>" +
-				"<a href =\"/usersystem2/index/index.jsp\"><input type = \"submit\" value = \"TOPへ戻る\"></a>" +
-
-				"</body>\r\n" +
-				"</html>\r\n" +
-				"");
 	}
 
 	//userIdが正しく入力されて場合に検索結果を出力するHTML

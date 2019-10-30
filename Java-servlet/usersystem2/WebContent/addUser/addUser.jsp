@@ -1,5 +1,5 @@
 ﻿<%@ page contentType="text/html; charset=UTF-8"%>
-<% addUserパッケージ %>
+<%-- addUserパッケージ --%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -18,6 +18,7 @@
 <p>名前(2文字以上50文字以内)：<input type = "text" name = "name" minlength="2" maxlength="50"></p>
 <p>メールアドレス(15文字以上)50文字以内)：<input type ="text" name = "mail" minlength="15" maxlength="50"></p>
 <p>電話番号(8文字以上15文字以内)：<input type = "text" name = "tel" minlength = "8" maxlength="15"></p>
+
 <%--//入力内容を確認するページへ移動(AddUserCheck.java) --%>
 <input type = "submit" value="新規登録">
 </form>

@@ -18,10 +18,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import UsingCrypt.UsingCrypt;
 
-import dosecret.DoSecret;
-import dosecret.SecretSave;
+//import UsingCrypt.UsingCrypt;
 
 @WebServlet("/AddUserCheck")
 public class AddUserCheck extends HttpServlet  {
@@ -31,7 +30,7 @@ public class AddUserCheck extends HttpServlet  {
 	String name;
 	String mail;
 	String tel;
-	String userIdState = "";
+
 	String userIdError = "";
 	String errorMsg = "";
 	String msg = "";
@@ -53,66 +52,28 @@ public class AddUserCheck extends HttpServlet  {
 		mail      = request.getParameter("mail");
 		tel 		 = request.getParameter("tel");
 
-
-		//passwordチェック
-		if(password.length() == 0 || password == null ) {
-			errorMsg += "<p>・パスワードが入力されていません。</p>";
-		}else {
-			msg += "<p>パスワード：*************</p>";
-		}
-		//nameチェック
-		if( name.length() == 0 || name == null) {
-			errorMsg  += "<p>・名前が入力されていません。 </p>";
-		}else {
-			msg += "<p>名前：" + name + "</p>";
-		}
-		//mailチェック
-		if( mail.length() == 0 || mail  == null) {
-			errorMsg += "<p>・メールアドレスが入力されていません。</p>";
-		}else {
-			msg += "<p>メールアドレス：" + mail + "</p>";
-		}
-		//telチェック
-		if( tel.length() == 0 || tel == null) {
-			errorMsg += "<p>・電話番号が入力されていません。</p>";
-			//System.out.println(errorMsg);
-		}else {
-			msg += "<p>電話番号：" + tel + "<p>";
-			//System.out.println(msg);
-		}
-
-
 		//HTML出力
 		response.setContentType("text/html;charset = UTF-8");
 		PrintWriter out = response.getWriter();
 
-		//パスワードを暗号化
-		makeSecretPassword(out);
+		//入力されたものを確認 いずれか1つでも正しく入力されていないものがあったらエラー文をだす
+		if((password.length() == 0 || password == null) || (name.length() == 0 || name == null) ||
+				(mail.length() == 0 || mail  == null) ||(tel.length() == 0 || tel == null) ) {
+			stateErrorInput(out);
+		}else {
+			//パスワードを暗号化⇒メソッド内でドライバ接続、SQL送信
+			makeSecretPassword(out);
+		}
+
 	}
 
-	//パスワードを暗号化するメソッド
-	public void  makeSecretPassword(PrintWriter out) {
-		//データの準備
-		//Initial Vector
-		byte[] iv = RandomStringUtils.randomAlphanumeric(16).getBytes();
-		//暗号解読キー
-		byte[] key = "yamada_2019_key_".getBytes();
-		//読みこんだinitial Vectorと暗号解読キーの保存
-		SecretSave.writeBytes(iv, "iv");
-		SecretSave.writeBytes(key, "secret");
-
-		//暗号化の処理
-		String source = password;
-		String result = "";
+	//passwordの暗号化
+	public void makeSecretPassword(PrintWriter out) {
 		try {
-			//DoSecretオブジェクトの生成
-			 DoSecret c = new DoSecret(SecretSave.readBytes("secret"), SecretSave.readBytes("iv"));
-			//暗号化した文字列を得る
-				result = c.encrypto(source);
-			//暗号化したパスワードをpassword変数へ代入する
-				password = result;
+			UsingCrypt usingCrypt = new UsingCrypt();
+			password = usingCrypt.saveToken(password);
 			//SQLの接続
-				driverConnect(out);
+			driverConnect(out);
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -143,7 +104,9 @@ public class AddUserCheck extends HttpServlet  {
 		}
 	}
 
-	//ユーザーID検索
+
+
+		//ユーザーID検索
 		public void checkUserId(String URL, String USERNAME, String PASS, PrintWriter out) {
 			try {
 				//入力されたuserIdを整数化
@@ -164,15 +127,9 @@ public class AddUserCheck extends HttpServlet  {
 					rs = pstmt.executeQuery();
 					//結果票の処理 //既にユーザーが登録されていたらエラー文を出す
 
-						if(rs.next()) {
-							userIdError += "<p> ・入力したユーザーはユーザー登録されています</p>";
-							//System.out.println(errorMsg);
-							stateErrorUserId(out);
-							//breakを忘れない！！
-						}else {
-							userIdState += "<p>ユーザーID：" + userId + "</p>";
-							//System.out.println(msg);
-						}
+					if(rs.next()) {
+						usedUserId(out);
+					}
 
 					//後片付け
 					rs.close();
@@ -203,14 +160,13 @@ public class AddUserCheck extends HttpServlet  {
 			}catch(NumberFormatException e) {
 				//ユーザーIDが全く入力されていないときのエラー文かつ
 				//ユーザーIDで文字入力されたときかつ
-				//ユーザーIDがint型の範囲を超えたとき
-				userIdError += "<p>ユーザーIDが正しく入力されていません。</p>";
-				stateErrorUserId(out);
+				//ユーザーIDがint型の範囲を超えたときにはエラー文を出す
+				stateErrorInput(out);
 			}
 	}
 
 	//IDが既に別のユーザーで登録されていた時
-	public void stateErrorUserId(PrintWriter out){
+	public void usedUserId(PrintWriter out){
 		//System.out.println(userIdError);
 		out.println("<!DOCTYPE html>\r\n" +
 				"<html lang=\"ja\">\r\n" +
@@ -220,7 +176,28 @@ public class AddUserCheck extends HttpServlet  {
 				"<meta name=\"viewport\" content=\"width=device-width initial-scale=1\">\r\n" +
 				"</head>\r\n" +
 				"<body>\r\n" +
-				userIdError + "\r\n" +
+				"<p>入力したユーザーIDは既に入力されています。</p>" + "\r\n" +
+				"<form action = \"/usersystem2/addUser/addUser.jsp\" method = \"get\">" +
+				"<input type = \"submit\" value =\"新規登録をやり直す\">"+"\r\n" +
+				"</form>" +
+				"<a href =\"/usersystem2/index/index.jsp\"><input type = \"submit\" value = \"TOPへ戻る\"></a>"+
+				"</body>\r\n" +
+				"</html>\r\n" +
+				"");
+	}
+	//ユーザーIDなどの入力欄での入力が正しく入力されていなかった時
+	public void stateErrorInput(PrintWriter out){
+		//System.out.println(userIdError);
+		out.println("<!DOCTYPE html>\r\n" +
+				"<html lang=\"ja\">\r\n" +
+				"<head>\r\n" +
+				"<meta charset=\"UTF-8\">\r\n" +
+				"<title></title>\r\n" +
+				"<meta name=\"viewport\" content=\"width=device-width initial-scale=1\">\r\n" +
+				"</head>\r\n" +
+				"<body>\r\n" +
+				"<p>正しく入力されていない箇所がありました。</p>"
+				+ "<p>お手数ですがもう一度最初からやり直してください。</p>" + "\r\n" +
 				"<form action = \"/usersystem2/addUser/addUser.jsp\" method = \"get\">" +
 				"<input type = \"submit\" value =\"新規登録をやり直す\">"+"\r\n" +
 				"</form>" +
@@ -273,7 +250,11 @@ public class AddUserCheck extends HttpServlet  {
 						"</head>\r\n" +
 						"<body>\r\n" +
 						"<h3>登録が完了しました</h3>"+ "\r\n" +
-						msg +
+						"<p>・ユーザーID：" + userId + "</p>"+
+						"<p>・パスワード：" + "**********</p>"+
+						"<p>・名前：" + name +  "</p>"+
+						"<p>・メールアドレス：" + mail +  "</p>"+
+						"<p>・電話番号：" + tel + "</p>"+
 						"<form action = \"/usersystem2/addUser/addUser.jsp\" method = \"get\">" +
 						"<input type = \"submit\" value =\"新規登録を続ける\">"+"\r\n" +
 						"</form>" +
