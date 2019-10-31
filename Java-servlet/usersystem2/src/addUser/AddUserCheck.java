@@ -31,9 +31,7 @@ public class AddUserCheck extends HttpServlet  {
 	String mail;
 	String tel;
 
-	String userIdError = "";
-	String errorMsg = "";
-	String msg = "";
+
 
 
 	Connection con;
@@ -57,7 +55,7 @@ public class AddUserCheck extends HttpServlet  {
 		PrintWriter out = response.getWriter();
 
 		//入力されたものを確認 いずれか1つでも正しく入力されていないものがあったらエラー文をだす
-		if((password.length() == 0 || password == null) || (name.length() == 0 || name == null) ||
+		if((strUserId.length() == 0 || strUserId == null) || (password.length() == 0 || password == null) || (name.length() == 0 || name == null) ||
 				(mail.length() == 0 || mail  == null) ||(tel.length() == 0 || tel == null) ) {
 			stateErrorInput(out);
 		}else {
@@ -128,6 +126,7 @@ public class AddUserCheck extends HttpServlet  {
 					//結果票の処理 //既にユーザーが登録されていたらエラー文を出す
 
 					if(rs.next()) {
+						//ここで既に登録されているユーザーのIDを使っている場合は「すでに登録されています」とHTMLでエラー文送る
 						usedUserId(out);
 					}
 
