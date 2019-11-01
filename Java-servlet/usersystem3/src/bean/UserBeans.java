@@ -12,6 +12,10 @@ public class UserBeans {
 	//Constructor
 	public UserBeans() {
 	}
+	public UserBeans(int userId, String password) {
+		this.userId = userId;
+		this.password = password;
+	}
 	public UserBeans(int userId, String password, String name, String mail, String tel ) {
 		this.userId = userId;
 		this.password = password;

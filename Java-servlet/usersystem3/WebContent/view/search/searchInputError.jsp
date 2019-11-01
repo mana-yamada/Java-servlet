@@ -1,16 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
+<%@ page import="controller.Search,bean.UserBeans" %>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
 
-<title>検索エラー</title>
+<title>入力エラー</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 </head>
 <body>
-<h3>検索エラー</h3>
-<p>検索エラーが発生しました。恐れ入りますがもう一度最初から登録をやり直してください。</p>
+<h3>入力エラー</h3>
+<p>入力エラーが発生しました。恐れ入りますがもう一度最初から登録をやり直してください。</p>
 <h5><a href = "/usersystem3/Search">入力画面へ戻る</a></h5>
 <h5><a href ="/usersystem3/Login">他のユーザーでログインする</a></h5>
 </body>

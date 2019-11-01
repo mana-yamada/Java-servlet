@@ -11,88 +11,120 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-import javax.servlet.ServletException;
-
 import bean.UserBeans;
-import controller.Add;
 
 public class UsingMysql {
+
+	String url;
+	String userName;
+	String pass;
 
 	Connection con;
 	Connection readCon;
 	PreparedStatement pstmt;
 	ResultSet rs;
 
+	//ユーザー登録前のデータチェックで入力されたユーザーIDのデータが既に登録されていた場合にcontrollerへ送る変数
+	private String userIdUsedError;
+	public String getUserIdUsedError() {
+		return userIdUsedError;
+	}
+	public void setUserIdUsedError(String userIdUsedError) {
+		this.userIdUsedError = userIdUsedError;
+	}
+
+	//ユーザー削除前/検索時にデータチェックで入力されたユーザーIDのデータが登録されていない場合にcontrollerへ送る変数
+	private String userIdNullError;
+
+	public String getUserIdNullError() {
+			return userIdNullError;
+		}
+	public void setUserIdNullError(String userIdNullError) {
+		this.userIdNullError = userIdNullError;
+	}
+
 	//登録前のユーザーIDチェック
-	public void check() {
+	public void addCheck(UserBeans user) {
 		driverConnect();
-		checkUserId();
+		readFile();
+		check(user);
 	}
 	//ユーザー登録
 	public void add(UserBeans user) {
 		driverConnect();
+		readFile();
 		addUser(user);
 	}
+
 	//ユーザー検索
-	public void search() {
+	public void search(UserBeans user) {
 		driverConnect();
-		searchUser();
+		readFile();
+		searchUser(user);
+	}
+
+	//削除前のユーザーIDチェック
+	public void removeCheck(UserBeans user) {
+		driverConnect();
+		readFile();
+		check(user);
 	}
 	//ユーザー削除
-	public void remove() {
+	public void remove(UserBeans user){
 		driverConnect();
-		removeUser();
+		readFile();
+		removeUser(user);
 	}
+
 	//SQLのドライバー調整⇒1回接続
 	private void driverConnect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
 		}catch(ClassNotFoundException e) {
 			System.out.println("ドライバーが正しくセットされていません");
+
 		}
+
+	}
+	//DB接続先のファイル読み込み
+	private void readFile() {
+		//1つのprivateメソッドにする
 		try {
 			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\usersystem3\\MySQLdocs.properties");
 			Properties p = new Properties();
 			p.load(fr);
-			final String URL = p.getProperty("url");
-			final String USERNAME = p.getProperty("userName");
-			final String PASS = p.getProperty("pass");
+			 url = p.getProperty("url");
+			 userName = p.getProperty("userName");
+			 pass = p.getProperty("pass");
 			fr.close();
-			readCon = DriverManager.getConnection(URL,USERNAME,PASS);
 		}catch(FileNotFoundException e) {
 			e.printStackTrace();
+
 		}catch(IOException e) {
 			e.printStackTrace();
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
+
 		}
 	}
 
-	//新規登録時のユーザーIDチェック詳細
-	private void checkUserId()  {
+	//登録前・削除前のデータ確認操作
+	//ユーザー検索操作
+	private void check(UserBeans user)  {
 		try {
-			//Addクラス型の変数
-			Add operateAdd = new Add();
 			try {
 				//①接続・自動コミットモードの解除
-				//con = readCon; 接続済み！？
+				con = DriverManager.getConnection(url,userName,pass);
 				con.setAutoCommit(false);
 				//②SQL送信処理
 				pstmt = con.prepareStatement("SELECT * FROM users WHERE userId = ?");
-				//pstmt.setInt(1, userId);
+				pstmt.setInt(1, user.getUserId());
 				//検索系SQL文を自動組み立て送信
 				rs = pstmt.executeQuery();
-				//結果票の処理 //既にユーザーが登録されていたらエラー文を出す
+				//新規登録前のチェックで入力されたユーザーのデータが既にあった場合
 				if(rs.next()) {
-					try {
-						//Addクラスに戻り、エラーページを呼び出すメソッドを作り出力する
-						operateAdd.userIdError();
-					}catch(ServletException e4) {
-						e4.printStackTrace();
-					}catch(IOException e5) {
-						e5.printStackTrace();
-					}
+					userIdUsedError = "入力されたユーザーIDは既に使われています。";
+					System.out.println("入力されたユーザーIDは既に使われています。");
+				}else {
+					userIdNullError = "入力されたユーザーIDのデータは登録されていません。";
 				}
 				//後片付け
 				rs.close();
@@ -112,54 +144,38 @@ public class UsingMysql {
 				if(con != null) {
 					try {
 						con.close();
-
 					}catch(SQLException e3) {
 						e3.printStackTrace();
 					}
 				}
 			}
 		}catch(NumberFormatException e) {
-			//ユーザーIDが全く入力されていないときのエラー文かつ
-			//ユーザーIDで文字入力されたときかつ
-			//ユーザーIDがint型の範囲を超えたときにはエラー文を出す
-			//Addクラスに戻り、エラーページを呼び出すメソッドを作り出力する
+			e.printStackTrace();
 		}
 	}
 
-	//ユーザーの新規登録データをテーブルに挿入①接続②SQL送信処理③切断
-	//ユーザー登録の実装詳細
+	//ユーザー登録
 	private void addUser(UserBeans user) {
-		//Addクラス型の変数
-		Add addAdd = new Add();
-
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
-			//con = readCon;
+			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
 			pstmt = con.prepareStatement("INSERT INTO users VALUES (?, ?, ?, ?, ?)");
 			//ひな型に値を流し込み
-//			pstmt.setInt(1, userId);
-//			pstmt.setString(2, password);
-//			pstmt.setString(3, name);
-//			pstmt.setString(4,mail);
-//			pstmt.setString(5, tel);
+			pstmt.setInt(1, user.getUserId());
+			pstmt.setString(2, user.getPassword());
+			pstmt.setString(3, user.getName());
+			pstmt.setString(4,user.getMail());
+			pstmt.setString(5, user.getTel());
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
 			//結果票の処理
 			if(r != 0) {
-				try {
-					//Addクラスに戻り、新規登録完了ページへ移動させるメソッドを呼び出す
-					addAdd.addComplete();
-				}catch(ServletException e4) {
-					e4.printStackTrace();
-				}catch(IOException e5) {
-					e5.printStackTrace();
-				}
+				System.out.println("データが正しく登録されました。");
 			}else {
 				System.out.println("データが正しく登録されませんでした。");
-				//Addクラスに戻り、ユーザー登録時のエラー文を出せたら出したい
 			}
 			//後片付け
 			pstmt.close();
@@ -186,28 +202,37 @@ public class UsingMysql {
 	}
 
 	//ユーザー検索画面でのユーザー検索
-	private void searchUser() {
+	private void searchUser(UserBeans user) {
 		try {
-			con = readCon;
+			con = DriverManager.getConnection(url,userName,pass);
+			//con = readCon;
 			//自動コミットモードの解除
 			con.setAutoCommit(false);
 			//SQL送信処理
 			//ひな型
 			pstmt = con.prepareStatement("SELECT * FROM users WHERE userId = ? ");
 			//ひな型に値を流し込み
-			//pstmt.setInt(1,userId);
+			pstmt.setInt(1,user.getUserId());
 			//検索系SQL文を自動組み立て、送信
 			rs = pstmt.executeQuery();
 			//結果票の処理 //ユーザーが登録されていなかったらエラー文を出す
 			if(rs.next()) {
-//					userId = rs.getInt("userId");
-//					password = rs.getString("password");
-//					name = rs.getString("name");
-//					mail = rs.getString("mail");
-//					tel = rs.getString("tel");
-				//searchクラスに戻り、復号するメソッドをつくり呼び出す
+				//SQL上のデータをuserインスタンスへ格納
+				user.setUserId(rs.getInt("userId"));
+				user.setName(rs.getString("name"));
+				user.setMail(rs.getString("mail"));
+				user.setTel(rs.getString("tel"));
+				try {
+					//パスワードを復号化
+					UsingCrypt unLock = new UsingCrypt();
+					String unlockedPassword = unLock.getToken(rs.getString("password")) ;
+						//復号化したSQL上のパスワードをuserインスタンスへ格納
+						user.setPassword(unlockedPassword);
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
 			}else {
-				//searchクラスに戻り、エラーページを呼び出すメソッドを呼び出す
+				userIdNullError = "入力されたユーザーIDのデータは登録されていません。";
 			}
 			//後片付け
 			rs.close();
@@ -234,23 +259,24 @@ public class UsingMysql {
 		}
 	}
 
-	//ユーザーIDの削除
-	private void removeUser(){
+	//ユーザー削除
+	private void removeUser(UserBeans user){
 		try {
-			con = readCon;
+			con = DriverManager.getConnection(url,userName,pass);
+			//con = readCon;
 			//自動コミットモードの解除
 			con.setAutoCommit(false);
 			//SQL送信処理
 			//ひな型
 			pstmt = con.prepareStatement("DELETE FROM users WHERE userId = ? ");
 			//ひな型に値を流し込み
-			//pstmt.setInt(1, userId);
+			pstmt.setInt(1, user.getUserId());
 			//更新系sqlの自動組み立て送信
 			int r = pstmt.executeUpdate();
 			if(r != 0) {
-				//removeクラスに戻り、削除完了ページにフォワードするメソッドをつくり呼び出す
+				System.out.println("データが正しく削除されました");
 			}else {
-				//removeクラスに戻り、エラーページにフォワードするメソッドをつくり呼び出す
+				System.out.println("データが正しく削除されませんでした");
 			}
 			//後片付け
 			pstmt.close();

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="bean.UserBeans" %>
 <%
-UserBeans person = (UserBeans) session.getAttribute("person");
+//UserBeans person = (UserBeans) session.getAttribute("person");
 %>
 
 <!DOCTYPE html>
