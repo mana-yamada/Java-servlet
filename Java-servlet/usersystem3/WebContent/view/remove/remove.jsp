@@ -18,6 +18,9 @@
 <!--  -->
 <input type="submit" value = "確認">
 </form>
+<h5><a href="/usersystem3/Menu">メニュー</a></h5>
+<h5><a href = "/usersystem3/Logout">ログアウト</a></h5>
+
 </body>
 </html>
 

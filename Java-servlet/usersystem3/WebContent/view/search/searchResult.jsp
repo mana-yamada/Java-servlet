@@ -19,7 +19,10 @@
 <p>名前(2文字以上50文字以内)：<%= target.getName() %></p>
 <p>メールアドレス(15文字以上)50文字以内)：<%= target.getMail() %></p>
 <p>電話番号(8文字以上15文字以内)：<%= target.getTel() %></p>
+
 <h5><a href = "/usersystem3/Search?value=back">検索画面へ戻る</a></h5>
+<h5><a href="/usersystem3/Menu?value=target">メニュー</a></h5>
+<h5><a href ="/usersystem3/Logout?value=target">ログアウト</a></h5>
 </body>
 </html>
 

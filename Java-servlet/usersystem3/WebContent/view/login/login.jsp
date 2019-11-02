@@ -15,8 +15,8 @@
 <body>
 <h1>ログイン</h1>
 <form action ="/usersystem3/Login" method="post">
-<p>ユーザーID<input type ="text" minlength ="8" maxlength="8"></p>
-<p>パスワード<input type ="text" minlength ="8" maxlength="20"></p>
+<p>ユーザーID<input type ="text" name ="userId" minlength ="8" maxlength="8"></p>
+<p>パスワード<input type ="password" name = "password" minlength ="8" maxlength="20"></p>
 <input type ="submit" value="ログイン">
 </form>
 <p>初めての方は新規登録を行ってください</p>

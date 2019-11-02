@@ -45,6 +45,15 @@ public class Remove extends HttpServlet {
 			forwardPath = "/view/remove/removeComplete.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 			dispatcher.forward(request, response);
+		}else if(parameter.equals("ng")) {
+			//get Httpsession
+			HttpSession session = request.getSession();
+			//targetインスタンスの削除
+			session.removeAttribute("target");
+			//forwardpath
+			forwardPath = "/view/remove/remove.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			dispatcher.forward(request, response);
 		}
 	}
 

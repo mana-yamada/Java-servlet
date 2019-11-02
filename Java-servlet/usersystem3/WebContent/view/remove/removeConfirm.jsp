@@ -17,8 +17,9 @@
 <p>ユーザーID(8文字の半角数字のみ)：<%= target.getUserId() %></p>
 <p>本当に削除してもよろしいですか？</p>
 <h5><a href = "/usersystem3/Remove?value=ok">削除</a></h5>
-<h5><a href = "/usersystem3/Remove">削除画面へ戻る</a></h5>
-<h5><a href ="/usersystem3/Logout">ログアウト</a></h5>
+<h5><a href = "/usersystem3/Remove?value=ng">削除画面へ戻る</a></h5>
+<h5><a href="/usersystem3/Menu?value=target">メニュー</a></h5>
+<h5><a href ="/usersystem3/Logout?value=target">ログアウト</a></h5>
 </body>
 </html>
 

@@ -12,7 +12,8 @@
 <h3>削除エラー</h3>
 <p>削除しようとしたユーザーIDのデータは登録されていません。恐れ入りますがもう一度最初から登録をやり直してください。</p>
 <h5><a href ="/usersystem3/Remove">削除画面へ戻る</a></h5>
-<h5><a href ="/usersystem3/Login">他のユーザーでログインする</a></h5>
+<h5><a href ="/usersystem3/Logout">ログアウト</a></h5>
+<h5><a href="/usersystem3/view/menu/menu.jsp">メニュー</a></h5>
 </body>
 </html>
 

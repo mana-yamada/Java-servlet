@@ -43,11 +43,17 @@ public class Add extends HttpServlet {
 			//今まで使っていたセッションスコープに保存したインスタンスを削除
 			session.removeAttribute("person");
 
-			//問題なければ登録完了ページへ
+			//登録完了ページへ
 			forwardPath = "/view/add/addComplete.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 			dispatcher.forward(request,response);
-
+		} else if(parameters.equals("ng")) {
+			HttpSession session = request.getSession();
+			session.removeAttribute("person");
+			//forward/新規登録フォームへ
+			forwardPath = "view/add/add.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			dispatcher.forward(request, response);
 		}
 	}
 

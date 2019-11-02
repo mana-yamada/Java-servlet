@@ -20,7 +20,8 @@
 <%--//検索内容を確認するページへ移動(SearchUserCheck.java) --%>
 <input type = "submit" value ="検索結果画面へ">
 </form>
-<h5><a href = "/usersystem3/view/menu/menu.jsp">メニューへ戻る</a></h5>
+<h5><a href = "/usersystem3/Menu">メニュー</a></h5>
+<h5><a href ="/usersystem3/Logout">ログアウト</a></h5>
 </body>
 </html>
 

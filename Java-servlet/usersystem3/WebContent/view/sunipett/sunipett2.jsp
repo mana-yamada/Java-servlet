@@ -15,6 +15,7 @@
 <body>
 
 <p></p>
+<h5><a href="/usersystem3/view/menu/menu.jsp">メニュー</a></h5>
 <h5><a href="/usersystem3/ ">確認する</a></h5>
 <h5><a href ="/usersystem3/Login">ログイン</a></h5>
 <h5><a href = "/usersystem3/Logout">ログアウト</a></h5>
@@ -22,6 +23,7 @@
 <h5><a href = "/usersystem3/Search">ユーザー検索</a></h5>
 <h5><a href = "/usersystem3/Remove">ユーザー削除</a></h5>
 <h5><a href ="/usersystem3/  ">戻る</a></h5>
+<h5><a href ="/usersystem3/Logout">ログアウト</a></h5>
 </body>
 </html>
 

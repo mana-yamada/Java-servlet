@@ -10,28 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-@WebServlet("/Logout")
-public class Logout extends HttpServlet {
+@WebServlet("/Menu")
+public class Menu extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-
 		String parameter = request.getParameter("value");
+
 		String forwardPath = "";
 
 		if(parameter == null) {
-			HttpSession session = request.getSession();
-			session.removeAttribute("loginUser");
-
-			forwardPath = "/view/logout/logout.jsp";
+			forwardPath = "/view/menu/menu.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request,response);
+			dispatcher.forward(request, response);
 		}else if(parameter.equals("target")) {
+			//削除確認時に保存したtargetインスタンスを削除
 			HttpSession session = request.getSession();
 			session.removeAttribute("target");
-			session.removeAttribute("loginUser");
-
-			forwardPath = "/view/logout/logout.jsp";
+			//forward
+			forwardPath = "/view/menu/menu.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request,response);
+			dispatcher.forward(request, response);
 		}
+
 	}
 }

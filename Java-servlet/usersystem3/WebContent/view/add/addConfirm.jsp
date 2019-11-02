@@ -21,8 +21,8 @@
 <p>電話番号(8文字以上15文字以内)：<%= person.getTel() %></p>
 <p>登録してもよろしいですか？</p>
 <h5><a href = "/usersystem3/Add?value=ok">登録</a></h5>
-<h5><a href = "/usersystem3/view/add/add.jsp">入力画面へ戻る</a></h5>
-<h5><a href ="/usersystem3/Login">他のユーザーでログインする</a></h5>
+<h5><a href = "/usersystem3/Add?value=ng">入力画面へ戻る</a></h5>
+<h5><a href ="/usersystem3/Login?value=person">他のユーザーでログインする</a></h5>
 </body>
 </html>
 

@@ -50,6 +50,8 @@ public class Search extends HttpServlet {
 
 						//検索データがない時はデータがないエラーページを送る
 						if(search.getUserIdNullError() != null) {
+							//targetインスタンスの削除
+							session.removeAttribute("target");
 							//forward
 							forwardPath = "/view/search/searchUserNull.jsp";
 							RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
@@ -85,27 +87,28 @@ public class Search extends HttpServlet {
 	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		String parameter ="";
-		request.setCharacterEncoding("UTF-8");
-		parameter = request.getParameter("value");
 
-		String forwardPath ="";
+			String parameter ="";
+			request.setCharacterEncoding("UTF-8");
+			parameter = request.getParameter("value");
 
-		if(parameter == null) {
-			//forward
-			forwardPath = "/view/search/search.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
-		}else if (parameter.equals("back")) {
-			//Httpsession get
-			HttpSession session = request.getSession();
-			//検索操作時に使ったtargetインスタンスを削除
-			session.removeAttribute("target");
-			//forward
-			forwardPath = "/view/search/search.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
-		}
+			String forwardPath ="";
+
+			if(parameter == null) {
+				//forward
+				forwardPath = "/view/search/search.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}else if (parameter.equals("back")) {
+				//検索操作時に使ったtargetインスタンスを削除
+				HttpSession session = request.getSession();
+				session.removeAttribute("target");
+				//forward
+				forwardPath = "/view/search/search.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}
+
 	}
 
 }
