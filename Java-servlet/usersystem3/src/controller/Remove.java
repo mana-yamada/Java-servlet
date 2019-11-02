@@ -16,44 +16,52 @@ import model.UsingMysql;
 @WebServlet("/Remove")
 public class Remove extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
-		//get parameter
-		request.setCharacterEncoding("UTF-8");
-		String parameter = request.getParameter("value");
-		//forwardPath
-		String forwardPath ="";
 
-		if(parameter == null) {
-			//forwardpath
-			forwardPath = "/view/remove/remove.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
-		}else if (parameter.equals("ok")) {
-			//get Httpsession
-			HttpSession session = request.getSession();
-			//インスタンスを呼び出し
-			UserBeans target = (UserBeans)session.getAttribute("target");
+		HttpSession session = request.getSession();
+		UserBeans loginUser = (UserBeans)session.getAttribute("loginUser");
 
-			//SQL操作
-			UsingMysql remove = new UsingMysql();
-			remove.remove(target);
+		if(loginUser == null) {
+			String redirectPath = "/usersystem3/index.jsp";
+			response.sendRedirect(redirectPath);
+		}else {
+			//get parameter
+			request.setCharacterEncoding("UTF-8");
+			String parameter = request.getParameter("value");
+			//forwardPath
+			String forwardPath ="";
 
-			//呼び出したセッションスコープに保存したインスタンスを削除
-			session.removeAttribute("target");
+			if(parameter == null) {
+				//forwardpath
+				String redirectPath = "/usersystem3/view/remove/remove.jsp";
+				response.sendRedirect(redirectPath);
+			}else if (parameter.equals("ok")) {
+				//get Httpsession
+				//HttpSession session = request.getSession();
+				//インスタンスを呼び出し
+				UserBeans target = (UserBeans)session.getAttribute("target");
 
-			//SQL操作で正しく登録されているユーザーIDのデータを削除できる場合
-			//forwardpath
-			forwardPath = "/view/remove/removeComplete.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
-		}else if(parameter.equals("ng")) {
-			//get Httpsession
-			HttpSession session = request.getSession();
-			//targetインスタンスの削除
-			session.removeAttribute("target");
-			//forwardpath
-			forwardPath = "/view/remove/remove.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
+				//SQL操作
+				UsingMysql remove = new UsingMysql();
+				remove.remove(target);
+
+				//呼び出したセッションスコープに保存したインスタンスを削除
+				session.removeAttribute("target");
+
+				//SQL操作で正しく登録されているユーザーIDのデータを削除できる場合
+				//forwardpath
+				forwardPath = "/view/remove/removeComplete.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}else if(parameter.equals("ng")) {
+				//get Httpsession
+				//HttpSession session = request.getSession();
+				//targetインスタンスの削除
+				session.removeAttribute("target");
+				//forwardpath
+				forwardPath = "/view/remove/remove.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 

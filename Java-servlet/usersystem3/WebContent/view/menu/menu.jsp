@@ -4,6 +4,7 @@
 <%
   //使用型 変数名 = (使用する型) session.getAttribute("インスタンス名");
 	UserBeans loginUser = (UserBeans)session.getAttribute("loginUser");
+
 %>
 <%--indexフォルダ --%>
 

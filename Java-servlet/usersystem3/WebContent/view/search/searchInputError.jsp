@@ -12,7 +12,7 @@
 <h3>入力エラー</h3>
 <p>入力エラーが発生しました。恐れ入りますがもう一度最初から登録をやり直してください。</p>
 <h5><a href = "/usersystem3/Search">検索画面へ戻る</a></h5>
-<h5><a href="/usersystem3/view/menu/menu.jsp">メニュー</a></h5>
+<h5><a href="/usersystem3/Menu">メニュー</a></h5>
 <h5><a href ="/usersystem3/Logout">ログアウト</a></h5>
 </body>
 </html>

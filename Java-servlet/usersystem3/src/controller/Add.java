@@ -48,6 +48,7 @@ public class Add extends HttpServlet {
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 			dispatcher.forward(request,response);
 		} else if(parameters.equals("ng")) {
+			//入力画面で打った内容を保存したpersonインスタンスを削除
 			HttpSession session = request.getSession();
 			session.removeAttribute("person");
 			//forward/新規登録フォームへ

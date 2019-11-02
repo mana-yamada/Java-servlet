@@ -12,7 +12,7 @@
 <h3>検索エラー</h3>
 <p>検索しようとしたユーザーIDのデータは登録されていません。恐れ入りますがもう一度最初から操作ををやり直してください。</p>
 <h5><a href ="/usersystem3/Search">検索画面へ戻る</a></h5>
-<h5><a href="/usersystem3/view/menu/menu.jsp">メニュー</a></h5>
+<h5><a href="/usersystem3/Menu">メニュー</a></h5>
 <h5><a href ="/usersystem3/Logout">ログアウト</a></h5>
 </body>
 </html>

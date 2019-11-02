@@ -1,7 +1,9 @@
 <%--jspファイルの設定スニペット --%>
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page import="bean.UserBeans" %>
 <%
   //使用型 変数名 = (使用する型) session.getAttribute("インスタンス名");
+UserBeans loginUser = (UserBeans)session.getAttribute("loginUser");
 %>
 <%--indexフォルダ --%>
 

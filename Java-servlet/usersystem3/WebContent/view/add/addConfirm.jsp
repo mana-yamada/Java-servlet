@@ -3,7 +3,8 @@
 <%@ page import="bean.UserBeans" %>
 
 <%
- UserBeans person = (UserBeans)session.getAttribute("person");
+ 	UserBeans person = (UserBeans)session.getAttribute("person");
+
 %>
 <!DOCTYPE html>
 <html lang="ja">

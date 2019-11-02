@@ -23,7 +23,7 @@ public class Login extends HttpServlet {
 
 		if(parameter == null) {
 			//forward
-			forwardPath = "/view/login/login.jsp";
+			forwardPath = "/index.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 			dispatcher.forward(request, response);
 		}else if(parameter.equals("person")) {
@@ -31,7 +31,7 @@ public class Login extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("person");
 			//forward
-			forwardPath = "/view/login/login.jsp";
+			forwardPath = "/index.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 			dispatcher.forward(request, response);
 		}
@@ -77,26 +77,26 @@ public class Login extends HttpServlet {
 					String forwardPath = "/view/login/loginUserNull.jsp";
 					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 					dispatcher.forward(request, response);
-				}
-
-				//SQLで検索したデータをloginUserインスタンスの参照に保存
-				session.setAttribute("loginUser", loginUser);
-
-				//参照を変えたloginUserインスタンスに格納された復号パスワードと入力されたパスワード文字列が位置しているか確認
-				if(password.equals(loginUser.getPassword())) {
-					//forward
-					String forwardPath = "/view/menu/menu.jsp";
-					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-					dispatcher.forward(request, response);
 				}else {
-					//入力されたユーザーIDのデータがない場合やパスワードとIDが一致しない場合は全てエラー文を出す
-					//インスタンスの削除
-					session.removeAttribute("loginUser");
-					//forward
-					String forwardPath = "/view/login/loginMismatchError.jsp";
-					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-					dispatcher.forward(request, response);
+					//SQLで検索したデータをloginUserインスタンスの参照に保存
+					session.setAttribute("loginUser", loginUser);
+
+					//参照を変えたloginUserインスタンスに格納された復号パスワードと入力されたパスワード文字列が位置しているか確認
+					if(password.equals(loginUser.getPassword())) {
+						//リダイレクト
+						String redirectPath = "/usersystem3/view/menu/menu.jsp";
+						response.sendRedirect(redirectPath);
+					}else {
+						//入力されたユーザーIDのデータがない場合やパスワードとIDが一致しない場合は全てエラー文を出す
+						//インスタンスの削除
+						session.removeAttribute("loginUser");
+						//forward
+						String forwardPath = "/view/login/loginMismatchError.jsp";
+						RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+						dispatcher.forward(request, response);
+					}
 				}
+
 			}catch(NumberFormatException e) {
 			//ユーザーIDが全く入力されていないときのエラー文かつ
 			//ユーザーIDで文字入力されたときかつ
