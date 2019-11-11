@@ -11,6 +11,7 @@ Health health = (Health)request.getAttribute("health");
 <meta charset="UTF-8">
 <title>すっきり健診結果</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
+<link rel = "stylesheet" href="/healthbmi/css/style.css">
 </head>
 <body>
 <h1>すっきり健診結果</h1>
@@ -22,3 +23,9 @@ Health health = (Health)request.getAttribute("health");
 </html>
 
 
+<%
+//h1 文字の大きさ 優先度低め
+//input type = "submit(送信ボタン)"⇒id「btn」を付与してbtnでスタイリング
+//p 文字の大きさ  優先度中
+
+%>

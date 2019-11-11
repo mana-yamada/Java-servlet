@@ -1,3 +1,4 @@
+package sqloperate;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -214,7 +215,7 @@ public class Stafflist {
 	private void readFile() {
 		//1つのprivateメソッドにする
 		try {
-			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\sqloperate\\MySQLdocs.properties");
+			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagementtest\\MySQLdocs.properties");
 			Properties p = new Properties();
 			p.load(fr);
 			 url = p.getProperty("url");

@@ -1,3 +1,4 @@
+package sqloperate;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,8 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-
-public class Goodslist {
+public class Nowstocklist {
 	String url;
 	String userName;
 	String pass;
@@ -19,45 +19,41 @@ public class Goodslist {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
-	//add 備品名と単価の追加
+	//add 備品名および残数の新規追加
 	public void add() {
 		driverConnect();
 		readFile();
 		int goodsId = 14;
 		String goods = "衣料用漂白剤";
-		int price = 170;
-		insert(goodsId,goods,price);
+		int stock = 10;
+		insert(goodsId,goods,stock);
 	}
 
-	//add 備品名や単価の変更
+	//change 備品名や残数の更新
 		public void change() {
 			driverConnect();
 			readFile();
-			//変更前の備品名
-			String formerGoods = "テープ止めオムツS";
-			//変更後の備品名・単価
-			String latterGoods = "オムツS";
-			int latterPrice = 2400;
-			//備品情報の変更
-			update(formerGoods,latterGoods, latterPrice);
+			String goods = "衣料用漂白剤";
+			int latterStock = 15;
+			update(goods, latterStock);
 		}
 
 	//insert 備品情報の新規追加
-	private void insert(int goodsId, String goods, int price) {
+	private void insert(int goodsId, String goods, int stock) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-//			pstmt = con.prepareStatement("INSERT INTO goodslist(goodsname, price) VALUES (?, ?)");
-			pstmt = con.prepareStatement("INSERT INTO goodslist( goodsid, goodsname, price)VALUES (?, ?, ?)");
+			//pstmt = con.prepareStatement("INSERT INTO nowstocklist(goodsname, nowstock)VALUES (?, ?, ?)");
+			pstmt = con.prepareStatement("INSERT INTO nowstocklist( goodsid, goodsname, nowstock)VALUES (?, ?, ?)");
 			//ひな型に値を流し込み
 //			pstmt.setString(1,goods);
 //			pstmt.setInt(2, price);
 			pstmt.setInt(1,goodsId);
 			pstmt.setString(2, goods);
-			pstmt.setInt(3, price);
+			pstmt.setInt(3, stock);
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -92,20 +88,19 @@ public class Goodslist {
 	}
 
 	//update 備品情報の更新
-	private void update(String formerGoods, String latterGoods, int latterPrice) {
+	private void update(String goods, int latterStock) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-			pstmt = con.prepareStatement("UPDATE goodslist\r\n" +
-					"SET goodsname = ? , price = ?\r\n" +
+			pstmt = con.prepareStatement("UPDATE nowstocklist\r\n" +
+					"SET nowstock = ?\r\n" +
 					"WHERE goodsname = ? ");
 			//ひな型に値を流し込み
-			pstmt.setString(1,latterGoods);
-			pstmt.setInt(2, latterPrice);
-			pstmt.setString(3, formerGoods);
+			pstmt.setInt(1, latterStock);
+			pstmt.setString(2, goods);
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -139,7 +134,6 @@ public class Goodslist {
 		}
 	}
 
-
 	private void driverConnect() {
 		try {
 			Class.forName("com.mysql.cj.jdbc.Driver");
@@ -152,7 +146,7 @@ public class Goodslist {
 	private void readFile() {
 		//1つのprivateメソッドにする
 		try {
-			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\sqloperate\\MySQLdocs.properties");
+			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagementtest\\MySQLdocs.properties");
 			Properties p = new Properties();
 			p.load(fr);
 			 url = p.getProperty("url");

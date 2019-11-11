@@ -1,3 +1,4 @@
+package sqloperate;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
@@ -9,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class Stafflist {
+public class Occupantlist {
 	String url;
 	String userName;
 	String pass;
@@ -18,26 +19,29 @@ public class Stafflist {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
-	//add 職員情報の新規追加
+	//add 入居者の入居される階の数字、居室番号、氏名を追加
 	public void add() {
 		driverConnect();
 		readFile();
-		int staffId = 12;
-		String staffName = "西郷隆盛";
-		String password = "saigotakamori";
-		String authority = "NO";
-		//insert(staffName, password, authority);
-		insert(staffId, staffName, password, authority);
+		int occupantId = 13 ;
+		int floorId = 3;
+		int roomNumber = 331;
+		String occupantName = "徳川綱吉";
+		//insert(floorId, roomNumber, occupantName);
+		insert(occupantId,floorId, roomNumber, occupantName);
 	}
 
-	//add 職員情報の変更
+	//add 入居者の入居される階の数字、居室番号、氏名の変更
 		public void change() {
 			driverConnect();
 			readFile();
-			String beforeName = "藤原鎌足";
-			String afterName = "中臣鎌足";
-			String afterAuthority = "YES";
-			update(beforeName, afterName, afterAuthority);
+			int floorId = 1;
+			int roomNumber = 101;
+			//変更前の氏名
+			String beforeName = "徳川綱吉";
+			//変更後の氏名
+			String occupantName = "徳川綱吉";
+			update(floorId, roomNumber, occupantName, beforeName);
 		}
 
 	//out 退居された入居者の情報を「退居済み」と設定
@@ -45,32 +49,33 @@ public class Stafflist {
 			driverConnect();
 			readFile();
 			String goout = "2";
-			String staffName = "足利義政";
-			leave(goout, staffName);
+			String occupantName = "徳川綱吉";
+			leave(goout, occupantName);
 		}
 
 
 	//insert 入庫者情報の新規追加
-//	private void insert(String staffName, String password, String authority) {
-		private void insert(int staffId, String staffName, String password, String authority) {
+		//insert(occupantId,floorId, roomNumber, occupantName);
+	//private void insert(int floorId, int roomNumber, String occupantName) {
+		private void insert(int occupantId, int floorId, int roomNumber, String occupantName) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-//			pstmt = con.prepareStatement("INSERT INTO stafflist(staffname, password, authority)\r\n" +
+//			pstmt = con.prepareStatement("INSERT INTO occupantlist(floorid, roomnumber, occupantname)\r\n" +
 //					"VALUES (?,?,?)");
-			pstmt = con.prepareStatement("INSERT INTO stafflist(staffId, staffname, password, authority)\r\n" +
+			pstmt = con.prepareStatement("INSERT INTO occupantlist(occupantid, floorid, roomnumber, occupantname)\r\n" +
 					"VALUES (?,?,?,?)");
 			//ひな型に値を流し込み
-//			pstmt.setString(1, staffName);
-//			pstmt.setString(2, password);
-//			pstmt.setString(3, authority);
-			pstmt.setInt(1, staffId);
-			pstmt.setString(2, staffName);
-			pstmt.setString(3, password);
-			pstmt.setString(4, authority);
+//			pstmt.setInt(1, floorId);
+//			pstmt.setInt(2, roomNumber);
+//			pstmt.setString(3, occupantName);
+			pstmt.setInt(1, occupantId);
+			pstmt.setInt(2, floorId);
+			pstmt.setInt(3, roomNumber);
+			pstmt.setString(4, occupantName);
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -105,20 +110,21 @@ public class Stafflist {
 	}
 
 	//入居者情報の変更
-	private void update(String beforeName, String afterName,  String afterAuthority) {
+	private void update(int floorId, int roomNumber, String occupantName , String beforeName) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-			pstmt = con.prepareStatement("UPDATE  stafflist\r\n" +
-					"SET staffname = ? , authority = ?\r\n" +
-					"WHERE staffname = ?");
+			pstmt = con.prepareStatement("UPDATE occupantlist\r\n" +
+					"SET floorid=?, roomnumber = ?, occupantname = ?\r\n" +
+					"WHERE occupantname = ? ");
 			//ひな型に値を流し込み
-			pstmt.setString(1, afterName);
-			pstmt.setString(2, afterAuthority);
-			pstmt.setString(3, beforeName);
+			pstmt.setInt(1, floorId);
+			pstmt.setInt(2, roomNumber);
+			pstmt.setString(3, occupantName);
+			pstmt.setString(4, beforeName);
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -151,24 +157,25 @@ public class Stafflist {
 			}
 		}
 	}
-	//テーブル「stafflist」内のカラム「goout」：CHAR(1)型
-	//'1'在職中
-	//'2'退社済み
-	//退社した職員のデータを「退社済み」と設定(メソッド名：leave)
-	//退社した社員が会社に戻った場合には「在職中」と再設定
-	private void leave(String goout, String staffName) {
+
+	//テーブル「occupantist」内のカラム「goout」：CHAR(1)型
+		//'1'入居中
+		//'2'退居済み
+	//退居された入居者のデータを「退居済み」と設定(メソッド名：leave)
+	//退居された入居者が再入居した場合は「入居中」と設定
+	private void leave(String goout, String occupantName) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-			pstmt = con.prepareStatement("UPDATE stafflist\r\n" +
-					"SET goout = ? \r\n" +
-					"WHERE staffname = ?");
+			pstmt = con.prepareStatement("UPDATE occupantlist\r\n" +
+					"SET goout = ?\r\n" +
+					"WHERE occupantname = ?");
 			//ひな型に値を流し込み
 			pstmt.setString(1, goout);
-			pstmt.setString(2, staffName);
+			pstmt.setString(2, occupantName);
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -214,7 +221,7 @@ public class Stafflist {
 	private void readFile() {
 		//1つのprivateメソッドにする
 		try {
-			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\sqloperate\\MySQLdocs.properties");
+			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagementtest\\MySQLdocs.properties");
 			Properties p = new Properties();
 			p.load(fr);
 			 url = p.getProperty("url");

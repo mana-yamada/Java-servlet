@@ -1,3 +1,4 @@
+package sqloperate;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -25,13 +26,13 @@ public class Recordlist {
 	public void in() {
 		driverConnect();
 		readFile();
-		int controlId = 1;
+		int controlId = 3;
 		int occupantId = 0;
 		int goodsId = 1;
 		//倉庫から備品を出し入れした年・月・日
-		String strDate = "2019-11-10"; Date date = Date.valueOf(strDate);
+		String strDate = "2019-11-11"; Date date = Date.valueOf(strDate);
         //倉庫から備品を出し入れした時・分・秒  //実際には秒は00秒でデータを格納するようにする
-        String strTime = "09:00:00"; Time time = Time.valueOf(strTime);
+        String strTime = "23:00:00"; Time time = Time.valueOf(strTime);
 		int outshed = 0;
 		int inshed = 10;
 		int stock = 0;
@@ -200,7 +201,7 @@ public class Recordlist {
 	private void readFile() {
 		//1つのprivateメソッドにする
 		try {
-			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\sqloperate\\MySQLdocs.properties");
+			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagementtest\\MySQLdocs.properties");
 			Properties p = new Properties();
 			p.load(fr);
 			 url = p.getProperty("url");

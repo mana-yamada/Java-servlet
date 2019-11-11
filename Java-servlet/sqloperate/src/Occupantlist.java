@@ -15,7 +15,6 @@ public class Occupantlist {
 	String pass;
 
 	Connection con;
-	Connection readCon;
 	PreparedStatement pstmt;
 	ResultSet rs;
 
