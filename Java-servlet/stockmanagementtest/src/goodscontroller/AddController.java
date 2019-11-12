@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Goods;
+import sqloperate.Goodslist;
 
 @WebServlet("/AddController")
 public class AddController extends HttpServlet{
@@ -32,6 +33,8 @@ public class AddController extends HttpServlet{
 			goods.getGoodsPrice();
 
 			//SQL操作!!
+			Goodslist addGoods = new Goodslist();
+			addGoods.add(goods);
 
 			//remove instance
 			session.removeAttribute("goods");
@@ -63,7 +66,7 @@ public class AddController extends HttpServlet{
 			String  strGoodsPrice = request.getParameter("goodsprice");
 			int goodsPrice = Integer.parseInt(strGoodsPrice);
 
-			//入力ミスがあったら、エラーメッセージを送るために条件分岐
+			/*入力ミスがあったら、エラーメッセージを送るために条件分岐
 			if(goodsName == null || !(goodsPrice > 0)) {
 				//入力欄で正しく入力されていないことをセッションスコープに保存
 				String errorMsg = "入力欄で正しく入力されていませんでした。恐れ入りますがもう一度入力し直してください。";
@@ -72,7 +75,8 @@ public class AddController extends HttpServlet{
 				String forward = "/view/goods/add/addConfirm.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 				dispatcher.forward(request, response);
-			}else {
+			}else {*/
+
 				//インスタンス生成
 				Goods goods = new Goods();
 				goods.setGoodsName(goodsName);
@@ -86,15 +90,16 @@ public class AddController extends HttpServlet{
 				String forward = "/view/goods/add/addConfirm.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 				dispatcher.forward(request, response);
-			}
+			//}
 		  }catch(NumberFormatException e) {
-			  	//入力欄で正しく入力されていないことをセッションスコープに保存
+			  	/*//入力欄で正しく入力されていないことをセッションスコープに保存
 				String errorMsg = "入力欄で正しく入力されていませんでした。恐れ入りますがもう一度入力し直してください。";
 				request.setAttribute("errorMsg" , errorMsg);
 				//forward
 				String forward = "/view/goods/add/addConfirm.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-				dispatcher.forward(request, response);
+				dispatcher.forward(request, response);*/
+			  e.printStackTrace();
 		  }
 		}
 	}

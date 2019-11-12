@@ -22,7 +22,7 @@
 <%-- 備品情報新規登録 --%>
 <main>
 <h3>備品情報新規登録</h3>
-<form action ="/stockmanagementtest/GoodsOperate?value=addconfirm" method = "post">
+<form action ="/stockmanagementtest/AddCoontroller?value=addconfirm" method = "post">
 <p>品目</p>
 <p>備品名：<input type= "text" name="goodsname"  minlength="1" maxlength = "30"></p>
 <p>備品の単価：<input type="text" name="goodsprice" minlength="1" maxlength = "7"></p>

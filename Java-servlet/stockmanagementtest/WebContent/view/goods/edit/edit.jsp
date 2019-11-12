@@ -4,9 +4,6 @@
 <%
 //ログインのセッションスコープを取得
 
-//goodslistテーブルのインスタンス取得
-//Goodslist goodslist = (Goodslist)session.getAttribute("goodslist");
-
 %>
 
 <!DOCTYPE html>
@@ -39,15 +36,25 @@
 		<th>削除</th>
 		</tr>
 		<%  //Goodslistクラス getTableメソッド内でArrayListに格納した備品名を表示
-			Iterator<Goods> it = goodsList.iterator(); %>
-			<% while(it.hasNext()){ %>
-			<% Goods content = it.next();%>
-				<tr>
-			 	<td> <%= content.getGoodsName() %></td>
-			 	<td><a><button id="#">変更</button></a></td>
-			    <td><a><button id="#">削除</button></a></td>
-			    </tr>
-			<% } %>
+		Iterator<Goods> it = goodsList.iterator(); %>
+		<% while(it.hasNext()){ %>
+		<% Goods content = it.next(); %>
+		<tr>
+		<%
+		//DBに格納した1行の各列を取得
+		int goodsId = content.getGoodsId();
+		String goodsName = content.getGoodsName();
+		int goodsPrice = content.getGoodsPrice();
+		String display = content.getDisplay();
+		//取得した1行データをインスタンス化、スコープに保存
+	    Goods editGoods = new Goods(goodsId, goodsName, goodsPrice, display);
+		request.setAttribute("editGoods", editGoods);
+		%>
+	 	<td> <%= goodsName %></td>
+	 	<td><a href="/stockmanagement/EditController?value=change"><button id="#">変更</button></a></td>
+	    <td><a href="/stockmanagement/EditController?value=undisplay"><button id="#">削除</button></a></td>
+	    </tr>
+		<%} %>
 		</table>
 	</main>
 </div>

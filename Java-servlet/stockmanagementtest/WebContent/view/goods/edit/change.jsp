@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
+<%@ page import = "goodscontroller.EditController" %>
+<%@ page import = "beans.Goods" %>
 <%-- ログインのセッションスコープを取得 --%>
 
 <!DOCTYPE html>
@@ -20,11 +22,17 @@
 </header>
 
 <%-- 備品情報変更 --%>
+
 <main>
 <h3>備品情報変更</h3>
-<form action ="/stockmanagementtest/#?value=changeconfirm" method ="post">
-<p></p>
+<form action ="/stockmanagementtest/EditController?value=changeconfirm" method ="post">
+<%
+	//変更前の備品データ1行を保存したインスタンスを取得
+	Goods editGoods = (Goods)session.getAttribute("editGoods");
+%>
+<p>変更前の備品名：<%= editGoods.getGoodsName() %></p>
 <p>変更後の備品名：<input type= "text" name="goodsname"  minlength="1" maxlength = "30"></p>
+<p>変更前の単価：<%= editGoods.getGoodsPrice() %></p>
 <p>変更後の単価：<input type="text" name="goodsprice" minlength="1" maxlength = "7"></p>
 <button>変更内容確認</button>
 </form>
