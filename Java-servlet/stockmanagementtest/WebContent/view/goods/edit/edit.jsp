@@ -48,11 +48,11 @@
 		String display = content.getDisplay();
 		//取得した1行データをインスタンス化、スコープに保存
 	    Goods editGoods = new Goods(goodsId, goodsName, goodsPrice, display);
-		request.setAttribute("editGoods", editGoods);
+		session.setAttribute("editGoods", editGoods);
 		%>
-	 	<td> <%= goodsName %></td>
-	 	<td><a href="/stockmanagement/EditController?value=change"><button id="#">変更</button></a></td>
-	    <td><a href="/stockmanagement/EditController?value=undisplay"><button id="#">削除</button></a></td>
+	 	<td> <%= content.getGoodsName() %></td>
+	 	<td><a href="/stockmanagementtest/EditController?value=change"><button id="#">変更</button></a></td>
+	    <td><a href="/stockmanagementtest/EditController?value=undisplay"><button id="#">削除</button></a></td>
 	    </tr>
 		<%} %>
 		</table>

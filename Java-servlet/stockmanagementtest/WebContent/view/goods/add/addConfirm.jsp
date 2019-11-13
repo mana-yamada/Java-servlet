@@ -9,8 +9,8 @@
 // add.jspで保存したインスタンス取得
 Goods goods = (Goods) session.getAttribute("goods");
 
-/*// errorMsgインスタンス取得
-String errorMsg = (String) request.getAttribute("errorMsg");*/
+// errorMsgインスタンス取得
+String errorMsg = (String) request.getAttribute("errorMsg");
 
 %>
 
@@ -35,18 +35,22 @@ String errorMsg = (String) request.getAttribute("errorMsg");*/
 
 <main>
 <%--エラーがあったら条件分岐でエラー文を出したい --%>
+<%if(errorMsg != null){ %>
+	<h3>備品情報 入力エラー</h3>
 
+	<p><%= errorMsg %></p>
+	<a href="/stockmanagementtest/AddController"><button>入力画面へ戻る</button></a>
+<% } else { %>
 <%-- エラーがなければ備品情報 登録確認 --%>
-<h3>備品情報 登録確認</h3>
+	<h3>備品情報 登録確認</h3>
 
-<p>品目</p>
-<p>備品名：<%= goods.getGoodsName() %></p>
-<p>備品の単価：<%= goods.getGoodsPrice() %>円</p>
-<p>上記の内容で備品情報を登録してもよろしいですか？</p>
-<a href ="/stockmanagementtest/AddCoontroller?value=addgoods"><button>登録</button></a>
-
-
-<a href="/stockmanagementtest/AddCoontroller?value=reinput"><button>入力画面へ戻る</button></a>
+	<p>品目</p>
+	<p>備品名：<%= goods.getGoodsName() %></p>
+	<p>備品の単価：<%= goods.getGoodsPrice() %>円</p>
+	<p>上記の内容で備品情報を登録してもよろしいですか？</p>
+	<a href ="/stockmanagementtest/AddController?value=addgoods"><button>登録</button></a>
+	<a href="/stockmanagementtest/AddController?value=reinput"><button>入力画面へ戻る</button></a>
+<% } %>
 <a href="#?value=fromaddConfirm"><button>メニューへ戻る</button></a>
 </main>
 

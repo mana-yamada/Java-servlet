@@ -17,6 +17,7 @@ import sqloperate.Goodslist;
 public class EditController extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
+		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
 		if(parameter == null) {
 			//編集画面へforward
@@ -28,13 +29,24 @@ public class EditController extends HttpServlet {
 			//備品情報編集画面で「変更」をクリックしたとき
 
 			//どの備品の情報を変更するかのインスタンス取得
-			HttpSession session = request.getSession();
-			Goods editGoods = (Goods)session.getAttribute("editGoods");
+			//HttpSession session = request.getSession();
+			//Goods editGoods = (Goods)session.getAttribute("editGoods");
 
 			//redirect
 			response.sendRedirect("/stockmanagementtest/view/goods/edit/change.jsp");
 
+		}else if(parameter.equals("backFromChange")) {
+			//備品情報変更画面で「編集画面に戻る」をクリックしたときbackFromChange
+			//remove editGoods
+			HttpSession session = request.getSession();
+			session.removeAttribute("editGoods");
+			//編集画面へforward
+			String forward = "/view/goods/edit/edit.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+			dispatcher.forward(request, response);
+
 		}else if(parameter.equals("changegoods")) {
+
 			//備品情報変更確認画面で「変更」をクリックしたとき
 			HttpSession session = request.getSession();
 			//変更前の備品データ1行を保存したインスタンスを取得
@@ -84,8 +96,8 @@ public class EditController extends HttpServlet {
 			//どの備品の情報を削除するかのインスタンス取得
 			/*※ここでいう「削除」は(ユーザーに見える部分だけでは見えないように
 			DBには格納しておくこととする*/
-			HttpSession session = request.getSession();
-			Goods editGoods = (Goods)session.getAttribute("editGoods");
+//			HttpSession session = request.getSession();
+//			Goods editGoods = (Goods)session.getAttribute("editGoods");
 
 			//redirect
 			response.sendRedirect("/stockmanagementtest/view/goods/edit/undisplayConfirm.jsp");
@@ -111,6 +123,10 @@ public class EditController extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("editgoods");
 
+			//編集画面へforward
+			String forward = "/view/goods/edit/edit.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+			dispatcher.forward(request, response);
 		}
 
 
@@ -119,6 +135,7 @@ public class EditController extends HttpServlet {
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
 		//changeconfirm
+		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
 		if(parameter.equals("changeconfirm")) {
 			try {

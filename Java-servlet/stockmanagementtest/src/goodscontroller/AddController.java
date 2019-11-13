@@ -57,17 +57,19 @@ public class AddController extends HttpServlet{
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{
+		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
 		//新規登録ページから
 		if(parameter.equals("addconfirm")) {
-		  try {
+
 			//入力フォームのパラメータ取得
+
 			String goodsName = request.getParameter("goodsname");
 			String  strGoodsPrice = request.getParameter("goodsprice");
-			int goodsPrice = Integer.parseInt(strGoodsPrice);
 
-			/*入力ミスがあったら、エラーメッセージを送るために条件分岐
-			if(goodsName == null || !(goodsPrice > 0)) {
+
+			//入力ミスがあったら、エラーメッセージを送るために条件分岐
+			if(goodsName.length() == 0 || goodsName.length() > 30 || strGoodsPrice.length() == 0) {
 				//入力欄で正しく入力されていないことをセッションスコープに保存
 				String errorMsg = "入力欄で正しく入力されていませんでした。恐れ入りますがもう一度入力し直してください。";
 				request.setAttribute("errorMsg" , errorMsg);
@@ -75,32 +77,40 @@ public class AddController extends HttpServlet{
 				String forward = "/view/goods/add/addConfirm.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
 				dispatcher.forward(request, response);
-			}else {*/
+			}else {
+			    try {
+					int goodsPrice = Integer.parseInt(strGoodsPrice);
+					//入力された単価の値が0以上であることを確認
+					if(goodsPrice < 0) {
+						throw new NumberFormatException("正しく入力されていません.");
+					}else {
+						//インスタンス生成
+						Goods goods = new Goods();
+						goods.setGoodsName(goodsName);
+						goods.setGoodsPrice(goodsPrice);
 
-				//インスタンス生成
-				Goods goods = new Goods();
-				goods.setGoodsName(goodsName);
-				goods.setGoodsPrice(goodsPrice);
+						//スコープ取得、保存
+						HttpSession session = request.getSession();
+						session.setAttribute("goods", goods);
 
-				//スコープ取得、保存
-				HttpSession session = request.getSession();
-				session.setAttribute("goods", goods);
+						//forward
+						String forward = "/view/goods/add/addConfirm.jsp";
+						RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+						dispatcher.forward(request, response);
+					}
 
-				//forward
-				String forward = "/view/goods/add/addConfirm.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-				dispatcher.forward(request, response);
-			//}
-		  }catch(NumberFormatException e) {
-			  	/*//入力欄で正しく入力されていないことをセッションスコープに保存
-				String errorMsg = "入力欄で正しく入力されていませんでした。恐れ入りますがもう一度入力し直してください。";
-				request.setAttribute("errorMsg" , errorMsg);
-				//forward
-				String forward = "/view/goods/add/addConfirm.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
-				dispatcher.forward(request, response);*/
-			  e.printStackTrace();
-		  }
+			    }catch(NumberFormatException e) {
+				  	//入力欄で正しく入力されていないことをセッションスコープに保存
+					String errorMsg = "備品の単価が正しく入力されていませんでした。恐れ入りますがもう一度入力し直してください。";
+					request.setAttribute("errorMsg" , errorMsg);
+					//forward
+					String forward = "/view/goods/add/addConfirm.jsp";
+					RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+					dispatcher.forward(request, response);
+					e.printStackTrace();
+			  }
+			}
+
 		}
 	}
 

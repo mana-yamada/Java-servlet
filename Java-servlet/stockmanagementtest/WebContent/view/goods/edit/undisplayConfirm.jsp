@@ -11,6 +11,11 @@
 
 %>
 
+<%
+	//削除しようとしている備品データ1行を保存したインスタンスを取得
+	Goods editGoods = (Goods)session.getAttribute("editGoods");
+%>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -21,7 +26,6 @@
 </head>
 
 <body>
-
 <%-- header --%>
 <header>
 <a href="#"><button id="menu">ラックん</button></a>
@@ -29,18 +33,11 @@
 <a href ="#"><button id ="logout">ログアウト</button></a>
 </header>
 
-
 <main>
 <%--エラー出力させるために後で条件分岐する --%>
 <% /* String errorMsg = (String)session.getattribute("errorMsg");*/ %>
 <%-- エラーがなければ備品情報 削除確認 --%>
 <h3>備品情報 削除確認</h3>
-
-
-<%
-	//削除しようとしている備品データ1行を保存したインスタンスを取得
-	Goods editGoods = (Goods)session.getAttribute("editGoods");
-%>
 <p>削除する備品名：<%= editGoods.getGoodsName() %></p>
 <p>単価：<%= editGoods.getGoodsPrice() %></p>
 
