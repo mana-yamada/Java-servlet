@@ -3,7 +3,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,7 +14,7 @@ import java.util.Properties;
 import beans.Goods;
 
 
-public class Goodslist implements Serializable {
+public class Goodslist  {
 	String url;
 	String userName;
 	String pass;

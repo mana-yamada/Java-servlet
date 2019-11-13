@@ -6,8 +6,6 @@
 <%
 //login scope
 
-// errorMsgインスタンス取得
-//String errorMsg = (String) request.getAttribute("errorMsg");
 
 %>
 
@@ -34,17 +32,15 @@
 </header>
 
 <main>
-<%--エラー出力させるために後で条件分岐する --%>
-<% /* String errorMsg = (String)session.getattribute("errorMsg");*/ %>
-<%-- エラーがなければ備品情報 削除確認 --%>
+
 <h3>備品情報 削除確認</h3>
 <p>削除する備品名：<%= editGoods.getGoodsName() %></p>
 <p>単価：<%= editGoods.getGoodsPrice() %></p>
 
 <p>上記の内容で備品情報を変更してもよろしいですか？</p>
-<a href ="/stockmanagementtest/EditController?value=undisplaycomplete"><button>削除</button></a>
+<a href ="/stockmanagementtest/UndisplayController?value=undisplayComplete"><button>削除</button></a>
 
-<a href="/stockmanagementtest/EditController?value=backUndisplay"><button>備品情報編集画面へ戻る</button></a>
+<a href="/stockmanagementtest/EditController?value=backFromUndisplay"><button>備品情報編集画面へ戻る</button></a>
 <a href="#"><button>メニューへ戻る</button></a>
 </main>
 

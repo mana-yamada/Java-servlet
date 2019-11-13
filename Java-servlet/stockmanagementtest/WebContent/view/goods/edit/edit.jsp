@@ -4,6 +4,9 @@
 <%
 //ログインのセッションスコープを取得
 
+//get scope
+
+
 %>
 
 <!DOCTYPE html>
@@ -24,37 +27,50 @@
 	</header>
 	<main>
 		<h3>備品情報編集</h3>
-		<%
-		  ArrayList<Goods> goodsList = new ArrayList<Goods>();
-		  Goodslist displayGoods = new Goodslist();
-		  displayGoods.get(goodsList);
-		%>
-		<table border="1" width="500" cellspacing="0" cellpadding="5" bordercolor="#333333">
+		<table border="1">
 		<tr>
+		<th>ArrayListのID</th>
+		<th>goodslistのID</th>
 		<th>備品名</th>
-		<th>変更</th>
-		<th>削除</th>
+		<th>備品の単価</th>
+		<th>表示or非表示</th>
+		<th>☆変更☆</th>
+		<th>■削除■</th>
 		</tr>
-		<%  //Goodslistクラス getTableメソッド内でArrayListに格納した備品名を表示
-		Iterator<Goods> it = goodsList.iterator(); %>
-		<% while(it.hasNext()){ %>
-		<% Goods content = it.next(); %>
-		<tr>
 		<%
-		//DBに格納した1行の各列を取得
-		int goodsId = content.getGoodsId();
-		String goodsName = content.getGoodsName();
-		int goodsPrice = content.getGoodsPrice();
-		String display = content.getDisplay();
-		//取得した1行データをインスタンス化、スコープに保存
-	    Goods editGoods = new Goods(goodsId, goodsName, goodsPrice, display);
-		session.setAttribute("editGoods", editGoods);
+		ArrayList<Goods> goodsList = new ArrayList<Goods>();
+	    Goodslist displayGoods = new Goodslist();
+		displayGoods.get(goodsList);
+
+		for(Goods target : goodsList){
+			//ArrayList 内でのインデックス番号
+			int listNumber = goodsList.indexOf(target);
+
+			//DBに格納した1行の各列を取得
+			int goodsId = target.getGoodsId();
+			String goodsName = target.getGoodsName();
+			int goodsPrice = target.getGoodsPrice();
+			String display = target.getDisplay();
+
+			//取得した1行データをインスタンス化、スコープに保存
+			Goods targetGoods = new Goods(goodsId, goodsName, goodsPrice, display, listNumber);
+			//String targetInstance = "targetGoods" + listNumber;
+			session.setAttribute("targetInstance" , targetGoods);
 		%>
-	 	<td> <%= content.getGoodsName() %></td>
-	 	<td><a href="/stockmanagementtest/EditController?value=change"><button id="#">変更</button></a></td>
-	    <td><a href="/stockmanagementtest/EditController?value=undisplay"><button id="#">削除</button></a></td>
+		<tr>
+	    <td><%= target.getListNumber()  %></td>
+		<td><%= target.getGoodsId() %></td>
+	 	<td> <%= target.getGoodsName() %></td>
+	 	<td><%= target.getGoodsPrice()%></td>
+	 	<td><%= target.getDisplay() %></td>
+	 	<td><a href="/stockmanagementtest/ChangeController?value=change"><button id="#">変更</button></a></td>
+	    <td><a href="/stockmanagementtest/UndisplayController?value=undisplay"><button id="#">削除</button></a></td>
+		<%}%>
+
+
+
 	    </tr>
-		<%} %>
+
 		</table>
 	</main>
 </div>

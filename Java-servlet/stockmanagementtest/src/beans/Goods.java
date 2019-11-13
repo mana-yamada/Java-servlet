@@ -10,12 +10,20 @@ public class Goods {
 		this.goodsPrice = goodsPrice;
 		this.display = display;
 	}
+	public Goods(int goodsId, String goodsName, int goodsPrice, String display, int listNumber) {
+		this.goodsId = goodsId;
+		this.goodsName = goodsName;
+		this.goodsPrice = goodsPrice;
+		this.display = display;
+		this.listNumber = listNumber;
+	}
+
 	//備品ID //備品名 //備品の単価 //表示or非表示
 	int goodsId;
 	String goodsName;
 	int goodsPrice;
 	String display;
-
+	int listNumber;
 	public int getGoodsId() {
 		return goodsId;
 	}
@@ -44,4 +52,11 @@ public class Goods {
 		this.display = display;
 	}
 
+	public int getListNumber() {
+		return listNumber;
+	}
+
+	public void setListNumber(int listNumber) {
+		this.listNumber = listNumber;
+	}
 }
