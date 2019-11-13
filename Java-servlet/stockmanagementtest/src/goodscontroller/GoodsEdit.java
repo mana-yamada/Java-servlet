@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 
 @WebServlet("/EditController")
-public class EditController extends HttpServlet {
+public class GoodsEdit extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
 

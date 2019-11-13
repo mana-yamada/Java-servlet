@@ -13,8 +13,8 @@ import javax.servlet.http.HttpSession;
 import beans.Goods;
 import sqloperate.Goodslist;
 
-@WebServlet("/AddController")
-public class AddController extends HttpServlet{
+@WebServlet("/GoodsAdd")
+public class GoodsAdd extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
 		//メニューページから、
 		//新規登録完了画面から新しく入力を続ける場合

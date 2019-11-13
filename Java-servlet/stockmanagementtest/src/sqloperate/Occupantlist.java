@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import beans.Occupant;
+
 public class Occupantlist {
 	String url;
 	String userName;
@@ -20,15 +22,10 @@ public class Occupantlist {
 	ResultSet rs;
 
 	//add 入居者の入居される階の数字、居室番号、氏名を追加
-	public void add() {
+	public void add(Occupant occupant) {
 		driverConnect();
 		readFile();
-		int occupantId = 13 ;
-		int floorId = 3;
-		int roomNumber = 331;
-		String occupantName = "徳川綱吉";
-		//insert(floorId, roomNumber, occupantName);
-		insert(occupantId,floorId, roomNumber, occupantName);
+		insert(occupant);
 	}
 
 	//add 入居者の入居される階の数字、居室番号、氏名の変更
@@ -55,27 +52,19 @@ public class Occupantlist {
 
 
 	//insert 入庫者情報の新規追加
-		//insert(occupantId,floorId, roomNumber, occupantName);
-	//private void insert(int floorId, int roomNumber, String occupantName) {
-		private void insert(int occupantId, int floorId, int roomNumber, String occupantName) {
+		private void insert(Occupant occupant) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-//			pstmt = con.prepareStatement("INSERT INTO occupantlist(floorid, roomnumber, occupantname)\r\n" +
-//					"VALUES (?,?,?)");
-			pstmt = con.prepareStatement("INSERT INTO occupantlist(occupantid, floorid, roomnumber, occupantname)\r\n" +
-					"VALUES (?,?,?,?)");
+			pstmt = con.prepareStatement("INSERT INTO occupantlist(floorid, roomnumber, occupantname)\r\n" +
+					"VALUES (?,?,?)");
 			//ひな型に値を流し込み
-//			pstmt.setInt(1, floorId);
-//			pstmt.setInt(2, roomNumber);
-//			pstmt.setString(3, occupantName);
-			pstmt.setInt(1, occupantId);
-			pstmt.setInt(2, floorId);
-			pstmt.setInt(3, roomNumber);
-			pstmt.setString(4, occupantName);
+			pstmt.setInt(1, occupant.getFloorId());
+			pstmt.setInt(2, occupant.getRoomNumber());
+			pstmt.setString(3, occupant.getOccupantName());
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();

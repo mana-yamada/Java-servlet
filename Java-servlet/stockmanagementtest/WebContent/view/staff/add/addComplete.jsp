@@ -5,7 +5,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>備品情報変更完了</title>
+<title>職員情報登録完了</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
@@ -21,11 +21,11 @@
 
 <main>
 
-<%-- 備品情報変更完了 --%>
-<h3>備品情報 変更完了</h3>
-<p>備品情報の変更が完了しました</p>
-<a href="/stockmanagementtest/GoodsEdit"><button>備品情報編集を続ける</button></a>
-<a href="/stockmanagementtest/#?value=fromaddConfirm"><button>メニューへ戻る</button></a>
+<%-- 職員情報登録完了 --%>
+<h3>職員情報 登録完了</h3>
+<p>職員情報の新規登録が完了しました</p>
+<a href="/stockmanagementtest/StaffAdd"><button>登録を続ける</button></a>
+<a href="#"><button>メニューへ戻る</button></a>
 </main>
 
 

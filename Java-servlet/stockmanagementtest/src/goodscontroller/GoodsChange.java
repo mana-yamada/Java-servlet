@@ -14,7 +14,7 @@ import beans.Goods;
 import sqloperate.Goodslist;
 
 @WebServlet("/ChangeController")
-public class ChangeController extends HttpServlet {
+public class GoodsChange extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
 		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");

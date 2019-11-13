@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import beans.Staff;
+
 public class Stafflist {
 	String url;
 	String userName;
@@ -20,15 +22,11 @@ public class Stafflist {
 	ResultSet rs;
 
 	//add 職員情報の新規追加
-	public void add() {
+	public void add(Staff staff) {
 		driverConnect();
 		readFile();
-		int staffId = 12;
-		String staffName = "西郷隆盛";
-		String password = "saigotakamori";
-		String authority = "NO";
-		//insert(staffName, password, authority);
-		insert(staffId, staffName, password, authority);
+		insert(staff);
+
 	}
 
 	//add 職員情報の変更
@@ -51,27 +49,23 @@ public class Stafflist {
 		}
 
 
-	//insert 入庫者情報の新規追加
-//	private void insert(String staffName, String password, String authority) {
-		private void insert(int staffId, String staffName, String password, String authority) {
+	//insert 職員の新規追加
+
+		private void insert(Staff staff) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-//			pstmt = con.prepareStatement("INSERT INTO stafflist(staffname, password, authority)\r\n" +
-//					"VALUES (?,?,?)");
-			pstmt = con.prepareStatement("INSERT INTO stafflist(staffId, staffname, password, authority)\r\n" +
-					"VALUES (?,?,?,?)");
+			pstmt = con.prepareStatement("INSERT INTO stafflist(staffname, password, authority)\r\n" +
+					"VALUES (?,?,?)");
+
 			//ひな型に値を流し込み
-//			pstmt.setString(1, staffName);
-//			pstmt.setString(2, password);
-//			pstmt.setString(3, authority);
-			pstmt.setInt(1, staffId);
-			pstmt.setString(2, staffName);
-			pstmt.setString(3, password);
-			pstmt.setString(4, authority);
+			pstmt.setString(1, staff.getStaffName());
+			pstmt.setString(2, staff.getPassword());
+			pstmt.setString(3, staff.getAuthority());
+
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();

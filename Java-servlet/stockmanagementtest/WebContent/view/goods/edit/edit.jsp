@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="sqloperate.Goodslist,beans.Goods, goodscontroller.EditController, java.util.ArrayList, java.util.Iterator"%>
+<%@ page import="sqloperate.Goodslist,beans.Goods, goodscontroller.GoodsEdit, java.util.ArrayList, java.util.Iterator"%>
 
 <%
 //ログインのセッションスコープを取得
@@ -63,8 +63,8 @@
 	 	<td> <%= target.getGoodsName() %></td>
 	 	<td><%= target.getGoodsPrice()%></td>
 	 	<td><%= target.getDisplay() %></td>
-	 	<td><a href="/stockmanagementtest/ChangeController?value=change"><button id="#">変更</button></a></td>
-	    <td><a href="/stockmanagementtest/UndisplayController?value=undisplay"><button id="#">削除</button></a></td>
+	 	<td><a href="/stockmanagementtest/GoodsChange?value=change"><button id="#">変更</button></a></td>
+	    <td><a href="/stockmanagementtest/GoodsUndisplay?value=undisplay"><button id="#">削除</button></a></td>
 		<%}%>
 
 

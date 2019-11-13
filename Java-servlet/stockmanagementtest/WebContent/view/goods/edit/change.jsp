@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import = "goodscontroller.EditController" %>
+<%@ page import = "goodscontroller.GoodsEdit" %>
 <%@ page import = "beans.Goods" %>
 <%-- ログインのセッションスコープを取得 --%>
 
@@ -34,12 +34,12 @@
 
 <p>変更前の備品名：<%= targetGoods.getGoodsName() %></p>
 <p>変更前の単価：<%= targetGoods.getGoodsPrice() %>円</p>
-<form action ="/stockmanagementtest/ChangeController?value=changeConfirm" method ="post">
+<form action ="/stockmanagementtest/GoodsChange?value=changeConfirm" method ="post">
 <p>変更後の備品名：<input type= "text" name="goodsName"  minlength="1" maxlength = "30"></p>
 <p>変更後の単価：<input type="text" name="goodsPrice" minlength="1" maxlength = "7">円</p>
 <button>変更内容確認</button>
 </form>
-<a href="/stockmanagementtest/EditController?value=backFromChange"><button>編集画面に戻る</button></a>
+<a href="/stockmanagementtest/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a>
 <a href="#"><button>メニューへ戻る</button></a>
 </main>
 
