@@ -1,0 +1,71 @@
+
+/*body内のタグ全体を囲む*/
+/* フッター部の配置用に定義 */
+div #contents{
+	position: relative;
+	min-height: 100%;
+}
+
+header {
+	position : relative;
+}
+
+/*トップメニューへ戻る一番上のボタン*/
+#menu{
+	/*文字のおおきさ 文字の太さ ボーダー ボーダーの丸み 文字色 メニューボタンの背景*/
+	font-size: 150%;
+	font-weight: bold;
+	border: ridge 3px #203F01;
+	border-radius: 5%;
+	color: #203F01;
+	background-color: white;
+	/*デスクトップでの位置*/
+	position: absolute;
+	top: 20px;
+	left: 20px;
+}
+
+/*ヘッダーのログインユーザーの位置*/
+header h3{
+	/*デスクトップでの位置*/
+	position: absolute;
+	top: 10px;
+	left: 30%;
+}
+/*ログアウトボタン*/
+#logout{
+	/*文字のおおきさ 文字の太さ ボーダー ボーダーの丸み 文字色 メニューボタンの背景*/
+	font-size: 150%;
+	font-weight: bold;
+	border: ridge 3px #203F01;
+	border-radius: 5%;
+	color: #203F01;
+	background-color: white;
+	/*デスクトップでの位置*/
+	position: absolute;
+	top: 20px;
+	left: 85%;
+}
+
+main{
+	/*デスクトップでの位置*/
+	position: absolute;
+	top: 20px;
+	left: 20px;
+	margin-top: 100px;
+	margin-left: 20px;
+}
+
+
+
+/*ページのコンテンツ*/
+
+/*フッター*/
+footer{
+	color: white;
+	background-color: #72A503;
+	/*デスクトップでの位置*/
+
+
+
+}

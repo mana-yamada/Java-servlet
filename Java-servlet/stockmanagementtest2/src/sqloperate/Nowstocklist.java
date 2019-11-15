@@ -8,13 +8,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Properties;
 
-import beans.Goods;
-
-
-public class Goodslist  {
+public class Nowstocklist {
 	String url;
 	String userName;
 	String pass;
@@ -23,50 +19,42 @@ public class Goodslist  {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
-	//add 備品名と単価の追加
-	public void add(Goods goods) {
+	//add 備品名および残数の新規追加
+	public void add() {
 		driverConnect();
 		readFile();
-		insert(goods);
+		int goodsId = 14;
+		String goods = "衣料用漂白剤";
+		int stock = 10;
+		insert(goodsId,goods,stock);
 	}
 
-
-	//get 現在使っている備品一覧をgoodslistテーブルから取得
-	public void get(ArrayList<Goods> goodsList) {
-		driverConnect();
-		readFile();
-		//DB全件取得
-		getTable(goodsList);
-	}
-
-
-	//change 備品名や単価の変更
-	public void change(int goodsId, String goodsName, int goodsPrice) {
-		driverConnect();
-		readFile();
-		//備品情報の変更
-		update(goodsId, goodsName, goodsPrice);
-	}
-
-	//display 登録されていた備品名と単価データの非表示 or 再表示の設定
-	public void display(int goodsId) {
-		driverConnect();
-		readFile();
-		changeDisplay(goodsId);
-	}
+	//change 備品名や残数の更新
+		public void change() {
+			driverConnect();
+			readFile();
+			String goods = "衣料用漂白剤";
+			int latterStock = 15;
+			update(goods, latterStock);
+		}
 
 	//insert 備品情報の新規追加
-	private void insert(Goods goods) {
+	private void insert(int goodsId, String goods, int stock) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-			pstmt = con.prepareStatement("INSERT INTO goodslist(goodsname, price) VALUES (?, ?)");
+			//pstmt = con.prepareStatement("INSERT INTO nowstocklist(goodsname, nowstock)VALUES (?, ?, ?)");
+			pstmt = con.prepareStatement("INSERT INTO nowstocklist( goodsid, goodsname, nowstock)VALUES (?, ?, ?)");
 			//ひな型に値を流し込み
-			pstmt.setString(1,goods.getGoodsName());
-			pstmt.setInt(2, goods.getGoodsPrice());
+//			pstmt.setString(1,goods);
+//			pstmt.setInt(2, price);
+			pstmt.setInt(1,goodsId);
+			pstmt.setString(2, goods);
+			pstmt.setInt(3, stock);
+
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
 			//結果票の処理
@@ -98,66 +86,21 @@ public class Goodslist  {
 			}
 		}
 	}
-
-	//getTable 備品情報全体を取得、表示
-	private void getTable(ArrayList<Goods> goodsList) {
-		try {
-			con = DriverManager.getConnection(url, userName, pass);
-			con.setAutoCommit(false);
-			//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
-			pstmt = con.prepareStatement("SELECT * FROM `goodslist` WHERE display = '1' ORDER BY `goodslist`.`goodsname` DESC");
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				int goodsId = rs.getInt("goodsid");
-				String goodsName = rs.getString("goodsname");
-				int price = rs.getInt("price");
-				String display = rs.getString("display");
-				//make goodsinstance
-				Goods goods = new Goods();
-				//インデックス番号を追加しましょう！
-
-				goods.setGoodsId(goodsId);
-				goods.setGoodsName(goodsName);
-				goods.setGoodsPrice(price);
-				goods.setDisplay(display);
-				//add goodsinstance in goodsList
-				goodsList.add(goods);
-			}
-			rs.close();
-			pstmt.close();
-			con.commit();
-		}catch(SQLException e) {
-			try {
-				con.rollback();
-			}catch(SQLException e2) {
-				e2.printStackTrace();
-			}
-		}finally {
-			if(con != null) {
-				try {
-					con.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
 
 	//update 備品情報の更新
-	private void update(int goodsId, String goodsName, int goodsPrice) {
+	private void update(String goods, int latterStock) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-			pstmt = con.prepareStatement("UPDATE goodslist SET goodsName = ? , price = ? WHERE goodsid = ? ");
-
+			pstmt = con.prepareStatement("UPDATE nowstocklist\r\n" +
+					"SET nowstock = ?\r\n" +
+					"WHERE goodsname = ? ");
 			//ひな型に値を流し込み
-			pstmt.setInt(1,goodsId);
-			pstmt.setString(2, goodsName);
-			pstmt.setInt(3, goodsPrice);
+			pstmt.setInt(1, latterStock);
+			pstmt.setString(2, goods);
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -190,35 +133,6 @@ public class Goodslist  {
 			}
 		}
 	}
-
-	//changeDisplay 登録されていた備品名と単価データの非表示 or 再表示の設定
-	private void changeDisplay(int goodsId){
-		try {
-			con = DriverManager.getConnection(url,userName,pass);
-			con.setAutoCommit(false);
-			pstmt = con.prepareStatement("UPDATE goodslist SET display = '2' WHERE goodsid = ?");
-			pstmt.setInt(1, goodsId );
-
-			pstmt.executeUpdate();
-			pstmt.close();
-			con.commit();
-		}catch(SQLException e) {
-			try {
-				con.rollback();
-			}catch(SQLException e2) {
-				e2.printStackTrace();
-			}
-		}finally {
-			if(con != null) {
-				try {
-					con.close();
-				}catch(SQLException e3) {
-					e3.printStackTrace();
-				}
-			}
-		}
-	}
-
 
 	private void driverConnect() {
 		try {

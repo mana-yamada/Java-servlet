@@ -8,13 +8,11 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Properties;
 
-import beans.Goods;
+import beans.Occupant;
 
-
-public class Goodslist  {
+public class Occupantlist {
 	String url;
 	String userName;
 	String pass;
@@ -23,141 +21,50 @@ public class Goodslist  {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
-	//add 備品名と単価の追加
-	public void add(Goods goods) {
+	//add 入居者の入居される階の数字、居室番号、氏名を追加
+	public void add(Occupant occupant) {
 		driverConnect();
 		readFile();
-		insert(goods);
+		insert(occupant);
 	}
 
+	//add 入居者の入居される階の数字、居室番号、氏名の変更
+		public void change() {
+			driverConnect();
+			readFile();
+			int floorId = 1;
+			int roomNumber = 101;
+			//変更前の氏名
+			String beforeName = "徳川綱吉";
+			//変更後の氏名
+			String occupantName = "徳川綱吉";
+			update(floorId, roomNumber, occupantName, beforeName);
+		}
 
-	//get 現在使っている備品一覧をgoodslistテーブルから取得
-	public void get(ArrayList<Goods> goodsList) {
-		driverConnect();
-		readFile();
-		//DB全件取得
-		getTable(goodsList);
-	}
+	//out 退居された入居者の情報を「退居済み」と設定
+		public void out() {
+			driverConnect();
+			readFile();
+			String goout = "2";
+			String occupantName = "徳川綱吉";
+			leave(goout, occupantName);
+		}
 
 
-	//change 備品名や単価の変更
-	public void change(int goodsId, String goodsName, int goodsPrice) {
-		driverConnect();
-		readFile();
-		//備品情報の変更
-		update(goodsId, goodsName, goodsPrice);
-	}
-
-	//display 登録されていた備品名と単価データの非表示 or 再表示の設定
-	public void display(int goodsId) {
-		driverConnect();
-		readFile();
-		changeDisplay(goodsId);
-	}
-
-	//insert 備品情報の新規追加
-	private void insert(Goods goods) {
+	//insert 入庫者情報の新規追加
+		private void insert(Occupant occupant) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-			pstmt = con.prepareStatement("INSERT INTO goodslist(goodsname, price) VALUES (?, ?)");
+			pstmt = con.prepareStatement("INSERT INTO occupantlist(floorid, roomnumber, occupantname)\r\n" +
+					"VALUES (?,?,?)");
 			//ひな型に値を流し込み
-			pstmt.setString(1,goods.getGoodsName());
-			pstmt.setInt(2, goods.getGoodsPrice());
-			//更新系SQL文を自動組み立て送信
-			int r = pstmt.executeUpdate();
-			//結果票の処理
-			if(r != 0) {
-				System.out.println("データが正しく登録されました。");
-			}else {
-				System.out.println("データが正しく登録されませんでした。");
-			}
-			//後片付け
-			pstmt.close();
-			//送信済みの処理要求の確定（コミット）
-			con.commit();
-		}catch(SQLException e){
-			e.printStackTrace();
-			//ロールバック
-			try {
-				con.rollback();
-			}catch(SQLException e2) {
-				e2.printStackTrace();
-			}
-		}finally {
-			//DB接続を切断
-			if(con != null) {
-				try {
-					con.close();
-				}catch(SQLException e3) {
-					e3.printStackTrace();
-				}
-			}
-		}
-	}
-
-	//getTable 備品情報全体を取得、表示
-	private void getTable(ArrayList<Goods> goodsList) {
-		try {
-			con = DriverManager.getConnection(url, userName, pass);
-			con.setAutoCommit(false);
-			//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
-			pstmt = con.prepareStatement("SELECT * FROM `goodslist` WHERE display = '1' ORDER BY `goodslist`.`goodsname` DESC");
-			rs = pstmt.executeQuery();
-			while(rs.next()) {
-				int goodsId = rs.getInt("goodsid");
-				String goodsName = rs.getString("goodsname");
-				int price = rs.getInt("price");
-				String display = rs.getString("display");
-				//make goodsinstance
-				Goods goods = new Goods();
-				//インデックス番号を追加しましょう！
-
-				goods.setGoodsId(goodsId);
-				goods.setGoodsName(goodsName);
-				goods.setGoodsPrice(price);
-				goods.setDisplay(display);
-				//add goodsinstance in goodsList
-				goodsList.add(goods);
-			}
-			rs.close();
-			pstmt.close();
-			con.commit();
-		}catch(SQLException e) {
-			try {
-				con.rollback();
-			}catch(SQLException e2) {
-				e2.printStackTrace();
-			}
-		}finally {
-			if(con != null) {
-				try {
-					con.close();
-				}catch(SQLException e) {
-					e.printStackTrace();
-				}
-			}
-		}
-	}
-
-
-	//update 備品情報の更新
-	private void update(int goodsId, String goodsName, int goodsPrice) {
-		//DBへの接続
-		try {
-			//①接続・自動コミットモードの解除
-			con = DriverManager.getConnection(url,userName,pass);
-			con.setAutoCommit(false);
-			//②SQL送信処理
-			pstmt = con.prepareStatement("UPDATE goodslist SET goodsName = ? , price = ? WHERE goodsid = ? ");
-
-			//ひな型に値を流し込み
-			pstmt.setInt(1,goodsId);
-			pstmt.setString(2, goodsName);
-			pstmt.setInt(3, goodsPrice);
+			pstmt.setInt(1, occupant.getFloorId());
+			pstmt.setInt(2, occupant.getRoomNumber());
+			pstmt.setString(3, occupant.getOccupantName());
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -191,24 +98,45 @@ public class Goodslist  {
 		}
 	}
 
-	//changeDisplay 登録されていた備品名と単価データの非表示 or 再表示の設定
-	private void changeDisplay(int goodsId){
+	//入居者情報の変更
+	private void update(int floorId, int roomNumber, String occupantName , String beforeName) {
+		//DBへの接続
 		try {
+			//①接続・自動コミットモードの解除
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
-			pstmt = con.prepareStatement("UPDATE goodslist SET display = '2' WHERE goodsid = ?");
-			pstmt.setInt(1, goodsId );
+			//②SQL送信処理
+			pstmt = con.prepareStatement("UPDATE occupantlist\r\n" +
+					"SET floorid=?, roomnumber = ?, occupantname = ?\r\n" +
+					"WHERE occupantname = ? ");
+			//ひな型に値を流し込み
+			pstmt.setInt(1, floorId);
+			pstmt.setInt(2, roomNumber);
+			pstmt.setString(3, occupantName);
+			pstmt.setString(4, beforeName);
 
-			pstmt.executeUpdate();
+			//更新系SQL文を自動組み立て送信
+			int r = pstmt.executeUpdate();
+			//結果票の処理
+			if(r != 0) {
+				System.out.println("データが正しく登録されました。");
+			}else {
+				System.out.println("データが正しく登録されませんでした。");
+			}
+			//後片付け
 			pstmt.close();
+			//送信済みの処理要求の確定（コミット）
 			con.commit();
-		}catch(SQLException e) {
+		}catch(SQLException e){
+			e.printStackTrace();
+			//ロールバック
 			try {
 				con.rollback();
 			}catch(SQLException e2) {
 				e2.printStackTrace();
 			}
 		}finally {
+			//DB接続を切断
 			if(con != null) {
 				try {
 					con.close();
@@ -219,6 +147,56 @@ public class Goodslist  {
 		}
 	}
 
+	//テーブル「occupantist」内のカラム「goout」：CHAR(1)型
+		//'1'入居中
+		//'2'退居済み
+	//退居された入居者のデータを「退居済み」と設定(メソッド名：leave)
+	//退居された入居者が再入居した場合は「入居中」と設定
+	private void leave(String goout, String occupantName) {
+		//DBへの接続
+		try {
+			//①接続・自動コミットモードの解除
+			con = DriverManager.getConnection(url,userName,pass);
+			con.setAutoCommit(false);
+			//②SQL送信処理
+			pstmt = con.prepareStatement("UPDATE occupantlist\r\n" +
+					"SET goout = ?\r\n" +
+					"WHERE occupantname = ?");
+			//ひな型に値を流し込み
+			pstmt.setString(1, goout);
+			pstmt.setString(2, occupantName);
+
+			//更新系SQL文を自動組み立て送信
+			int r = pstmt.executeUpdate();
+			//結果票の処理
+			if(r != 0) {
+				System.out.println("データが正しく登録されました。");
+			}else {
+				System.out.println("データが正しく登録されませんでした。");
+			}
+			//後片付け
+			pstmt.close();
+			//送信済みの処理要求の確定（コミット）
+			con.commit();
+		}catch(SQLException e){
+			e.printStackTrace();
+			//ロールバック
+			try {
+				con.rollback();
+			}catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			//DB接続を切断
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e3) {
+					e3.printStackTrace();
+				}
+			}
+		}
+	}
 
 	private void driverConnect() {
 		try {
@@ -249,3 +227,4 @@ public class Goodslist  {
 
 
 }
+

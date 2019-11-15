@@ -41,12 +41,6 @@ public class GoodsEdit extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("editGoods");
 			session.removeAttribute("changeGoods");
-
-			String errorMsg = (String) session.getAttribute("errorMsg");
-			if(errorMsg.length() != 0) {
-				session.removeAttribute("errorMsg");
-			}
-
 		}
 		/* 削除確認画面から*/
 		else if(parameter.equals("backFromUndisplay")) {
@@ -61,7 +55,6 @@ public class GoodsEdit extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
-
 
 }
 

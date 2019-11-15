@@ -11,7 +11,7 @@
 
 <%
 	//削除しようとしている備品データ1行を保存したインスタンスを取得
-	Goods targetGoods = (Goods)session.getAttribute("targetGoods");
+	Goods targetGoods = (Goods)session.getAttribute("targetInstance");
 %>
 
 <!DOCTYPE html>

@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import beans.Goods;
 import sqloperate.Goodslist;
 
-@WebServlet("/GoodsUndisplay")
+@WebServlet("/UndisplayController")
 public class GoodsUndisplay extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
