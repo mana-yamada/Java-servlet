@@ -24,17 +24,19 @@
 <h3>職員情報新規登録</h3>
 <form action ="/stockmanagementtest/StaffAdd?value=addConfirm" method = "post">
 
-<p>職員名：(30字以内)<input type= "text" name="staffName"  minlength="1" maxlength = "30"></p>
+<p>職員名：(30字以内)</p>
+<p><input type= "text" name="staffName"  minlength="1" maxlength = "30"></p>
 
-<p>パスワード：8字以上20字以内：<input type = "password" name="password" minlength = "8" maxlength = "20"></p>
+<p>パスワード：8字以上20字以内</p>
+<p><input type = "password" name="password" minlength = "8" maxlength = "20"></p>
 
 <p>管理者権限</p>
-<p><input type = "radio" name ="authority" value="YES"> 有 <input type = "radio" name = "authority" value="NO"> 無</p>
+<p><input type = "radio" name ="authority" value="YES"> 有 <input type = "radio" name = "authority" value="NO" checked="checked" > 無</p>
 
-<button>登録内容確認</button>
+<p><button>登録内容確認</button></p>
 
 </form>
-<a href="#"><button>メニューへ戻る</button></a>
+<p><a href="#"><button>メニューへ戻る</button></a></p>
 </main>
 
 

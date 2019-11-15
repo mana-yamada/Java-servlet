@@ -57,8 +57,8 @@
 </form>
 
 
-<a href="/stockmanagementtest/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a>
-<a href="#"><button>メニューへ戻る</button></a>
+<p><a href="/stockmanagementtest/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
+<p><a href="#"><button>メニューへ戻る</button></a></p>
 </main>
 
 

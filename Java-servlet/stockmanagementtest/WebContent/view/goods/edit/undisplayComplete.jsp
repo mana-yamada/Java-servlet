@@ -24,8 +24,8 @@
 <%-- 備品情報削除完了 --%>
 <h3>備品情報 削除完了</h3>
 <p>備品情報の削除が完了しました</p>
-<a href="/stockmanagementtest/GoodsEdit"><button>備品情報編集を続ける</button></a>
-<a href="/stockmanagementtest/#"><button>メニューへ戻る</button></a>
+<p><a href="/stockmanagementtest/GoodsEdit"><button>備品情報編集を続ける</button></a></p>
+<p><a href="/stockmanagementtest/#"><button>メニューへ戻る</button></a></p>
 </main>
 
 

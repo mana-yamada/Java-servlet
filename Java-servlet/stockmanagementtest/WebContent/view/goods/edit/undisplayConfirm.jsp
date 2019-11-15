@@ -38,10 +38,10 @@
 <p>単価：<%= editGoods.getGoodsPrice() %></p>
 
 <p>上記の内容で備品情報を削除してもよろしいですか？</p>
-<a href ="/stockmanagementtest/GoodsUndisplay?value=undisplayComplete"><button>削除</button></a>
+<p><a href ="/stockmanagementtest/GoodsUndisplay?value=undisplayComplete"><button>削除</button></a></p>
 
-<a href="/stockmanagementtest/GoodsEdit?value=backFromUndisplay"><button>備品情報編集画面へ戻る</button></a>
-<a href="#"><button>メニューへ戻る</button></a>
+<p><a href="/stockmanagementtest/GoodsEdit?value=backFromUndisplay"><button>備品情報編集画面へ戻る</button></a></p>
+<p><a href="#"><button id ="#">メニューへ戻る</button></a></p>
 </main>
 
 </body>

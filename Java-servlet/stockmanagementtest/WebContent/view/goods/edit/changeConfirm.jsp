@@ -47,10 +47,10 @@
 <p>変更後の単価：<%= changeGoods.getGoodsPrice() %></p>
 <p>上記の内容で備品情報を変更してもよろしいですか？</p>
 
-<a href="/stockmanagementtest/GoodsChange?value=changeAction"><button>変更</button></a>
+<p><a href="/stockmanagementtest/GoodsChange?value=changeAction"><button>変更</button></a></p>
 
-<a href="/stockmanagementtest/GoodsChange?value=reChangeInput"><button>入力画面へ戻る</button></a>
-<a href="/stockmanagementtest/GoodsEdit?value=backFromConfirm"><button>備品情報編集画面へ戻る</button></a>
+<p><a href="/stockmanagementtest/GoodsChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
+<p><a href="/stockmanagementtest/GoodsEdit?value=backFromConfirm"><button>備品情報編集画面へ戻る</button></a></p>
 <% } %>
 
 </main>
