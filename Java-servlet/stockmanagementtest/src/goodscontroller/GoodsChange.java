@@ -23,7 +23,7 @@ public class GoodsChange extends HttpServlet {
 				String strGoodsId = request.getParameter("goodsId");
 				String GoodsName = request.getParameter("goodsName");
 				String strGoodsPrice = request.getParameter("goodsPrice");
-				String Display = request.getParameter("display");
+
 
 				//String型で受け取ったid priceをinteger
 				int GoodsId = Integer.parseInt(strGoodsId);
@@ -32,7 +32,7 @@ public class GoodsChange extends HttpServlet {
 
 				HttpSession session = request.getSession();
 				//requestから取得した各情報からeditGoodsインスタンスを生成
-				Goods editGoods = new Goods(GoodsId, GoodsName, GoodsPrice, Display);
+				Goods editGoods = new Goods(GoodsId, GoodsName, GoodsPrice);
 
 				//editGoodsをセッションに格納
 				session.setAttribute("editGoods", editGoods);
@@ -42,6 +42,22 @@ public class GoodsChange extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 				dispatcher.forward(request, response);
 
+			}
+
+			/*変更確認画面から変更確認(エラー文送った場合)*/
+			else if(parameter.equals("reChangeInputByError")) {
+				/*remove scope*/
+				HttpSession session = request.getSession();
+
+				Goods editGoods = (Goods)session.getAttribute("editGoods");
+
+				//remove errorMsg instance
+				session.removeAttribute("errorMsg");
+
+				//forward
+				String forwardPath = "/view/goods/edit/change.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
 			}
 
 			/*変更確認画面から変更画面*/
@@ -54,12 +70,6 @@ public class GoodsChange extends HttpServlet {
 
 				//remove changeGoods instance
 				session.removeAttribute("changeGoods");
-
-				//remove errorMsg instance
-				String errorMsg =(String)session.getAttribute("errorMsg");
-				if(errorMsg.length() != 0) {
-					session.removeAttribute("errorMsg");
-				}
 
 				//forward
 				String forwardPath = "/view/goods/edit/change.jsp";
@@ -89,8 +99,10 @@ public class GoodsChange extends HttpServlet {
 				session.removeAttribute("editGoods");
 				session.removeAttribute("changeGoods");
 
-				//redirect
-				response.sendRedirect("/stockmanagementtest/view/goods/edit/changeComplete.jsp");
+				//forward
+				String forwardPath = "/view/goods/edit/changeComplete.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
 			}
 
 	}
@@ -107,15 +119,14 @@ public class GoodsChange extends HttpServlet {
 				HttpSession session = request.getSession();
 				Goods editGoods = (Goods)session.getAttribute("editGoods");
 
-
 				String goodsNameChange = request.getParameter("goosNameChange");
 				String goodsName = request.getParameter("goodsName");
+				if (goodsName.length() == 0) {
+					throw new NullPointerException("備品名未入力");
+				}
 
 				String goodsPriceChange = request.getParameter("goodsNameChange");
 				String strGoodsPrice = request.getParameter("goodsPrice");
-
-				/*「変更あり」にチェック、入力フォームが空欄である場合*/
-				/* 入力フォームが空欄だったら、.NullPointerException*/
 
 				int goodsPrice = Integer.parseInt(strGoodsPrice);
 
@@ -131,6 +142,18 @@ public class GoodsChange extends HttpServlet {
 				dispatcher.forward(request, response);
 
 			}
+			/*備品名の入力欄が空だった場合*/
+			catch(NullPointerException e) {
+				/* 変更画面から変更確認画面(エラー表示)*/
+				String errorMsg = "変更後の備品名が入力されていません。恐れ入りますがもう一度最初から編集画面に戻って操作をやり直してください。";
+				HttpSession session = request.getSession();
+				session.setAttribute("errorMsg", errorMsg);
+				//forward
+				String forwardPath = "/view/goods/edit/changeConfirm.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+				e.printStackTrace();
+			}
 			/*単価の入力欄で0~9以外の文字列が入っていた場合*/
 			catch(NumberFormatException e) {
 				/* 変更画面から変更確認画面(エラー表示)*/
@@ -143,6 +166,7 @@ public class GoodsChange extends HttpServlet {
 				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}
+
 		}
 	}
 

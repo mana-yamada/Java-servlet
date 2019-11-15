@@ -4,11 +4,11 @@ public class Goods {
 	public Goods(){
 
 	}
-	public Goods(int goodsId, String goodsName, int goodsPrice, String display) {
+	public Goods(int goodsId, String goodsName, int goodsPrice) {
 		this.goodsId = goodsId;
 		this.goodsName = goodsName;
 		this.goodsPrice = goodsPrice;
-		this.display = display;
+
 	}
 	public Goods(int goodsId, String goodsName, int goodsPrice, String display, int listNumber) {
 		this.goodsId = goodsId;

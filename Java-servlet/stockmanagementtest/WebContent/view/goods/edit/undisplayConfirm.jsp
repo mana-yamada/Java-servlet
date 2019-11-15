@@ -11,7 +11,7 @@
 
 <%
 	//削除しようとしている備品データ1行を保存したインスタンスを取得
-	Goods targetGoods = (Goods)session.getAttribute("targetGoods");
+	Goods editGoods = (Goods)session.getAttribute("editGoods");
 %>
 
 <!DOCTYPE html>
@@ -34,10 +34,10 @@
 <main>
 
 <h3>備品情報 削除確認</h3>
-<p>削除する備品名：<%=  targetGoods.getGoodsName() %></p>
-<p>単価：<%= targetGoods.getGoodsPrice() %></p>
+<p>削除する備品名：<%=  editGoods.getGoodsName() %></p>
+<p>単価：<%= editGoods.getGoodsPrice() %></p>
 
-<p>上記の内容で備品情報を変更してもよろしいですか？</p>
+<p>上記の内容で備品情報を削除してもよろしいですか？</p>
 <a href ="/stockmanagementtest/GoodsUndisplay?value=undisplayComplete"><button>削除</button></a>
 
 <a href="/stockmanagementtest/GoodsEdit?value=backFromUndisplay"><button>備品情報編集画面へ戻る</button></a>

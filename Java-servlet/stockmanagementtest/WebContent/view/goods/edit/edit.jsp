@@ -64,13 +64,18 @@
 			 	<input type="hidden" name="goodsId" value="<%= target.getGoodsId() %>">
 			 	<input type="hidden" name="goodsName" value="<%= target.getGoodsName() %>">
 			 	<input type="hidden" name="goodsPrice" value="<%= target.getGoodsPrice() %>">
-			 	<input type="hidden" name="display" value="<%= target.getDisplay() %>">
 			 	<button id="#">変更</button>
 		 	</form>
 		 	</td>
 
 		    <td>
-		    <button id="#">削除</button>
+		    <form action="/stockmanagementtest/GoodsUndisplay" method="get">
+			 	<input type="hidden" name="goodsId" value="<%= target.getGoodsId() %>">
+			 	<input type="hidden" name="goodsName" value="<%= target.getGoodsName() %>">
+			 	<input type="hidden" name="goodsPrice" value="<%= target.getGoodsPrice() %>">
+			 	<button id="#">削除</button>
+		 	</form>
+
 		    </td>
 		<%}%>
 	    </tr>
