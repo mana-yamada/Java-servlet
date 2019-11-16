@@ -19,7 +19,7 @@ public class GoodsEdit extends HttpServlet {
 
 		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
-		/*どんなパラメータを受け取ったのかで編集画面に移るまでの処理を条件分岐*/
+		 /*どんなパラメータを受け取ったのかで編集画面に移るまでの処理を条件分岐*/
 
 		/* 管理画面から
 		 * 変更完了画面から
@@ -34,6 +34,12 @@ public class GoodsEdit extends HttpServlet {
 			//remove editGoods
 			HttpSession session = request.getSession();
 			session.removeAttribute("editGoods");
+		}
+		/* 変更確認画面(エラー文送った場合)から*/
+		else if(parameter.equals("backFromConfirmByError")) {
+			HttpSession session = request.getSession();
+			session.removeAttribute("editGoods");
+			session.removeAttribute("errorMsg");
 		}
 		/* 変更確認画面から*/
 		else if(parameter.equals("backFromConfirm")) {
@@ -55,6 +61,7 @@ public class GoodsEdit extends HttpServlet {
 		dispatcher.forward(request, response);
 
 	}
+
 
 }
 

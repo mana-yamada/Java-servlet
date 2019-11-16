@@ -33,18 +33,17 @@ Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 <a href ="#"><button id ="logout">ログアウト</button></a>
 </header>
 
-
 <main>
 <%--エラーがあったら条件分岐でエラー文を出したい --%>
 <%if(errorMsg != null){ %>
 	<h3>職員情報 入力エラー</h3>
 	<p><%= errorMsg %></p>
-	<a href="/stockmanagementtest/StaffAdd?value=backFromAddError"><button>入力画面へ戻る</button></a>
+	<p><a href="/stockmanagementtest/StaffAdd?value=backFromAddError"><button>入力画面へ戻る</button></a></p>
 <% } else { %>
 <%-- エラーがなければ職員情報 登録確認    floorId, roomNumber ,staffName--%>
 	<h3>職員情報 登録確認</h3>
-	<p>職員名<%= registerStaff.getStaffName() %></p>
-	<p>パスワード＊＊＊＊＊＊＊＊＊＊＊＊</p>
+	<p>職員名：<%= registerStaff.getStaffName() %></p>
+	<p>パスワード：＊＊＊＊＊＊＊＊＊＊＊＊</p>
 
 	<% if(registerStaff.getAuthority().equals("YES")){ %>
 			<p>管理者権限：有</p>
@@ -52,10 +51,10 @@ Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 		    <p>管理者権限：無</p>
 	<% }%>
 
-	<a href ="/stockmanagementtest/StaffAdd?value=addAction"><button>登録</button></a>
-	<a href="/stockmanagementtest/StaffAdd?value=backFromAdd"><button>入力画面へ戻る</button></a>
+	<p><a href ="/stockmanagementtest/StaffAdd?value=addAction"><button>登録</button></a></p>
+	<p><a href="/stockmanagementtest/StaffAdd?value=backFromAdd"><button>入力画面へ戻る</button></a></p>
 <% } %>
-<a href="#?value=fromaddConfirm"><button>メニューへ戻る</button></a>
+<p><a href="#?value=fromaddConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

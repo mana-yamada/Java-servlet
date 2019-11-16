@@ -8,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 import beans.Occupant;
@@ -28,26 +29,28 @@ public class Occupantlist {
 		insert(occupant);
 	}
 
-	//add 入居者の入居される階の数字、居室番号、氏名の変更
-		public void change() {
+	//get 現在入居されている方のリストをoccupantlistテーブルから取得
+		public void get(ArrayList<Occupant> occupantList) {
 			driverConnect();
 			readFile();
-			int floorId = 1;
-			int roomNumber = 101;
-			//変更前の氏名
-			String beforeName = "徳川綱吉";
-			//変更後の氏名
-			String occupantName = "徳川綱吉";
-			update(floorId, roomNumber, occupantName, beforeName);
+			//DB全件取得
+			getTable(occupantList);
+		}
+
+
+	//change 入居者の入居される階の数字、居室番号、氏名の変更
+		public void change(Occupant occupant) {
+			driverConnect();
+			readFile();
+			update(occupant);
 		}
 
 	//out 退居された入居者の情報を「退居済み」と設定
-		public void out() {
+		public void out(Occupant occupant) {
 			driverConnect();
 			readFile();
-			String goout = "2";
-			String occupantName = "徳川綱吉";
-			leave(goout, occupantName);
+
+			leave(occupant);
 		}
 
 
@@ -98,8 +101,53 @@ public class Occupantlist {
 		}
 	}
 
+	//getTable 備品情報全体を取得、表示
+	private void getTable(ArrayList<Occupant> occupantList) {
+		try {
+			con = DriverManager.getConnection(url, userName, pass);
+			con.setAutoCommit(false);
+			//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
+			pstmt = con.prepareStatement("SELECT * FROM `occupantlist` WHERE display = '1' ORDER BY `occupantlist`.`roomnumber` ASC");
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int occupantId = rs.getInt("occupantid");
+				int floorId = rs.getInt("floorid");
+				int roomNumber = rs.getInt("roomnumber");
+				String occupantName = rs.getString("occupantname");
+				String display = rs.getString("display");
+				//make occupantinstance
+				Occupant occupant = new Occupant();
+				//インデックス番号を追加しましょう！
+				occupant.setOccupantId(occupantId);
+				occupant.setFloorId(floorId);
+				occupant.setRoomNumber(roomNumber);
+				occupant.setOccupantName(occupantName);
+				occupant.setDisplay(display);
+				//add occupantinstance in occupantList
+				occupantList.add(occupant);
+			}
+			rs.close();
+			pstmt.close();
+			con.commit();
+		}catch(SQLException e) {
+			try {
+				con.rollback();
+			}catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	//入居者情報の変更
-	private void update(int floorId, int roomNumber, String occupantName , String beforeName) {
+	private void update(Occupant occupant) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
@@ -108,12 +156,12 @@ public class Occupantlist {
 			//②SQL送信処理
 			pstmt = con.prepareStatement("UPDATE occupantlist\r\n" +
 					"SET floorid=?, roomnumber = ?, occupantname = ?\r\n" +
-					"WHERE occupantname = ? ");
+					"WHERE occupantid = ? ");
 			//ひな型に値を流し込み
-			pstmt.setInt(1, floorId);
-			pstmt.setInt(2, roomNumber);
-			pstmt.setString(3, occupantName);
-			pstmt.setString(4, beforeName);
+			pstmt.setInt(1, occupant.getFloorId());
+			pstmt.setInt(2, occupant.getRoomNumber());
+			pstmt.setString(3, occupant.getOccupantName());
+			pstmt.setInt(4, occupant.getOccupantId());
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -151,8 +199,8 @@ public class Occupantlist {
 		//'1'入居中
 		//'2'退居済み
 	//退居された入居者のデータを「退居済み」と設定(メソッド名：leave)
-	//退居された入居者が再入居した場合は「入居中」と設定
-	private void leave(String goout, String occupantName) {
+
+	private void leave(Occupant occupant) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
@@ -160,12 +208,10 @@ public class Occupantlist {
 			con.setAutoCommit(false);
 			//②SQL送信処理
 			pstmt = con.prepareStatement("UPDATE occupantlist\r\n" +
-					"SET goout = ?\r\n" +
-					"WHERE occupantname = ?");
+					"SET display = '2' \r\n" +
+					"WHERE occupantid = ?");
 			//ひな型に値を流し込み
-			pstmt.setString(1, goout);
-			pstmt.setString(2, occupantName);
-
+			pstmt.setInt(1, occupant.getOccupantId());
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
 			//結果票の処理

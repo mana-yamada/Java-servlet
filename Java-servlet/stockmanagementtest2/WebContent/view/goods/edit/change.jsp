@@ -5,7 +5,7 @@
 
 <%
 	//変更前の備品データ1行を保存したインスタンスを取得
-	Goods targetGoods = (Goods)session.getAttribute("targetInstance");
+	Goods editGoods = (Goods)session.getAttribute("editGoods");
 %>
 
 
@@ -31,17 +31,37 @@
 
 <main>
 <h3>備品情報変更</h3>
+<p>変更前の備品名：<%= editGoods.getGoodsName() %></p>
+<p>変更前の単価：<%= editGoods.getGoodsPrice() %>円</p>
 
-<p>変更前の備品名：<%= targetGoods.getGoodsName() %></p>
-<p>変更前の単価：<%= targetGoods.getGoodsPrice() %>円</p>
 <form action ="/stockmanagementtest/GoodsChange?value=changeConfirm" method ="post">
-<p>変更後の備品名：<input type= "text" name="goodsName"  minlength="1" maxlength = "30"></p>
-<p>変更後の単価：<input type="text" name="goodsPrice" minlength="1" maxlength = "7">円</p>
+<%--備品名変更 --%>
+<p>備品名</p>
+<p><input type="radio" name="goodsNameChange" value="unchange" onclick="document.getElementById('nameForm').style.display= 'none';" >変更なし</p>
+<p><input type="radio" name="goodsNameChange" value="change"   onclick="document.getElementById('nameForm').style.display= 'block';" checked = "checked">変更あり</p>
+
+<!-- scriptタグで表示設定 -->
+<p id ="nameForm"><input type= "text" name="goodsName" value="<%= editGoods.getGoodsName()  %>"  maxlength = "30"></p>
+
+<%--備品単価  --%>
+<p>単価</p>
+
+<p><input type="radio" name="goodsPriceChange" value="unchange" onclick="document.getElementById('priceForm').style.display = 'none';">変更なし</p>
+<p><input type="radio" name="goodsPriceChange" value="change"   onclick="document.getElementById('priceForm').style.display = 'block';" checked = "checked">変更あり</p>
+
+<!-- scriptタグで表示設定 -->
+<p id ="priceForm" ><input  type="text" name="goodsPrice" value="<%= editGoods.getGoodsPrice() %>"  maxlength = "7">円</p>
+
+<%-- 確認ボタン --%>
 <button>変更内容確認</button>
 </form>
-<a href="/stockmanagementtest/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a>
-<a href="#"><button>メニューへ戻る</button></a>
+
+
+<p><a href="/stockmanagementtest/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
+<p><a href="#"><button>メニューへ戻る</button></a></p>
 </main>
+
+
 
 </body>
 </html>

@@ -56,8 +56,8 @@ public class GoodsEdit extends HttpServlet {
 		}
 
 		//編集画面へforward
-		String forward = "/view/goods/edit/edit.jsp";
-		RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+		String path = "/view/goods/edit/edit.jsp";
+		RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 		dispatcher.forward(request, response);
 
 	}

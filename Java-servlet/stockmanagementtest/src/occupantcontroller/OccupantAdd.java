@@ -34,8 +34,8 @@ public class OccupantAdd extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("registerOccupant");
 			//forward
-			String forwardPath = "/view/occupant/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			String path = "/view/occupant/add/add.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 
 		}
@@ -46,8 +46,8 @@ public class OccupantAdd extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.removeAttribute("errorMsg");
 			//forward
-			String forwardPath = "/view/occupant/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			String path = "/view/occupant/add/add.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 
 		}
@@ -67,8 +67,8 @@ public class OccupantAdd extends HttpServlet {
 			session.removeAttribute("registerOccupant");
 
 			//forward
-			String forwardPath = "/view/occupant/add/addComplete.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+			String path = "/view/occupant/add/addComplete.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 
 		}
@@ -77,8 +77,8 @@ public class OccupantAdd extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
 		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
-		//forwardPath
-		String forwardPath = "/view/occupant/add/addConfirm.jsp";
+		//path
+		String path = "/view/occupant/add/addConfirm.jsp";
 
 		/*登録画面から登録確認画面*/
 		if(parameter.equals("addConfirm")) {
@@ -93,7 +93,7 @@ public class OccupantAdd extends HttpServlet {
 				session.setAttribute("errorMsg", errorMsg);
 
 				//forward
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 			}else {
 			  try {
@@ -107,7 +107,7 @@ public class OccupantAdd extends HttpServlet {
 				session.setAttribute("registerOccupant", registerOccupant);
 
 				//forward
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 
 			  }catch(NumberFormatException e) {
@@ -117,7 +117,7 @@ public class OccupantAdd extends HttpServlet {
 				  session.setAttribute("errorMsg", errorMsg);
 
 				  //forward
-				  RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				  RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				  dispatcher.forward(request, response);
 				  e.printStackTrace();
 			  }

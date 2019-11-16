@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import beans.Goods;
 import sqloperate.Goodslist;
 
-@WebServlet("/UndisplayController")
+@WebServlet("/GoodsUndisplay")
 public class GoodsUndisplay extends HttpServlet {
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
@@ -21,7 +21,24 @@ public class GoodsUndisplay extends HttpServlet {
 		String parameter = request.getParameter("value");
 
 		/*編集画面から削除確認画面*/
-		if(parameter.equals("undisplay")) {
+		if(parameter == null) {
+			String strGoodsId = request.getParameter("goodsId");
+			String GoodsName = request.getParameter("goodsName");
+			String strGoodsPrice = request.getParameter("goodsPrice");
+
+
+			//String型で受け取ったid priceをinteger
+			int GoodsId = Integer.parseInt(strGoodsId);
+			int GoodsPrice = Integer.parseInt(strGoodsPrice);
+
+
+			HttpSession session = request.getSession();
+			//requestから取得した各情報からeditGoodsインスタンスを生成
+			Goods editGoods = new Goods(GoodsId, GoodsName, GoodsPrice);
+
+			//editGoodsをセッションに格納
+			session.setAttribute("editGoods", editGoods);
+
 			//forward
 			String parameterPath = "view/goods/edit/undisplayConfirm.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(parameterPath);

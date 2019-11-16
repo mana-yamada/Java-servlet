@@ -42,9 +42,6 @@
 	    Goodslist displayGoods = new Goodslist();
 		displayGoods.get(goodsList);
 
-		session.setAttribute("goodsList", goodsList);
-
-
 		for(Goods target : goodsList){
 			//ArrayList 内でのインデックス番号
 			int listNumber = goodsList.indexOf(target);
@@ -56,35 +53,38 @@
 			String display = target.getDisplay();
 		%>
 		<tr>
-	    <td><%= listNumber  %></td>
-		<td><%= target.getGoodsId() %></td>
-	 	<td><%= target.getGoodsName() %></td>
-	 	<td><%= target.getGoodsPrice()%></td>
-	 	<td><%= target.getDisplay() %></td>
+		    <td><%= listNumber  %></td>
+			<td><%= target.getGoodsId() %></td>
+		 	<td><%= target.getGoodsName() %></td>
+		 	<td><%= target.getGoodsPrice()%></td>
+		 	<td><%= target.getDisplay() %></td>
 
-	 	<td>
-	 	<%	//取得した1行データをインスタンス化、スコープに保存
+		 	<td>
+		 	<form action="/stockmanagementtest/GoodsChange" method="get">
+			 	<input type="hidden" name="goodsId" value="<%= target.getGoodsId() %>">
+			 	<input type="hidden" name="goodsName" value="<%= target.getGoodsName() %>">
+			 	<input type="hidden" name="goodsPrice" value="<%= target.getGoodsPrice() %>">
+			 	<button id="#">変更</button>
+		 	</form>
+		 	</td>
 
-		%>
-	 	<a href="/stockmanagementtest/GoodsChange?value=change" ><button id="#">
-	 	<%= listNumber  %>変更</button></a>
-	 	</td>
+		    <td>
+		    <form action="/stockmanagementtest/GoodsUndisplay" method="get">
+			 	<input type="hidden" name="goodsId" value="<%= target.getGoodsId() %>">
+			 	<input type="hidden" name="goodsName" value="<%= target.getGoodsName() %>">
+			 	<input type="hidden" name="goodsPrice" value="<%= target.getGoodsPrice() %>">
+			 	<button id="#">削除</button>
+		 	</form>
 
-	    <td>
-	    <a href="/stockmanagementtest/GoodsUndisplay?value=undisplay"><button id="#">削除</button></a>
-	    </td>
-
-
-
+		    </td>
 		<%}%>
-
-
-
 	    </tr>
 
 		</table>
 	</main>
 </div>
+
+
 </body>
 </html>
 

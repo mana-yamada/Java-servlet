@@ -26,9 +26,9 @@
 <p>品目</p>
 <p>備品名：(30字以内)<input type= "text" name="goodsname"  minlength="1" maxlength = "30"></p>
 <p>備品の単価：<input type="text" name="goodsprice" minlength="1" maxlength = "7">円</p>
-<button>登録内容確認</button>
+<p><button>登録内容確認</button></p>
 </form>
-<a href="#"><button>メニューへ戻る</button></a>
+<p><a href="#"><button>メニューへ戻る</button></a></p>
 </main>
 
 

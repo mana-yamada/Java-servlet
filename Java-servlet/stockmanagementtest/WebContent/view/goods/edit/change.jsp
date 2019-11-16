@@ -35,33 +35,29 @@
 <p>変更前の単価：<%= editGoods.getGoodsPrice() %>円</p>
 
 <form action ="/stockmanagementtest/GoodsChange?value=changeConfirm" method ="post">
-<%--備品名変更 --%>
-<p>備品名</p>
-<p><input type="radio" name="goodsNameChange" value="unchange" onclick="document.getElementById('nameForm').style.display= 'none';" >変更なし</p>
-<p><input type="radio" name="goodsNameChange" value="change"   onclick="document.getElementById('nameForm').style.display= 'block';" checked = "checked">変更あり</p>
 
-<!-- scriptタグで表示設定 -->
-<p id ="nameForm"><input type= "text" name="goodsName" value="<%= editGoods.getGoodsName()  %>"  maxlength = "30"></p>
+<%--備品名 --%>
+<p>備品名</p>
+<p><input type="radio" name="goodsNameChange" value="unchange" onclick="nameChange()" >変更なし</p>
+<p><input type="radio" name="goodsNameChange" value="change"   onclick="nameChange()" checked = "checked">変更あり</p>
+<p id ="nameForm"><input type= "text" name="goodsName" value="<%= editGoods.getGoodsName() %>"  maxlength = "30"></p><!-- scriptタグで表示設定 -->
 
 <%--備品単価  --%>
 <p>単価</p>
-
-<p><input type="radio" name="goodsPriceChange" value="unchange" onclick="document.getElementById('priceForm').style.display = 'none';">変更なし</p>
-<p><input type="radio" name="goodsPriceChange" value="change"   onclick="document.getElementById('priceForm').style.display = 'block';" checked = "checked">変更あり</p>
-
-<!-- scriptタグで表示設定 -->
-<p id ="priceForm" ><input  type="text" name="goodsPrice" value="<%= editGoods.getGoodsPrice() %>"  maxlength = "7">円</p>
+<p><input type="radio" name="goodsPriceChange" value="unchange" onclick="priceChange()">変更なし</p>
+<p><input type="radio" name="goodsPriceChange" value="change"   onclick="priceChange()" checked = "checked">変更あり</p>
+<p id ="priceForm" ><input  type="text" name="goodsPrice" value="<%= editGoods.getGoodsPrice() %>"  maxlength = "7">円</p><!-- scriptタグで表示設定 -->
 
 <%-- 確認ボタン --%>
 <button>変更内容確認</button>
 </form>
 
-
 <p><a href="/stockmanagementtest/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
 <p><a href="#"><button>メニューへ戻る</button></a></p>
 </main>
 
-
+<script type="text/javascript" src="/stockmanagementtest/js/goods.js">
+</script>
 
 </body>
 </html>

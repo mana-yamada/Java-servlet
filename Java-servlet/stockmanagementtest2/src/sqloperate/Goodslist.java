@@ -152,12 +152,12 @@ public class Goodslist  {
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-			pstmt = con.prepareStatement("UPDATE goodslist SET goodsName = ? , price = ? WHERE goodsid = ? ");
+			pstmt = con.prepareStatement("UPDATE goodslist SET goodsname = ? , price = ? WHERE goodsid = ? ");
 
 			//ひな型に値を流し込み
-			pstmt.setInt(1,goodsId);
-			pstmt.setString(2, goodsName);
-			pstmt.setInt(3, goodsPrice);
+			pstmt.setString(1, goodsName);
+			pstmt.setInt(2, goodsPrice);
+			pstmt.setInt(3,goodsId);
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
@@ -199,7 +199,12 @@ public class Goodslist  {
 			pstmt = con.prepareStatement("UPDATE goodslist SET display = '2' WHERE goodsid = ?");
 			pstmt.setInt(1, goodsId );
 
-			pstmt.executeUpdate();
+			int r = pstmt.executeUpdate();
+			if(r != 0) {
+				System.out.println("データが正しく登録されました");
+			}else {
+				System.out.println("データが正しく登録されませんでした。");
+			}
 			pstmt.close();
 			con.commit();
 		}catch(SQLException e) {
