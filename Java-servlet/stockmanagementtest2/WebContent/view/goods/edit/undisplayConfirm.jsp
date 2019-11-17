@@ -25,11 +25,7 @@
 
 <body>
 <%-- header --%>
-<header>
-<a href="#"><button id="menu">ラックん</button></a>
-<h3>ログインユーザー：〇〇〇〇</h3>
-<a href ="#"><button id ="logout">ログアウト</button></a>
-</header>
+<jsp:include page="/view/template/header.jsp"></jsp:include>
 
 <main>
 
@@ -40,7 +36,7 @@
 <p>上記の内容で備品情報を削除してもよろしいですか？</p>
 <p><a href ="/stockmanagementtest/GoodsUndisplay?value=undisplayComplete"><button>削除</button></a></p>
 
-<p><a href="/stockmanagementtest/GoodsEdit?value=backFromUndisplay"><button>備品情報編集画面へ戻る</button></a></p>
+<p><a href="/stockmanagementtest/GoodsEdit?value=backFromUndisplay"><button>編集画面へ戻る</button></a></p>
 <p><a href="#"><button id ="#">メニューへ戻る</button></a></p>
 </main>
 

@@ -11,6 +11,13 @@ public class Occupant {
 		this.occupantName = occupantName;
 	}
 
+	public Occupant(int occupantId, int floorId, int roomNumber, String occupantName) {
+		this.occupantId = occupantId;
+		this.floorId = floorId;
+		this.roomNumber = roomNumber;
+		this.occupantName = occupantName;
+	}
+
 	int occupantId;
 	int floorId;
 	int roomNumber;

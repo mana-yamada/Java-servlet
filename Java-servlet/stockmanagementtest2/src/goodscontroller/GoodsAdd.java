@@ -22,8 +22,8 @@ public class GoodsAdd extends HttpServlet{
 		String parameter = request.getParameter("value");
 		if(parameter == null) {
 			//forward
-			String forward = "/view/goods/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+			String path = "/view/goods/add/add.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 		}else if(parameter.equals("addgoods")) {
 			//get instance Goods
@@ -40,8 +40,8 @@ public class GoodsAdd extends HttpServlet{
 			session.removeAttribute("goods");
 
 			//forward
-			String forward = "/view/goods/add/addComplete.jsp";
-			RequestDispatcher  dispatcher = request.getRequestDispatcher(forward);
+			String path = "/view/goods/add/addComplete.jsp";
+			RequestDispatcher  dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 		}else if(parameter.equals("reinput")) {
 			//remove instance need getSession!?
@@ -49,8 +49,8 @@ public class GoodsAdd extends HttpServlet{
 			request.removeAttribute("errorMsg");
 
 			//forward
-			String forward = "/view/goods/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+			String path = "/view/goods/add/add.jsp";
+			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 		}
 
@@ -74,8 +74,8 @@ public class GoodsAdd extends HttpServlet{
 				String errorMsg = "入力欄で正しく入力されていませんでした。恐れ入りますがもう一度入力し直してください。";
 				request.setAttribute("errorMsg" , errorMsg);
 				//forward
-				String forward = "/view/goods/add/addConfirm.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+				String path = "/view/goods/add/addConfirm.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 			}else {
 			    try {
@@ -94,8 +94,8 @@ public class GoodsAdd extends HttpServlet{
 						session.setAttribute("goods", goods);
 
 						//forward
-						String forward = "/view/goods/add/addConfirm.jsp";
-						RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+						String path = "/view/goods/add/addConfirm.jsp";
+						RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 						dispatcher.forward(request, response);
 					}
 
@@ -104,8 +104,8 @@ public class GoodsAdd extends HttpServlet{
 					String errorMsg = "備品の単価が正しく入力されていませんでした。恐れ入りますがもう一度入力し直してください。";
 					request.setAttribute("errorMsg" , errorMsg);
 					//forward
-					String forward = "/view/goods/add/addConfirm.jsp";
-					RequestDispatcher dispatcher = request.getRequestDispatcher(forward);
+					String path = "/view/goods/add/addConfirm.jsp";
+					RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 					dispatcher.forward(request, response);
 					e.printStackTrace();
 			  }

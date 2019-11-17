@@ -1,4 +1,4 @@
-package goodscontroller;
+package staffcontroller;
 
 import java.io.IOException;
 
@@ -10,37 +10,34 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import beans.Goods;
-import sqloperate.Goodslist;
+import beans.Staff;
+import sqloperate.Stafflist;
 
-@WebServlet("/GoodsUndisplay")
-public class GoodsUndisplay extends HttpServlet {
-
+@WebServlet("/StaffUndisplay")
+public class StaffUndisplay extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
 		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
 
 		/*編集画面から削除確認画面*/
 		if(parameter == null) {
-			String strGoodsId = request.getParameter("goodsId");
-			String GoodsName = request.getParameter("goodsName");
-			String strGoodsPrice = request.getParameter("goodsPrice");
-
+			String strStaffId = request.getParameter("staffId");
+			String StaffName = request.getParameter("staffName");
+			String authority = request.getParameter("authority");
 
 			//String型で受け取ったid priceをinteger
-			int GoodsId = Integer.parseInt(strGoodsId);
-			int GoodsPrice = Integer.parseInt(strGoodsPrice);
+			int StaffId = Integer.parseInt(strStaffId);
 
 
 			HttpSession session = request.getSession();
-			//requestから取得した各情報からeditGoodsインスタンスを生成
-			Goods editGoods = new Goods(GoodsId, GoodsName, GoodsPrice);
+			//requestから取得した各情報からeditStaffインスタンスを生成
+			Staff editStaff = new Staff(StaffId, StaffName, authority);
 
-			//editGoodsをセッションに格納
-			session.setAttribute("editGoods", editGoods);
+			//editStaffをセッションに格納
+			session.setAttribute("editStaff", editStaff);
 
 			//forward
-			String path = "view/goods/edit/undisplayConfirm.jsp";
+			String path = "view/staff/edit/undisplayConfirm.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 
@@ -49,22 +46,21 @@ public class GoodsUndisplay extends HttpServlet {
 		else if (parameter.equals("undisplayComplete")) {
 			//get scope
 			HttpSession session = request.getSession();
-			Goods editGoods = (Goods)session.getAttribute("editGoods");
-			int goodsId = editGoods.getGoodsId();
+			Staff editStaff = (Staff)session.getAttribute("editStaff");
+			int staffId = editStaff.getStaffId();
 
 			//SQL操作
-			Goodslist undisplay = new Goodslist();
-			undisplay.display(goodsId);
+			Stafflist undisplay = new Stafflist();
+			undisplay.display(staffId);
 
 			//delete scope
-			session.removeAttribute("editGoods");
+			session.removeAttribute("editStaff");
 
 			//forward
-			String path = "view/goods/edit/undisplayComplete.jsp";
+			String path = "view/staff/edit/undisplayComplete.jsp";
 			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 
 		}
 	}
-
 }

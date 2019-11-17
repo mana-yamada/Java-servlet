@@ -12,6 +12,12 @@ public class Staff {
 		this.authority = authority;
 	}
 
+	public Staff(int staffId, String staffName, String authority) {
+		this.staffId = staffId;
+		this.staffName = staffName;
+		this.authority = authority;
+	}
+
 	int staffId;
 	String staffName;
 	String password;

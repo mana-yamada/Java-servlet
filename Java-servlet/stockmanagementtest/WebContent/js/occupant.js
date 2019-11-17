@@ -30,7 +30,37 @@ function nameChange2(){
 	}
   }
 
+  /*入居者情報編集画面での表示フロア変更*/
+  function entryChange2(){
+
+	  if(document.getElementById('changeSelect')){
+		  var id = document.getElementById('changeSelect').value;
+
+		  if(id === 'select1'){
+			  document.getElementById('floor1').style.display = "block";
+			  document.getElementById('floor2').style.display = "none";
+			  document.getElementById('floor3').style.display = "none";
+		  }else if(id ==='select2'){
+			  document.getElementById('floor1').style.display = "none";
+			  //document.getElementById('floor').style.display = "";
+			  document.getElementById('floor2').style.display = "block";
+			  document.getElementById('floor3').style.display = "none";
+			  //document.getelementById('').style.display ="";
+		  }else if(id ==='select3'){
+			  //document.getelementById('').style.display ="";
+			  document.getElementById('floor1').style.display = "none";
+			  document.getElementById('floor2').style.display = "none";
+			  document.getElementById('floor3').style.display = "block";
+		  }
+	  }
+  }
 
 
 
-}
+
+
+
+
+
+
+}e

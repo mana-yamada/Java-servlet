@@ -13,16 +13,13 @@
 <body>
 
 <%-- header --%>
-<header>
-<a href="#"><button id="menu">ラックん</button></a>
-<h3>ログインユーザー：〇〇〇〇</h3>
-<a href ="#"><button id ="logout">ログアウト</button></a>
-</header>
+<jsp:include page="/view/template/header.jsp"></jsp:include>
 
 <%-- 入居者情報新規登録 --%>
 <main>
 <h3>入居者情報新規登録</h3>
 <form action ="/stockmanagementtest/OccupantAdd?value=addConfirm" method = "post">
+<p>登録する入居者</p>
 <p>入居者名：(30字以内)<input type= "text" name="occupantName"  minlength="1" maxlength = "30"></p>
 <p>入居フロア(整数)<input type ="text" name = "floorId" minlength="1" maxlegth="2"></p>
 <p>居室番号(3ケタから4ケタの整数)：<input type="text" name="roomaNumber" minlength="1" maxlength = "5"></p>

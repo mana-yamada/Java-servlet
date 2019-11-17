@@ -38,8 +38,8 @@ public class GoodsChange extends HttpServlet {
 				session.setAttribute("editGoods", editGoods);
 
 				//forward
-				String forwardPath = "/view/goods/edit/change.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				String path = "/view/goods/edit/change.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 
 			}
@@ -55,8 +55,8 @@ public class GoodsChange extends HttpServlet {
 				session.removeAttribute("errorMsg");
 
 				//forward
-				String forwardPath = "/view/goods/edit/change.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				String path = "/view/goods/edit/change.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 			}
 
@@ -72,8 +72,8 @@ public class GoodsChange extends HttpServlet {
 				session.removeAttribute("changeGoods");
 
 				//forward
-				String forwardPath = "/view/goods/edit/change.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				String path = "/view/goods/edit/change.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 			}
 
@@ -100,8 +100,8 @@ public class GoodsChange extends HttpServlet {
 				session.removeAttribute("changeGoods");
 
 				//forward
-				String forwardPath = "/view/goods/edit/changeComplete.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				String path = "/view/goods/edit/changeComplete.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 			}
 
@@ -137,8 +137,8 @@ public class GoodsChange extends HttpServlet {
 				session.setAttribute("changeGoods", changeGoods);
 
 				//forward
-				String forwardPath = "/view/goods/edit/changeConfirm.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				String path = "/view/goods/edit/changeConfirm.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 
 			}
@@ -149,8 +149,8 @@ public class GoodsChange extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("errorMsg", errorMsg);
 				//forward
-				String forwardPath = "/view/goods/edit/changeConfirm.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				String path = "/view/goods/edit/changeConfirm.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}
@@ -161,8 +161,8 @@ public class GoodsChange extends HttpServlet {
 				HttpSession session = request.getSession();
 				session.setAttribute("errorMsg", errorMsg);
 				//forward
-				String forwardPath = "/view/goods/edit/changeConfirm.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				String path = "/view/goods/edit/changeConfirm.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}

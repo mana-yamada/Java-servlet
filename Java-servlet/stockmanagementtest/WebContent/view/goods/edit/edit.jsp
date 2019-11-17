@@ -18,13 +18,11 @@
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
 <body>
-<div id="contents">
+
 <%-- header --%>
-	<header>
-		<a href="#"><button id="menu">ラックん</button></a>
-		<h3>ログインユーザー：〇〇〇〇</h3>
-		<a href ="#"><button id ="logout">ログアウト</button></a>
-	</header>
+<jsp:include page="/view/template/header.jsp"></jsp:include>
+
+<div id="contents">
 	<main>
 		<h3>備品情報編集</h3>
 		<table border="1">
