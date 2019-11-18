@@ -25,12 +25,12 @@
 	<main>
 		<h3>備品情報編集</h3>
 
-		<table border ="0">
+		<table >
 		<tr>
 		<th>表示フロア</th>
 		<td>
 			<select id="changeSelect" name="selectFloor" onchange="entryChange2();">
-				<option value="select1">1F</option>
+				<option value="select1" selected>1F</option>
 				<option value="select2">2F</option>
 				<option value="select3">3F</option>
 			</select>
@@ -39,17 +39,7 @@
 		</table>
 
 
-		<table border="1">
-		<tr>
-		<th>ArrayList Id</th>
-		<th>Id</th>
-		<th>入居フロア</th>
-		<th>居室番号</th>
-		<th>氏名</th>
-		<th>表示設定</th>
-		<th>変更</th>
-		<th>削除</th>
-		</tr>
+
 
 		<%
 
@@ -60,104 +50,149 @@
 
 		%>
 
-		<% for(Occupant target : occupantList){ %>
+		 <table border="1" id = "floor1">
+			<tr>
+				<th>Id</th>
+				<th>入居フロア</th>
+				<th>居室番号</th>
+				<th>氏名</th>
+				<th>変更</th>
+				<th>削除</th>
+			</tr>
 
-			<% if(target.getFloorId() == 1){ %>
-		    	<tr id ="floor1">
-				    <td><%=  occupantList.indexOf(target)  %></td>
-					<td><%= target.getOccupantId() %></td>
-					<td><%= target.getFloorId() %>
-					<td><%= target.getRoomNumber() %></td>
-				 	<td><%= target.getOccupantName() %></td>
-				 	<td><%= target.getDisplay() %></td>
+         <% for(Occupant target : occupantList){ %>
+		    <% if (target.getFloorId() == 1 ) { %>
+    		<tr>
+				<td><%= target.getOccupantId() %></td>
+				<td><%= target.getFloorId() %>
+				<td><%= target.getRoomNumber() %></td>
+			 	<td><%= target.getOccupantName() %></td>
 
-				 	<td>
-				 	<form action="/stockmanagementtest/OccupantChange" method="get">
-					 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
-				 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
-					 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
-					 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
-					 	<button id="#">変更</button>
-				 	</form>
-				 	</td>
+			 	<td>
+			 	<form action="/stockmanagementtest/OccupantChange" method="get">
+				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
+			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
+				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
+				 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
+				 	<button id="#">変更</button>
+			 	</form>
+			 	</td>
 
-				    <td>
-				    <form action="/stockmanagementtest/OccupantUndisplay" method="get">
-					 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
-				 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
-					 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
-					 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
-					 	<button id="#">削除</button>
-				 	</form>
-				    </td>
-		   	    </tr>
-		  	<% } %>
-			<% if(target.getFloorId() == 2){ %>
-				<tr id ="floor2">
-				    <td><%=  occupantList.indexOf(target)  %></td>
-					<td><%= target.getOccupantId() %></td>
-					<td><%= target.getFloorId() %>
-					<td><%= target.getRoomNumber() %></td>
-				 	<td><%= target.getOccupantName() %></td>
-				 	<td><%= target.getDisplay() %></td>
+			    <td>
+			    <form action="/stockmanagementtest/OccupantUndisplay" method="get">
+				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
+			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
+				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
+				 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
+				 	<button id="#">削除</button>
+			 	</form>
+			    </td>
+		    </tr>
+    	    <% } %>
+     	<%}%>
+	</table>
 
-				 	<td>
-				 	<form action="/stockmanagementtest/OccupantChange" method="get">
-					 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
-				 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
-					 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
-					 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
-					 	<button id="#">変更</button>
-				 	</form>
-				 	</td>
+	<table border="1" id = "floor2">
+			<tr>
 
-				    <td>
-				    <form action="/stockmanagementtest/OccupantUndisplay" method="get">
-					 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
-				 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
-					 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
-					 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
-					 	<button id="#">削除</button>
-				 	</form>
-				    </td>
-		   	    </tr>
-		 	<% } %>
-			<% if(target.getFloorId() == 3){ %>
-				<tr id ="floor3">
-				    <td><%=  occupantList.indexOf(target)  %></td>
-					<td><%= target.getOccupantId() %></td>
-					<td><%= target.getFloorId() %>
-					<td><%= target.getRoomNumber() %></td>
-				 	<td><%= target.getOccupantName() %></td>
-				 	<td><%= target.getDisplay() %></td>
+				<th>Id</th>
+				<th>入居フロア</th>
+				<th>居室番号</th>
+				<th>氏名</th>
+				<th>変更</th>
+				<th>削除</th>
+			</tr>
 
-				 	<td>
-				 	<form action="/stockmanagementtest/OccupantChange" method="get">
-					 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
-				 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
-					 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
-					 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
-					 	<button id="#">変更</button>
-				 	</form>
-				 	</td>
+         <% for(Occupant target : occupantList){ %>
+		    <% if (target.getFloorId() == 2 ) { %>
+    		<tr>
+				<td><%= target.getOccupantId() %></td>
+				<td><%= target.getFloorId() %>
+				<td><%= target.getRoomNumber() %></td>
+			 	<td><%= target.getOccupantName() %></td>
 
-				    <td>
-				    <form action="/stockmanagementtest/OccupantUndisplay" method="get">
-					 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
-				 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
-					 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
-					 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
-					 	<button id="#">削除</button>
-				 	</form>
+			 	<td>
+			 	<form action="/stockmanagementtest/OccupantChange" method="get">
+				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
+			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
+				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
+				 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
+				 	<button id="#">変更</button>
+			 	</form>
+			 	</td>
 
-				    </td>
-		   	    </tr>
-		   <% }%>
-	<%}%>
-		</table>
+			    <td>
+			    <form action="/stockmanagementtest/OccupantUndisplay" method="get">
+				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
+			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
+				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
+				 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
+				 	<button id="#">削除</button>
+			 	</form>
+			    </td>
+		    </tr>
+    	    <% } %>
+     	<%}%>
+	</table>
+
+	<table border="1" id = "floor3">
+			<tr>
+
+				<th>Id</th>
+				<th>入居フロア</th>
+				<th>居室番号</th>
+				<th>氏名</th>
+
+				<th>変更</th>
+				<th>削除</th>
+			</tr>
+
+         <% for(Occupant target : occupantList){ %>
+		    <% if (target.getFloorId() == 3 ) { %>
+    		<tr>
+			    <%//ccupantList.indexOf(target)  %>
+				<td><%= target.getOccupantId() %></td>
+				<td><%= target.getFloorId() %>
+				<td><%= target.getRoomNumber() %></td>
+			 	<td><%= target.getOccupantName() %></td>
+
+			 	<td>
+			 	<form action="/stockmanagementtest/OccupantChange" method="get">
+				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
+			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
+				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
+				 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
+				 	<button id="#">変更</button>
+			 	</form>
+			 	</td>
+
+			    <td>
+			    <form action="/stockmanagementtest/OccupantUndisplay" method="get">
+				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
+			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
+				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
+				 	<input type="hidden" name="occupantName" value="<%= target.getOccupantName() %>">
+				 	<button id="#">削除</button>
+			 	</form>
+			    </td>
+		    </tr>
+    	    <% } %>
+     	<%}%>
+	</table>
 	</main>
 </div>
 
+
+
+
+
+
+
+<script>
+document.getElementById('floor1').style.display = "block";
+document.getElementById('floor2').style.display = "none";
+document.getElementById('floor3').style.display = "none";
+</script>
 <script type="text/javascript" src="/stockmanagementtest/js/occupant.js"></script>
 </body>
 </html>

@@ -42,7 +42,6 @@ function nameChange2(){
 			  document.getElementById('floor3').style.display = "none";
 		  }else if(id ==='select2'){
 			  document.getElementById('floor1').style.display = "none";
-			  //document.getElementById('floor').style.display = "";
 			  document.getElementById('floor2').style.display = "block";
 			  document.getElementById('floor3').style.display = "none";
 			  //document.getelementById('').style.display ="";
@@ -63,4 +62,4 @@ function nameChange2(){
 
 
 
-}e
+}
