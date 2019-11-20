@@ -42,9 +42,6 @@ public class OperateController extends HttpServlet {
 			String hour   =  request.getParameter("hour");
 			String minute   =  request.getParameter("minute");
 
-
-
-
 			//担当者(職員) ID
 			String strStaffId = request.getParameter("staff");
 

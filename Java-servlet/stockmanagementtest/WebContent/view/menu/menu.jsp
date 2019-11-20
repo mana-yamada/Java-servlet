@@ -20,8 +20,8 @@
 
 <%-- ログインユーザー全員に見せる--%>
 
-<p><a href="/stockmanagementtest/"><button id="">在庫入出庫画面</button></a></p>
-<p><a href="/stockmanagementtest/"><button id="">現在の備品残数</button></a></p>
+<p><a href="/stockmanagementtest/view/operate/operate.jsp"><button id="">在庫入出庫画面</button></a></p>
+<p><a href="#"><button id="">現在の備品残数</button></a></p>
 
 
 <%-- 管理者権限を有するユーザーのみに見せる 条件文：「if(authority.equals("YES"))」--%>
