@@ -1,80 +1,20 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="sqloperate.Occupantlist,beans.Occupant,sqloperate.Stafflist,beans.Staff, sqloperate.Goodslist, beans.Goods, java.util.ArrayList, java.util.Iterator"%>
-
-<%
-//ログインのセッションスコープを取得
-
-//get scope
-
-
-%>
-
+<%@ page import="sqloperate.Goodslist, sqloperate.Occupantlist, beans.Goods, beans.Occupant, java.util.ArrayList, java.util.Iterator"%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>備品入出庫入力画面</title>
+<title>備品入出庫出力画面</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
 <body>
 
-<%-- header --%>
-<jsp:include page="/view/template/header.jsp"></jsp:include>
-
-	<main>
-	<h3>備品入出庫</h3>
-
-	<form action ="/stockmanagementtest/OperateController" method = "get">
+<%----%>
 
 
-		<div id = "recordDate">
-		<p><label>日時
-			<select name = "year">
-			<% for(int year = 2019; year < 2025 ; year++) {%>
-			<option value = "<%= year %>"><%= year %></option>
-			<% } %>
-			</select>
-			年
-			<select name ="month">
-			<% for(int month = 0; month < 12 ; month++) {%>
-			<option value ="<%= month + 1 %>"><%= month + 1 %></option>
-			<% } %>
-			</select>
-			月
-			<select name = "day">
-			<% for(int day = 0; day < 31 ; day++) {%>
-			<option value = "<%= day + 1 %>"><%= day + 1 %></option>
-			<% } %>
-			</select>
-			日
-			<select name = "hour">
-			<% for(int hour = -1; hour < 23 ; hour++) {%>
-			<option value = "<%= hour + 1 %>"><%= hour + 1 %></option>
-			<% } %>
-			</select>
-			時
-			<select name = "minute">
-			<% for(int minute = 0; minute < 12 ; minute++) {%>
-			<option value = "<%= minute * 5 %>"><%= minute * 5 %></option>
-			<% } %>
-			</select>
-			分
-		</label></p>
-		</div>
+<form action = "" method="get">
 
-		<div id = "staff">
-		<p><label>担当者
-			<select name = "staff">
-			<%ArrayList<Staff> staffList = new ArrayList<Staff>();
-		      Stafflist operate = new Stafflist();
-		      operate.get(staffList); %>
-			<% for(Staff target : staffList){%>
-				<option value = "<%= target.getStaffId()%>"><%= target.getStaffName() %></option>
-			<% } %>
-			</select>
-		</label></p>
-		</div>
 
 		<div id = "bihin">
 		<p>備品名
@@ -187,18 +127,12 @@
 		</div>
 
 
-	<button>入力内容確認</button>
-	</form>
+<button>確認</button>
+</form>
 
-    <p><a href="#"><button>メニューへ戻る</button></a></p>
-	</main>
+		<script src="/stockmanagementtest/js/operate.js">
+		</script>
 
-	<script src="/stockmanagementtest/js/operate.js">
-	</script>
 
-</body>
-</html>
-
-<%-- include file="/view/operate/date.jsp" --%>
-<%-- include file="/view/operate/staff.jsp" --%>
-<%-- include file="/view/operate/goods.jsp" --%>
+		</body>
+		</html>

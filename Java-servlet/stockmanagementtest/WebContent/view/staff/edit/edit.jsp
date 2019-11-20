@@ -80,16 +80,3 @@
 </html>
 
 
-<%-- section
-<section>
-</section>
---%>
-
-
-<%-- footer
-<footer>
-		<p>@rakkun kaigo_se Inc.</p>
-	</footer>
- --%>
-
-

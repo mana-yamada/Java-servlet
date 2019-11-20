@@ -23,6 +23,14 @@ public class Goodslist  {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
+	//search
+	public void search(Goods goods) {
+		driverConnect();
+		readFile();
+		record(goods);
+	}
+
+
 	//add 備品名と単価の追加
 	public void add(Goods goods) {
 		driverConnect();
@@ -54,6 +62,41 @@ public class Goodslist  {
 		readFile();
 		changeDisplay(goodsId);
 	}
+
+	//record  備品入出庫時に使う
+	private void record(Goods goods) {
+		try {
+			con = DriverManager.getConnection(url, userName, pass);
+			con.setAutoCommit(false);
+			//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
+			pstmt = con.prepareStatement("SELECT goodsname FROM goodslist WHERE goodsid = ? ");
+			pstmt.setInt(1, goods.getGoodsId());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String goodsName = rs.getString("goodsname");
+				goods.setGoodsName(goodsName);
+			}
+			rs.close();
+			pstmt.close();
+			con.commit();
+		}catch(SQLException e) {
+			try {
+				con.rollback();
+			}catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+
 
 	//insert 備品情報の新規追加
 	private void insert(Goods goods) {

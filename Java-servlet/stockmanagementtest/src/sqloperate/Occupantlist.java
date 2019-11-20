@@ -22,6 +22,14 @@ public class Occupantlist {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
+	//search 入居者検索
+	public void search(Occupant occupant) {
+		driverConnect();
+		readFile();
+		record(occupant);
+	}
+
+
 	//add 入居者の入居される階の数字、居室番号、氏名を追加
 	public void add(Occupant occupant) {
 		driverConnect();
@@ -53,6 +61,51 @@ public class Occupantlist {
 			leave(occupant);
 		}
 
+	/* record 入居者のもとに備品を届けた時にフォームで受け取ったoccupantIdをもとに、
+	 * 入居者の居室番号と名前を取り出す */
+		private void record(Occupant occupant) {
+			//DBへの接続
+			try {
+				//①接続・自動コミットモードの解除
+				con = DriverManager.getConnection(url,userName,pass);
+				con.setAutoCommit(false);
+				//②SQL送信処理
+				pstmt = con.prepareStatement("SELECT roomnumber,occupantname FROM occupantlist WHERE occupantid = ?");
+				//ひな型に値を流し込み
+				pstmt.setInt(1, occupant.getOccupantId());
+
+				//更新系SQL文を自動組み立て送信
+				rs = pstmt.executeQuery();
+				//結果票の処理
+				while(rs.next()) {
+					int roomNumber = rs.getInt("roomnumber");
+					String occupantName = rs.getString("occupantname");
+					occupant.setRoomNumber(roomNumber);
+					occupant.setOccupantName(occupantName);
+				}
+				//後片付け
+				pstmt.close();
+				//送信済みの処理要求の確定（コミット）
+				con.commit();
+			}catch(SQLException e){
+				e.printStackTrace();
+				//ロールバック
+				try {
+					con.rollback();
+				}catch(SQLException e2) {
+					e2.printStackTrace();
+				}
+			}finally {
+				//DB接続を切断
+				if(con != null) {
+					try {
+						con.close();
+					}catch(SQLException e3) {
+						e3.printStackTrace();
+					}
+				}
+			}
+		}
 
 	//insert 入庫者情報の新規追加
 		private void insert(Occupant occupant) {
