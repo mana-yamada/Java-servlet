@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Goods;
+import beans.Stock;
 import sqloperate.Goodslist;
+import sqloperate.Nowstocklist;
 
 @WebServlet("/GoodsAdd")
 public class GoodsAdd extends HttpServlet{
@@ -32,9 +34,15 @@ public class GoodsAdd extends HttpServlet{
 			goods.getGoodsName();
 			goods.getGoodsPrice();
 
-			//SQL操作!!
+			//SQL操作!!goodslistへデータを入れる
 			Goodslist addGoods = new Goodslist();
 			addGoods.add(goods);
+			//SQL操作  nowstocklistへデータを入れる
+			//Stockに関するデータをインスタンス化
+			Stock goodsAdd = new Stock(goods.getGoodsName(), 0);
+			//インスタンスをnowstocklistテーブルへ送る
+			Nowstocklist insertGoods = new Nowstocklist();
+			insertGoods.add(goodsAdd);
 
 			//remove instance
 			session.removeAttribute("goods");

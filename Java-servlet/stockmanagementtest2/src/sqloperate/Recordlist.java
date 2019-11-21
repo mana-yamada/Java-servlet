@@ -5,13 +5,14 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.util.Properties;
+
+import beans.Record;
+
 public class Recordlist {
 
 	String url;
@@ -23,46 +24,46 @@ public class Recordlist {
 	ResultSet rs;
 
 	//inshed 発注して施設に届いた備品を倉庫に入れます
-	public void in() {
+	public void inout(Record record) {
 		driverConnect();
 		readFile();
-		int controlId = 3;
-		int occupantId = 0;
-		int goodsId = 1;
-		//倉庫から備品を出し入れした年・月・日
-		String strDate = "2019-11-11"; Date date = Date.valueOf(strDate);
-        //倉庫から備品を出し入れした時・分・秒  //実際には秒は00秒でデータを格納するようにする
-        String strTime = "23:00:00"; Time time = Time.valueOf(strTime);
-		int outshed = 0;
-		int inshed = 10;
+//		int controlId = 3;
+//		int occupantId = 0;
+//		int goodsId = 1;
+//		//倉庫から備品を出し入れした年・月・日
+//		String strDate = "2019-11-11"; Date date = Date.valueOf(strDate);
+//        //倉庫から備品を出し入れした時・分・秒  //実際には秒は00秒でデータを格納するようにする
+//        String strTime = "23:00:00"; Time time = Time.valueOf(strTime);
+//		int outshed = 0;
+//		int inshed = 10;
 		int stock = 0;
-		int staffId = 1;
-//		search(occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
-		search(controlId, occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
+
+		search(record, stock);
+		//search(controlId, occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
 	}
 
 	//outshed 備品を倉庫から出します
-	public void out() {
+	public void out(Record record) {
 		driverConnect();
 		readFile();
-		int controlId = 2;
-		int occupantId = 1;
-		int goodsId = 1;
-		//倉庫から備品を出し入れした年・月・日
-		String strDate = "2019-11-10"; Date date = Date.valueOf(strDate);
-        //倉庫から備品を出し入れした時・分・秒  //実際には秒は00秒でデータを格納するようにする
-        String strTime = "16:00:00"; Time time = Time.valueOf(strTime);
-		int outshed = 1;
-		int inshed = 0;
+//		int controlId = 2;
+//		int occupantId = 1;
+//		int goodsId = 1;
+//		//倉庫から備品を出し入れした年・月・日
+//		String strDate = "2019-11-10"; Date date = Date.valueOf(strDate);
+//        //倉庫から備品を出し入れした時・分・秒  //実際には秒は00秒でデータを格納するようにする
+//        String strTime = "16:00:00"; Time time = Time.valueOf(strTime);
+//		int outshed = 1;
+//		int inshed = 0;
+//		int staffId = 1;
 		int stock = 0;
-		int staffId = 1;
 //		search(occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
-		search(controlId, occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
+		search(record, stock);
 	}
 
 
 //	private void inoutshed(int occupantid, int goodsid ,Date date, Time time, int outshed,int inshed,int stock,String staffid ) {
-	private void inoutshed(int controlId, int occupantId, int goodsId ,Date date, Time time, int outshed,int inshed,int stock, int staffId ) {
+	private void inoutshed(Record record, int stock) {
 		//DBへの接続
 		try {
 			//①接続・自動コミットモードの解除
@@ -75,31 +76,24 @@ public class Recordlist {
 //					+ "VALUES (?, ?, ?, ?, ?, ? ,?, ?)");
 			pstmt = con.prepareStatement(""
 					+ "INSERT INTO recordlist("
-					+ "controlid, occupantid, goodsid, date, time, outshed, inshed, stock, staffId) "
-					+ "VALUES (?, ?, ?, ?, ?, ?, ? ,?, ?)");
+					+ "occupantid, goodsid, date, time, outshed, inshed, stock, staffId) "
+					+ "VALUES (?, ?, ?, ?, ?, ? ,?, ?)");
 			//ひな型に値を流し込み
-//			pstmt.setInt(1, occupantId);
-//			pstmt.setInt(2, goodsId);
-//			pstmt.setDate(3, date);
-//			pstmt.setTime(4, time);
-//			pstmt.setInt(5, outshed);
-//			pstmt.setInt(6, inshed);
-//			pstmt.setInt(7, stock);
-//			pstmt.setInt(8, staffId);
-			pstmt.setInt(1, controlId);
-			pstmt.setInt(2, occupantId);
-			pstmt.setInt(3, goodsId);
-			pstmt.setDate(4, date);
-			pstmt.setTime(5, time);
-			pstmt.setInt(6, outshed);
-			pstmt.setInt(7, inshed);
-			pstmt.setInt(8, stock);
-			pstmt.setInt(9, staffId);
+			pstmt.setInt(1, record.getOccupantId());
+			pstmt.setInt(2, record.getGoodsId());
+			pstmt.setDate(3, record.getDate());
+			pstmt.setTime(4, record.getTime());
+			pstmt.setInt(5, record.getOutshed());
+			pstmt.setInt(6, record.getInshed());
+			pstmt.setInt(7, stock);
+			pstmt.setInt(8, record.getStaffId());
+
 
 			//更新系SQL文を自動組み立て送信
 			int r = pstmt.executeUpdate();
 			//結果票の処理
 			if(r != 0) {
+				record.setStock(stock);
 				System.out.println("データが正しく登録されました。");
 			}else {
 				System.out.println("データが正しく登録されませんでした。");
@@ -130,7 +124,7 @@ public class Recordlist {
 
 	//入力されたgoodsidの備品で最後に倉庫から出し入れした記録を抽出する
 //	private void search(int occupantid, int goodsid , Date date, Time time, int outshed,int inshed, int stock,String staffid ) {
-	private void search(int controlId, int occupantId, int goodsId , Date date, Time time, int outshed,int inshed, int stock,int staffId ) {
+	private void search(Record record, int stock ) {
 		try {
 			con = DriverManager.getConnection(url,userName,pass);
 			//自動コミットモードの解除
@@ -144,13 +138,13 @@ public class Recordlist {
 //					"ORDER BY date DESC, time DESC LIMIT 1\r\n" +
 //					"");
 			pstmt = con.prepareStatement(
-					"SELECT controlid, goodsid, date, time, outshed, inshed , stock\r\n" +
+					"SELECT goodsid, date, time, outshed, inshed , stock\r\n" +
 					"FROM recordlist\r\n" +
 					"WHERE goodsid = ? \r\n" +
 					"ORDER BY date DESC, time DESC LIMIT 1\r\n" +
 					"");
 			//ひな型に値を流し込み
-			pstmt.setInt(1,goodsId);
+			pstmt.setInt(1,record.getGoodsId());
 			//検索系SQL文を自動組み立て、送信
 			rs = pstmt.executeQuery();
 			//結果票の処理 //ユーザーが登録されていなかったらエラー文を出す
@@ -158,9 +152,9 @@ public class Recordlist {
 				//最後に倉庫から出し入れした時点での備品の残数を引数に代入する
 				stock = rs.getInt("stock");
 				//倉庫に入れた備品の数 + 最後に倉庫から出し入れした時点での備品の残数 + 倉庫から出した備品の数 = 現在の倉庫にある備品の残数
-				stock = stock + inshed - outshed;
+				stock = stock + record.getInshed() - record.getOutshed();
 			}else {
-				stock = stock + inshed - outshed;
+				stock = stock + record.getInshed() - record.getOutshed();
 			}
 			//後片付け
 			rs.close();
@@ -181,7 +175,7 @@ public class Recordlist {
 				try {
 					con.close();
 //					inoutshed(occupantid, goodsid, date, time, outshed, inshed, stock, staffid);
-					inoutshed(controlId, occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
+					inoutshed(record, stock);
 				}catch(SQLException e3) {
 					e3.printStackTrace();
 				}

@@ -35,7 +35,7 @@
 <%
 	//変更前の入居者データ1行を保存したインスタンスを取得
 	Occupant editOccupant = (Occupant)session.getAttribute("editOccupant");
-	/*変更後に表示しようとしている入居者名、単価を保存したインスタンスを取得*/
+	/*変更後に表示しようとしている入居者名などを保存したインスタンスを取得*/
 	Occupant changeOccupant = (Occupant)session.getAttribute("changeOccupant");
 %>
 <p>入居者ID：<%= editOccupant.getOccupantId() %></p>

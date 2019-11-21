@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.Goods;
 import sqloperate.Goodslist;
+import sqloperate.Nowstocklist;
 
 @WebServlet("/GoodsChange")
 public class GoodsChange extends HttpServlet {
@@ -94,6 +95,14 @@ public class GoodsChange extends HttpServlet {
 				/*備品情報を更新させるメソッドを呼び出す*/
 				Goodslist changingGoodsData = new Goodslist();
 				changingGoodsData.change(goodsId, goodsName, goodsPrice);
+
+				/*nowstocklistの備品名も変更させえる*/
+				Goods stockgoods = new Goods();
+				stockgoods.setGoodsId(goodsId);
+				stockgoods.setGoodsName(goodsName);
+
+				Nowstocklist changeGoodsName = new Nowstocklist();
+				changeGoodsName.changing(stockgoods);
 
 				/*情報変更に使用したスコープを破棄*/
 				session.removeAttribute("editGoods");

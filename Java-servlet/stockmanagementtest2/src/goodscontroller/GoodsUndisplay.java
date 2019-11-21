@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import beans.Goods;
 import sqloperate.Goodslist;
+import sqloperate.Nowstocklist;
 
 @WebServlet("/GoodsUndisplay")
 public class GoodsUndisplay extends HttpServlet {
@@ -52,9 +53,12 @@ public class GoodsUndisplay extends HttpServlet {
 			Goods editGoods = (Goods)session.getAttribute("editGoods");
 			int goodsId = editGoods.getGoodsId();
 
-			//SQL操作
+			//SQL操作 goodslist
 			Goodslist undisplay = new Goodslist();
 			undisplay.display(goodsId);
+			//SQL操作 nowstocklist
+			Nowstocklist nondisplay = new Nowstocklist();
+			nondisplay.nondisplay(goodsId);
 
 			//delete scope
 			session.removeAttribute("editGoods");

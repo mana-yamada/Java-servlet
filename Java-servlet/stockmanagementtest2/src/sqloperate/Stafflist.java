@@ -22,6 +22,13 @@ public class Stafflist {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
+	//search 在庫入出庫画面操作時
+	public void search(Staff staff) {
+		driverConnect();
+		readFile();
+		record(staff);
+	}
+
 	//add 職員情報の新規追加
 	public void add(Staff staff) {
 		driverConnect();
@@ -53,6 +60,38 @@ public class Stafflist {
 			leave(staffId);
 		}
 
+	//record  備品入出庫時に使う
+		private void record(Staff staff) {
+			try {
+				con = DriverManager.getConnection(url, userName, pass);
+				con.setAutoCommit(false);
+				//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
+				pstmt = con.prepareStatement("SELECT staffname FROM stafflist WHERE staffid = ? ");
+				pstmt.setInt(1, staff.getStaffId());
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					String staffName = rs.getString("staffname");
+					staff.setStaffName(staffName);
+				}
+				rs.close();
+				pstmt.close();
+				con.commit();
+			}catch(SQLException e) {
+				try {
+					con.rollback();
+				}catch(SQLException e2) {
+					e2.printStackTrace();
+				}
+			}finally {
+				if(con != null) {
+					try {
+						con.close();
+					}catch(SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 
 	//insert 職員の新規追加
 

@@ -109,7 +109,7 @@ public class OccupantChange  extends HttpServlet{
 			try {
 				//get editOccupant scope
 				HttpSession session = request.getSession();
-				Occupant editOccupant = (Occupant)session.getAttribute("editOccupant");
+				//Occupant editOccupant = (Occupant)session.getAttribute("editOccupant");
 
 				String occupantNameChange = request.getParameter("occupantNameChange");
 				String occupantName = request.getParameter("occupantName");

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Staff;
+import model.UsingCrypt;
 import sqloperate.Stafflist;
 
 @WebServlet("/StaffAdd")
@@ -91,17 +92,44 @@ public class StaffAdd extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 				dispatcher.forward(request, response);
 			}else {
-				//make instance
-				Staff registerStaff = new Staff(staffName, password, authority);
-				//save instance
-				HttpSession session = request.getSession();
-				session.setAttribute("registerStaff", registerStaff);
+				try {
+					//passwordの暗号化
+					UsingCrypt usingCrypt = new UsingCrypt();
+					password = usingCrypt.saveToken(password);
 
-				//forward
-				String forwardPath = "/view/staff/add/addConfirm.jsp";
-				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-				dispatcher.forward(request, response);
+					//make instance
+					Staff registerStaff = new Staff(staffName, password, authority);
+					//save instance
+					HttpSession session = request.getSession();
+					session.setAttribute("registerStaff", registerStaff);
 
+					//新規登録時にすでに登録されているユーザーIDを登録しようとしているか確認
+					//UsingMysql check = new UsingMysql();
+					//check.addCheck(person);
+
+					//SQL操作時にユーザーIDが既に登録されている場合
+//					if(check.getUserIdUsedError() != null) {
+//						//保存したインスタンスの削除
+//						session.removeAttribute("target");
+//						//入力されたユーザーIDが既に使われているものならばそのように知らせる
+//						forwardPath = "/view/add/usedIdError.jsp";
+//						RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+//						dispatcher.forward(request, response);
+//					//DBにユーザーIDのかぶりがない時
+//					}else {
+//						//forward
+//						forwardPath = "/view/add/addConfirm.jsp";
+//						RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+//						dispatcher.forward(request, response);
+//					}
+
+					//forward
+					String forwardPath = "/view/staff/add/addConfirm.jsp";
+					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+					dispatcher.forward(request, response);
+				}catch(Exception e) {
+					System.out.println("正しく暗号化されていません");
+				}
 			}
 		}
 	}

@@ -9,6 +9,7 @@
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
 <body>
-<h1>ログイン画面</h1>
+<p><a href= "/stockmanagementtest/LoginController">ログイン画面</a></p>
+
 </body>
 </html>
