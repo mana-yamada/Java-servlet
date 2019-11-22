@@ -17,57 +17,67 @@ import sqloperate.Stafflist;
 @WebServlet("/StaffAdd")
 public class StaffAdd extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
-		request.setCharacterEncoding("UTF-8");
-		String parameter = request.getParameter("value");
-		/*メニューから新規登録画面
-		 * 登録完了画面から新規登録画面*/
-		if(parameter == null) {
-			//forward
-			String forwardPath = "view/staff/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
-		}
-		/*新規登録確認画面から新規登録完了画面*/
-		//addAction
-		else if(parameter.equals("addAction")) {
+		HttpSession session = request.getSession();
+		Staff loginUser = (Staff)session.getAttribute("loginUser");
+		if(loginUser == null ) {
+			//redirect
+			String path = "/stockmanagementtest/view/login/login.jsp";
+			response.sendRedirect(path);
 
-			HttpSession session = request.getSession();
-			// add.jspで保存したインスタンス取得
-			Staff registerStaff = (Staff)session.getAttribute("registerStaff");
+		} else if(loginUser.getAuthority().equals("NO")) {
+			session.removeAttribute("loginUser");
+			//redirect
+			String path = "/stockmanagementtest/view/login/login.jsp";
+			response.sendRedirect(path);
+		} else {
+			request.setCharacterEncoding("UTF-8");
+			String parameter = request.getParameter("value");
+			/*メニューから新規登録画面
+			 * 登録完了画面から新規登録画面*/
+			if(parameter == null) {
+				//forward
+				String forwardPath = "view/staff/add/add.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}
+			/*新規登録確認画面から新規登録完了画面*/
+			//addAction
+			else if(parameter.equals("addAction")) {
+				// add.jspで保存したインスタンス取得
+				Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 
-			//operate sql
-			Stafflist register = new Stafflist();
-			register.add(registerStaff);
+				//operate sql
+				Stafflist register = new Stafflist();
+				register.add(registerStaff);
 
-			//remove instance
-			session.removeAttribute("registerStaff");
+				//remove instance
+				session.removeAttribute("registerStaff");
 
-			//forward
-			String forwardPath = "view/staff/add/addComplete.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
-		}
-		/*登録確認画面から登録画面(エラー有の場合)*/
-		else if(parameter.equals("backFromAddError")) {
-			//remove errorMsg
-			HttpSession session = request.getSession();
-			session.removeAttribute("errorMsg");
+				//forward
+				String forwardPath = "view/staff/add/addComplete.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}
+			/*登録確認画面から登録画面(エラー有の場合)*/
+			else if(parameter.equals("backFromAddError")) {
+				//remove errorMsg
+				session.removeAttribute("errorMsg");
 
-			//forward
-			String forwardPath = "view/staff/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
-		}
-		/*登録確認画面から登録画面*/
-		else if(parameter.equals("backFromAdd")) {
-			//remove registerInstance
-			HttpSession session = request.getSession();
-			session.removeAttribute("registerStaff");
+				//forward
+				String forwardPath = "view/staff/add/add.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}
+			/*登録確認画面から登録画面*/
+			else if(parameter.equals("backFromAdd")) {
+				//remove registerInstance
+				session.removeAttribute("registerStaff");
 
-			//forward
-			String forwardPath = "view/staff/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
+				//forward
+				String forwardPath = "view/staff/add/add.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
+			}
 		}
 	}
 

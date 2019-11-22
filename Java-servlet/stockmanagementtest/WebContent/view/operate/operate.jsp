@@ -23,7 +23,7 @@
 <jsp:include page="/view/template/header.jsp"></jsp:include>
 
 	<main>
-	<h3>備品入出庫</h3>
+	<h3>備品入出庫入力</h3>
 
 	<form action ="/stockmanagementtest/OperateController" method = "get">
 
@@ -194,7 +194,7 @@
 	<button>入力内容確認</button>
 	</form>
 
-    <p><a href="#"><button>メニューへ戻る</button></a></p>
+    <p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 
 	<script src="/stockmanagementtest/js/operate.js">

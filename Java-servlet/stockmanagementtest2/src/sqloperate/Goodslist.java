@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import beans.Goods;
+import beans.Stock;
 
 
 public class Goodslist  {
@@ -23,11 +24,32 @@ public class Goodslist  {
 	PreparedStatement pstmt;
 	ResultSet rs;
 
-	//search
+	//search 備品入出庫時に検索 備品入出庫時のstock確認、入出庫作業
 	public void search(Goods goods) {
 		driverConnect();
 		readFile();
 		record(goods);
+	}
+
+	//updatingStock goodslistのnowstock更新
+	public void updatingStock(Stock stock) {
+		driverConnect();
+		readFile();
+		updateStock(stock);
+	}
+
+	//stockError 残数0のgoodsを出庫しようとした場合
+	public void stockError(Stock stock) {
+		driverConnect();
+		readFile();
+		rollBack(stock);
+	}
+
+	//making 現在の備品残数テーブルをブラウザ内に出力させる
+	public void making(ArrayList<Stock> stockList) {
+		driverConnect();
+		readFile();
+		make(stockList);
 	}
 
 
@@ -38,7 +60,6 @@ public class Goodslist  {
 		insert(goods);
 	}
 
-
 	//get 現在使っている備品一覧をgoodslistテーブルから取得
 	public void get(ArrayList<Goods> goodsList) {
 		driverConnect();
@@ -46,7 +67,6 @@ public class Goodslist  {
 		//DB全件取得
 		getTable(goodsList);
 	}
-
 
 	//change 備品名や単価の変更
 	public void change(int goodsId, String goodsName, int goodsPrice) {
@@ -63,18 +83,128 @@ public class Goodslist  {
 		changeDisplay(goodsId);
 	}
 
-	//record  備品入出庫時に使う
+	//record  備品入出庫時のstock確認、入出庫作業
 	private void record(Goods goods) {
 		try {
 			con = DriverManager.getConnection(url, userName, pass);
 			con.setAutoCommit(false);
 			//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
-			pstmt = con.prepareStatement("SELECT goodsname FROM goodslist WHERE goodsid = ? ");
+			pstmt = con.prepareStatement("SELECT goodsname, nowstock FROM goodslist WHERE goodsid = ? ");
 			pstmt.setInt(1, goods.getGoodsId());
 			rs = pstmt.executeQuery();
 			while(rs.next()) {
 				String goodsName = rs.getString("goodsname");
 				goods.setGoodsName(goodsName);
+				int nowStock = rs.getInt("nowstock");
+				goods.setStock(nowStock);
+			}
+			rs.close();
+			pstmt.close();
+			con.commit();
+		}catch(SQLException e) {
+			try {
+				con.rollback();
+			}catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	//updateStock  goodslistのnowstock更新
+	private void updateStock(Stock stock) {
+		try {
+			con = DriverManager.getConnection(url,userName,pass);
+			con.setAutoCommit(false);
+			pstmt = con.prepareStatement("UPDATE goodslist SET nowstock = ? WHERE goodsid = ?");
+			pstmt.setInt(1,stock.getStock());
+			pstmt.setInt(2, stock.getGoodsId());
+
+			int r = pstmt.executeUpdate();
+			if(r != 0) {
+				System.out.println("データが正しく登録されました");
+			}else {
+				System.out.println("データが正しく登録されませんでした。");
+			}
+			pstmt.close();
+			con.commit();
+		}catch(SQLException e) {
+			try {
+				con.rollback();
+			}catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e3) {
+					e3.printStackTrace();
+				}
+			}
+		}
+	}
+
+	//rollBack 残数０の備品を出庫しようとした場合
+	private void rollBack(Stock stock) {
+		try {
+			con = DriverManager.getConnection(url, userName, pass);
+			con.setAutoCommit(false);
+
+			pstmt = con.prepareStatement("SELECT nowstock FROM goodslist WHERE goodsid = ? ");
+			pstmt.setInt(1, stock.getGoodsId());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+
+				int nowStock = rs.getInt("nowstock");
+				stock.setStock(nowStock);
+			}
+			rs.close();
+			pstmt.close();
+			con.commit();
+		}catch(SQLException e) {
+			try {
+				con.rollback();
+			}catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	//make 現在の備品残数テーブルをブラウザ内に出力させる
+	private void make(ArrayList<Stock> stockList) {
+		try {
+			con = DriverManager.getConnection(url, userName, pass);
+			con.setAutoCommit(false);
+			//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
+			pstmt = con.prepareStatement("SELECT goodsname, nowstock FROM goodslist ORDER BY goodsname DESC ");
+
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				String goodsName = rs.getString("goodsname");
+				int nowstock = rs.getInt("nowstock");
+
+				Stock stock = new Stock();
+				stock.setGoodsName(goodsName);
+				stock.setStock(nowstock);
+
+				stockList.add(stock);
+
 			}
 			rs.close();
 			pstmt.close();
@@ -152,6 +282,7 @@ public class Goodslist  {
 				int goodsId = rs.getInt("goodsid");
 				String goodsName = rs.getString("goodsname");
 				int price = rs.getInt("price");
+				int stock = rs.getInt("nowstock");
 				String display = rs.getString("display");
 				//make goodsinstance
 				Goods goods = new Goods();
@@ -161,6 +292,7 @@ public class Goodslist  {
 				goods.setGoodsName(goodsName);
 				goods.setGoodsPrice(price);
 				goods.setDisplay(display);
+				goods.setStock(stock);
 				//add goodsinstance in goodsList
 				goodsList.add(goods);
 			}

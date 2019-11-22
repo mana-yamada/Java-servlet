@@ -55,7 +55,7 @@
 </form>
 
 <p><a href="/stockmanagementtest/StaffEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
-<p><a href="#"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController?value=fromStaffEditing"><button>メニューへ戻る</button></a></p>
 </main>
 
 <script type="text/javascript" src="/stockmanagementtest/js/staff.js">

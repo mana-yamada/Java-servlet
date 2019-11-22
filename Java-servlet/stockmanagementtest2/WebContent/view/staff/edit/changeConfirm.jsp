@@ -1,6 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import = "beans.Staff" %>
 <%  //login scope  %>
+<%   String errorMsg = (String)session.getAttribute("errorMsg"); //change %>
+<%
+	//変更前の職員データ1行を保存したインスタンスを取得
+	Staff editStaff = (Staff)session.getAttribute("editStaff");
+	/*変更後に表示しようとしている職員名、単価を保存したインスタンスを取得*/
+	Staff changeStaff = (Staff)session.getAttribute("changeStaff"); //change
+%>
+
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -17,8 +25,6 @@
 
 
 <main>
-
-<%   String errorMsg = (String)session.getAttribute("errorMsg"); %>
 <%   if(errorMsg != null) { %>
 	<%--エラーがあった場合 --%>
 	<h3>職員情報入力エラー</h3>
@@ -30,12 +36,6 @@
 	<%-- エラーがなく問題ない場合 --%>
 	<h3>職員情報 変更確認</h3>
 
-<%
-	//変更前の職員データ1行を保存したインスタンスを取得
-	Staff editStaff = (Staff)session.getAttribute("editStaff");
-	/*変更後に表示しようとしている職員名、単価を保存したインスタンスを取得*/
-	Staff changeStaff = (Staff)session.getAttribute("changeStaff");
-%>
 
 
 
@@ -64,7 +64,7 @@
 <p><a href="/stockmanagementtest/StaffChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
 <p><a href="/stockmanagementtest/StaffEdit?value=backFromConfirm"><button>職員情報編集画面へ戻る</button></a></p>
 <% } %>
-
+<p><a href="/stockmanagementtest/MenuController?value=fromStaffChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

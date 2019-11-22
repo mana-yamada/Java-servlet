@@ -23,7 +23,7 @@
 <jsp:include page="/view/template/header.jsp"></jsp:include>
 
 	<main>
-	<h3>備品入出庫</h3>
+	<h3>備品入出庫入力</h3>
 
 	<form action ="/stockmanagementtest/OperateController" method = "get">
 
@@ -83,7 +83,7 @@
 	    	Goodslist displayGoods = new Goodslist();
 			displayGoods.get(goodsList);    %>
 		<%for(Goods target : goodsList){%>
-			<option value = "<%= target.getGoodsId()%>"><%= target.getGoodsName() %></option>
+			<option value = "<%= target.getGoodsId()%>"><%= target.getGoodsName() %> 残数：<%= target.getStock() %></option>
 		<%}%>
 		</select>
 		</p>
@@ -92,7 +92,8 @@
 		<div id = "stockoperate">
 		<p>入出庫
 		<input type="radio" name = "sheds" value = "insheds"  onclick="inStock();" >入庫
-		<input type="radio" name = "sheds" value = "outsheds" onclick="outStock();" >出庫
+		<input type="radio" name = "sheds" value = "outsheds" onclick="outStock();"  >出庫
+		<input type="radio" name = "sheds" value = "nonsheds" style = "display:none" checked = "checked">
 		</p>
 		</div>
 
@@ -123,17 +124,20 @@
 			<!-- 使用場所詳細① 共用部 or 居室  ボタン(出庫時のみ表示) -->
 			<div id ="space">
 			<p>使用場所
+
 			<input type = "radio" name = "space" value ="shareSpace" onclick="share();">共用部
 			<input type = "radio" name = "space" value ="possSpace" onclick="poss();">利用者居室
+			<input type = "radio" name = "space" value = "nonSpace" style = "display:none;" checked = "checked">
 			</p>
 			</div>
 
 			<!-- 使用場所詳細② どこのフロア -->
 			<div id="where">
 			<p>対象者</p>
-			<input type = "radio" name="floor" value = "1" onclick ="floor1()">1F
-			<input type = "radio" name="floor" value = "2" onclick ="floor2()">2F
-			<input type = "radio" name="floor" value = "3" onclick ="floor3()">3F
+			<input type = "radio" name= "floor" value = "1" onclick ="floor1()">1F
+			<input type = "radio" name= "floor" value = "2" onclick ="floor2()">2F
+			<input type = "radio" name= "floor" value = "3" onclick ="floor3()">3F
+			<input type = "radio" name= "floor" value = "nonFloor" style = "display:none;" checked = "checked" >
 			</div>
 
 			<% ArrayList <Occupant> occupantList = new ArrayList<Occupant>();
@@ -190,7 +194,7 @@
 	<button>入力内容確認</button>
 	</form>
 
-    <p><a href="#"><button>メニューへ戻る</button></a></p>
+    <p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 
 	<script src="/stockmanagementtest/js/operate.js">

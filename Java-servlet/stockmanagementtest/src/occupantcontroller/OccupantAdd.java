@@ -11,66 +11,81 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Occupant;
+import beans.Staff;
 import sqloperate.Occupantlist;
 
 @WebServlet("/OccupantAdd")
 public class OccupantAdd extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException , IOException {
-		request.setCharacterEncoding("UTF-8");
-		String parameter = request.getParameter("value");
-		/*メニューから登録画面*/
-		/*登録完了画面から登録画面*/
-		if(parameter == null || parameter.length() == 0){
-			//forward
-			String forwardPath = "/view/occupant/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-			dispatcher.forward(request, response);
+		HttpSession session = request.getSession();
+		Staff loginUser = (Staff)session.getAttribute("loginUser");
+		if(loginUser == null ) {
+			//redirect
+			String path = "/stockmanagementtest/view/login/login.jsp";
+			response.sendRedirect(path);
 
-		}
-		/*登録確認画面から登録画面
-		 * value=backFromAdd*/
-		else if(parameter.equals("backFromAdd")) {
-			//remove registerOccupant instance
-			HttpSession session = request.getSession();
-			session.removeAttribute("registerOccupant");
-			//forward
-			String path = "/view/occupant/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-			dispatcher.forward(request, response);
+		} else if(loginUser.getAuthority().equals("NO")) {
+			session.removeAttribute("loginUser");
+			//redirect
+			String path = "/stockmanagementtest/view/login/login.jsp";
+			response.sendRedirect(path);
+		} else {
+			request.setCharacterEncoding("UTF-8");
+			String parameter = request.getParameter("value");
+			/*メニューから登録画面*/
+			/*登録完了画面から登録画面*/
+			if(parameter == null || parameter.length() == 0){
+				//forward
+				String forwardPath = "/view/occupant/add/add.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+				dispatcher.forward(request, response);
 
-		}
-		/*登録確認画面から登録画面(エラー文を送った場合)
-		 * value= backFromAddError*/
-		else if(parameter.equals("backFromAddError")) {
-			//remove errorMsg instance
-			HttpSession session = request.getSession();
-			session.removeAttribute("errorMsg");
-			//forward
-			String path = "/view/occupant/add/add.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-			dispatcher.forward(request, response);
+			}
+			/*登録確認画面から登録画面
+			 * value=backFromAdd*/
+			else if(parameter.equals("backFromAdd")) {
+				//remove registerOccupant instance
 
-		}
-		/*登録確認画面から登録完了画面
-		 * value=addAction*/
-		else if(parameter.equals("addAction")) {
+				session.removeAttribute("registerOccupant");
+				//forward
+				String path = "/view/occupant/add/add.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);
 
-			//get instance
-			HttpSession session = request.getSession();
-			Occupant registerOccupant = (Occupant)session.getAttribute("registerOccupant");
+			}
+			/*登録確認画面から登録画面(エラー文を送った場合)
+			 * value= backFromAddError*/
+			else if(parameter.equals("backFromAddError")) {
+				//remove errorMsg instance
 
-			//operate SQL
-			Occupantlist register = new Occupantlist();
-			register.add(registerOccupant);
+				session.removeAttribute("errorMsg");
+				//forward
+				String path = "/view/occupant/add/add.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);
 
-			//remove instance
-			session.removeAttribute("registerOccupant");
+			}
+			/*登録確認画面から登録完了画面
+			 * value=addAction*/
+			else if(parameter.equals("addAction")) {
 
-			//forward
-			String path = "/view/occupant/add/addComplete.jsp";
-			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
-			dispatcher.forward(request, response);
+				//get instance
 
+				Occupant registerOccupant = (Occupant)session.getAttribute("registerOccupant");
+
+				//operate SQL
+				Occupantlist register = new Occupantlist();
+				register.add(registerOccupant);
+
+				//remove instance
+				session.removeAttribute("registerOccupant");
+
+				//forward
+				String path = "/view/occupant/add/addComplete.jsp";
+				RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+				dispatcher.forward(request, response);
+
+			}
 		}
 	}
 

@@ -25,7 +25,7 @@
 <p>居室番号(3ケタから4ケタの整数)：<input type="text" name="roomNumber"></p>
 <button>登録内容確認</button>
 </form>
-<a href="#"><button>メニューへ戻る</button></a>
+<a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
 

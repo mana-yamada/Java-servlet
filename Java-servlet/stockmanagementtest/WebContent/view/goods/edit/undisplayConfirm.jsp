@@ -37,7 +37,7 @@
 <p><a href ="/stockmanagementtest/GoodsUndisplay?value=undisplayComplete"><button>削除</button></a></p>
 
 <p><a href="/stockmanagementtest/GoodsEdit?value=backFromUndisplay"><button>編集画面へ戻る</button></a></p>
-<p><a href="#"><button id ="#">メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController?-value=fromGoodsEditing"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

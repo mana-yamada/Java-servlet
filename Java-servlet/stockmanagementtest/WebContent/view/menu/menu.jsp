@@ -17,10 +17,14 @@
 </head>
 
 <body>
+
 <%-- if login error { --%>
 <% if(errorMsg != null) { %>
-	<p><%= errorMsg %></p>
-	<p><a href = "/stockmanagementtest/LoginController?value=backFromMenuError"></a></p>
+<main>
+<h3>ログインエラー</h3>
+ <p><%= errorMsg %></p>
+ <p><a href = "/stockmanagementtest/LoginController?value=backFromMenuError">ログイン画面に戻る</a></p>
+</main>
 
 <% } else { %>
 	<%-- header --%>
@@ -28,9 +32,8 @@
 	<main>
 	<h3>メニュー画面</h3>
 	<%-- ログインユーザー全員に見せる--%>
-	<p><a href="/stockmanagementtest/view/operate/operate.jsp"><button id="">在庫入出庫画面</button></a></p>
-	<p><a href="/stockmanagementtest/view/stock/stock.jsp"><button id="">現在の備品残数</button></a></p>
-
+	<p><a href="/stockmanagementtest/OperateController?value=fromMenu"><button id="">在庫入出庫画面</button></a></p>
+	<p><a href="/stockmanagementtest/StockController"><button id="">現在の備品残数</button></a></p>
 	<% if (loginUser.getAuthority().equals("YES") ) { %>
 	<p>職員（担当者）情報管理</p>
 	<p><a href="/stockmanagementtest/StaffEdit"><button id="">職員情報編集</button></a>  <a href="/stockmanagementtest/StaffAdd"><button id="">新規登録</button></a></p>
@@ -40,22 +43,6 @@
 	<p><a href="/stockmanagementtest/GoodsEdit"><button id="">備品情報編集</button></a>  <a href="/stockmanagementtest/GoodsAdd"><button id="">新規登録</button></a></p>
 	<% } %>
 	</main>
-<% } %>
+<%  } %>
 </body>
 </html>
-
-
-
-<%-- section
-<section>
-</section>
---%>
-
-
-<%-- footer
-<footer>
-<p>@rakkun kaigo_se Inc.</p>
-</footer>
- --%>
-
-

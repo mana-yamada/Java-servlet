@@ -52,7 +52,7 @@
 <p><a href="/stockmanagementtest/OccupantChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
 <p><a href="/stockmanagementtest/OccupantEdit?value=backFromConfirm"><button>入居者情報編集画面へ戻る</button></a></p>
 <% } %>
-
+<p><a href="/stockmanagementtest/MenuController?value=fromOccupantChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

@@ -24,7 +24,7 @@
 <p>備品の単価：<input type="text" name="goodsprice" minlength="1" maxlength = "7">円</p>
 <p><button>登録内容確認</button></p>
 </form>
-<p><a href="#"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

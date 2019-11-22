@@ -13,13 +13,12 @@
 <body>
 
 <%-- header --%>
-<%-- header --%>
 <jsp:include page="/view/template/header.jsp"></jsp:include>
 
 
 <main>
 <h3></h3>
-<p><a href="#"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

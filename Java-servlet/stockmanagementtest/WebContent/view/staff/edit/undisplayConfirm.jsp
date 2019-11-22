@@ -36,7 +36,7 @@
 <p><a href ="/stockmanagementtest/StaffUndisplay?value=undisplayComplete"><button>削除</button></a></p>
 
 <p><a href="/stockmanagementtest/StaffEdit?value=backFromUndisplay"><button>編集画面へ戻る</button></a></p>
-<p><a href="#"><button id ="#">メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController?value=fromStaffEditing"><button id ="#">メニューへ戻る</button></a></p>
 </main>
 
 </body>

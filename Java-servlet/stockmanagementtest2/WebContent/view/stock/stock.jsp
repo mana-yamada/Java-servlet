@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%@ page import="java.util.ArrayList, java.util.Iterator , beans.Stock, sqloperate.Nowstocklist"%>
+<%@ page import="sqloperate.Goodslist, beans.Stock, java.util.ArrayList, java.util.Iterator , beans.Stock"%>
 
 <%
 //ログインのセッションスコープを取得
@@ -11,15 +11,15 @@
 <%
 	ArrayList<Stock> stockList = new ArrayList<Stock>();
 
-    Nowstocklist getTable = new Nowstocklist();
-    getTable.display(stockList);
+   	Goodslist getTable = new Goodslist();
+    getTable.making(stockList);
 %>
 
 <!DOCTYPE html>
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>備品入出庫入力画面</title>
+<title>現在の備品残数</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
@@ -29,8 +29,9 @@
 <jsp:include page="/view/template/header.jsp"></jsp:include>
 
 <main>
+<h3>現在の備品残数</h3>
 <div id = "nowstock">
-	<table>
+	<table  border = "1">
 	<tr>
 	<th>備品名</th>
 	<th>現在の残数</th>
@@ -43,7 +44,7 @@
    <% } %>
 	</table>
 </div>
-<p><a href="#"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

@@ -4,6 +4,7 @@ public class Goods {
 	public Goods(){
 
 	}
+
 	public Goods(int goodsId, String goodsName, int goodsPrice) {
 		this.goodsId = goodsId;
 		this.goodsName = goodsName;
@@ -22,8 +23,10 @@ public class Goods {
 	int goodsId;
 	String goodsName;
 	int goodsPrice;
+	int stock;
 	String display;
 	int listNumber;
+
 	public int getGoodsId() {
 		return goodsId;
 	}
@@ -43,6 +46,14 @@ public class Goods {
 	}
 	public void setGoodsPrice(int goodsPrice) {
 		this.goodsPrice = goodsPrice;
+	}
+
+	public int getStock() {
+		return stock;
+	}
+
+	public void setStock(int stock) {
+		this.stock = stock;
 	}
 
 	public String getDisplay() {

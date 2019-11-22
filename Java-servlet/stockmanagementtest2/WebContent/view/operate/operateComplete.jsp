@@ -28,6 +28,6 @@
 <p><a href= "/stockmanagementtest//view/operate/operate.jsp"><button>入出庫記録の登録を続ける</button></a>
 <p><a href="#"><button>メニューへ戻る</button></a></p>
 </main>
-
+<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 </body>
 </html>

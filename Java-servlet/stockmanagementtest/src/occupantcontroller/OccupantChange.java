@@ -11,12 +11,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import beans.Occupant;
+import beans.Staff;
 import sqloperate.Occupantlist;
 
 @WebServlet("/OccupantChange")
 public class OccupantChange  extends HttpServlet{
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
+		HttpSession session = request.getSession();
+		Staff loginUser = (Staff)session.getAttribute("loginUser");
+		if(loginUser == null ) {
+			//redirect
+			String path = "/stockmanagementtest/view/login/login.jsp";
+			response.sendRedirect(path);
+
+		} else if(loginUser.getAuthority().equals("NO")) {
+			session.removeAttribute("loginUser");
+			//redirect
+			String path = "/stockmanagementtest/view/login/login.jsp";
+			response.sendRedirect(path);
+		} else {
+
 		//パラメータ「value」の値によって条件分岐
 		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
@@ -31,7 +46,7 @@ public class OccupantChange  extends HttpServlet{
 
 			//save instance
 			Occupant editOccupant = new Occupant(occupantId, floorId, roomNumber, occupantName);
-			HttpSession session = request.getSession();
+
 			session.setAttribute("editOccupant", editOccupant);
 
 			//forward
@@ -42,11 +57,6 @@ public class OccupantChange  extends HttpServlet{
 
 		/*変更確認画面から変更確認(エラー文送った場合)*/
 		else if(parameter.equals("reChangeInputByError")) {
-			/*remove scope*/
-			HttpSession session = request.getSession();
-
-
-
 			//remove errorMsg instance
 			session.removeAttribute("errorMsg");
 
@@ -60,7 +70,7 @@ public class OccupantChange  extends HttpServlet{
 		else if(parameter.equals("reChangeInput")) {
 
 			/*remove scope*/
-			HttpSession session = request.getSession();
+
 
 
 			//remove changeOccupant instance
@@ -74,7 +84,7 @@ public class OccupantChange  extends HttpServlet{
 
 		/*変更確認画面から変更完了画面*/
 		else if(parameter.equals("changeAction")) {
-			HttpSession session = request.getSession();
+
 			Occupant editOccupant = (Occupant)session.getAttribute("editOccupant");
 			Occupant changeOccupant = (Occupant)session.getAttribute("changeOccupant");
 
@@ -95,6 +105,7 @@ public class OccupantChange  extends HttpServlet{
 			RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 			dispatcher.forward(request, response);
 			}
+		}
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

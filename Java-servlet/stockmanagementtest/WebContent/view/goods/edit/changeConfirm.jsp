@@ -46,7 +46,7 @@
 <p><a href="/stockmanagementtest/GoodsChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
 <p><a href="/stockmanagementtest/GoodsEdit?value=backFromConfirm"><button>備品情報編集画面へ戻る</button></a></p>
 <% } %>
-
+<p><a href="/stockmanagementtest/MenuController?value=fromGoodsChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

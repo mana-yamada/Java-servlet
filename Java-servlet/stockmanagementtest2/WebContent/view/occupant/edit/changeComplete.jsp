@@ -21,7 +21,7 @@
 <h3>入居者情報 変更完了</h3>
 <p>入居者情報の変更が完了しました</p>
 <a href="/stockmanagementtest/OccupantEdit"><button>入居者情報編集を続ける</button></a>
-<a href="/stockmanagementtest/#?value=fromAddComlete"><button>メニューへ戻る</button></a>
+<a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
 

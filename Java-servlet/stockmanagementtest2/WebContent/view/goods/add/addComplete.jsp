@@ -21,7 +21,7 @@
 <h3>備品情報 登録完了</h3>
 <p>備品情報の新規登録が完了しました</p>
 <p><a href="/stockmanagementtest/GoodsAdd"><button>登録を続ける</button></a></p>
-<p><a href="#"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

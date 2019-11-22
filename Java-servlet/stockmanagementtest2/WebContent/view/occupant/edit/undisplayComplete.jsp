@@ -21,7 +21,7 @@
 <h3>入居者情報 削除完了</h3>
 <p>入居者情報の削除が完了しました</p>
 <p><a href="/stockmanagementtest/OccupantEdit"><button>入居者情報編集を続ける</button></a></p>
-<p><a href="/stockmanagementtest/#"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

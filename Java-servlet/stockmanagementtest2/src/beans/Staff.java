@@ -23,6 +23,7 @@ public class Staff {
 	String password;
 	String authority;
 	String display;
+	String errorMsg;
 	public int getStaffId() {
 		return staffId;
 	}
@@ -53,5 +54,14 @@ public class Staff {
 	public void setDisplay(String display) {
 		this.display = display;
 	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
+	}
+
 
 }

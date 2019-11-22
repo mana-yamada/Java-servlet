@@ -21,7 +21,7 @@
 <h3>入居者情報 登録完了</h3>
 <p>入居者情報の新規登録が完了しました</p>
 <a href="/stockmanagementtest/OccupantAdd"><button>登録を続ける</button></a>
-<a href="#"><button>メニューへ戻る</button></a>
+<a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
 

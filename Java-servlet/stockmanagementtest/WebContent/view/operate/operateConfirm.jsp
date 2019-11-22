@@ -63,7 +63,7 @@
 <p><a href = "/stockmanagementtest/OperateController?value=backFromComfirm"><button>入力画面へ戻る</button></a></p>
 <% } %>
 
-
+<p><a href="/stockmanagementtest/MenuController?value=fromOperateConfirm"><button>メニューへ戻る</button></a></p>
 
 
 </main>

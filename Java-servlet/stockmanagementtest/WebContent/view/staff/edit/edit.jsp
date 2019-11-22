@@ -72,6 +72,7 @@
 	    </tr>
 
 		</table>
+		<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 </div>
 

@@ -64,7 +64,7 @@
 <p><a href="/stockmanagementtest/StaffChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
 <p><a href="/stockmanagementtest/StaffEdit?value=backFromConfirm"><button>職員情報編集画面へ戻る</button></a></p>
 <% } %>
-
+<p><a href="/stockmanagementtest/MenuController?value=fromStaffChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

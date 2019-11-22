@@ -51,7 +51,7 @@ Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 	<p><a href ="/stockmanagementtest/StaffAdd?value=addAction"><button>登録</button></a></p>
 	<p><a href="/stockmanagementtest/StaffAdd?value=backFromAdd"><button>入力画面へ戻る</button></a></p>
 <% } %>
-<p><a href="#?value=fromaddConfirm"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController?value=fromStaffAddConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

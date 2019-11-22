@@ -46,7 +46,7 @@ Occupant registerOccupant = (Occupant)session.getAttribute("registerOccupant");
 	<a href ="/stockmanagementtest/OccupantAdd?value=addAction"><button>登録</button></a>
 	<a href="/stockmanagementtest/OccupantAdd?value=backFromAdd"><button>入力画面へ戻る</button></a>
 <% } %>
-<a href="#?value=fromaddConfirm"><button>メニューへ戻る</button></a>
+<a href="/stockmanagementtest/MenuController?value=fromOccupantAddConfirm"><button>メニューへ戻る</button></a>
 </main>
 
 </body>

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import beans.Staff;
+import model.UsingCrypt;
 
 public class Stafflist {
 	String url;
@@ -21,6 +22,13 @@ public class Stafflist {
 	Connection con;
 	PreparedStatement pstmt;
 	ResultSet rs;
+
+	//login ログイン時
+	public void login(Staff staff) {
+		driverConnect();
+		readFile();
+		loginSearch(staff);
+	}
 
 	//search 在庫入出庫画面操作時
 	public void search(Staff staff) {
@@ -58,6 +66,63 @@ public class Stafflist {
 			driverConnect();
 			readFile();
 			leave(staffId);
+		}
+
+	//loginSearch ログイン時のユーザー検索
+		private void loginSearch(Staff staff) {
+			try {
+				con = DriverManager.getConnection(url,userName,pass);
+				//con = readCon;
+				//自動コミットモードの解除
+				con.setAutoCommit(false);
+				//SQL送信処理
+				//ひな型
+				pstmt = con.prepareStatement("SELECT staffid , password, authority FROM stafflist WHERE staffid = ?");
+				//ひな型に値を流し込み
+				pstmt.setInt(1,staff.getStaffId());
+				//検索系SQL文を自動組み立て、送信
+				rs = pstmt.executeQuery();
+				//結果票の処理 //ユーザーが登録されていなかったらエラー文を出す
+				if(rs.next()) {
+					//SQL上のデータをuserインスタンスへ格納
+					staff.setStaffId(rs.getInt("staffid"));
+					staff.setAuthority(rs.getString("authority"));
+					try {
+						//パスワードを復号化
+						UsingCrypt unLock = new UsingCrypt();
+						String unlockedPassword = unLock.getToken(rs.getString("password")) ;
+							//復号化したSQL上のパスワードをuserインスタンスへ格納
+							staff.setPassword(unlockedPassword);
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+				}else {
+					String errorMsg = "入力されたユーザーIDのデータは登録されていません。";
+					staff.setErrorMsg(errorMsg);
+				}
+				//後片付け
+				rs.close();
+				pstmt.close();
+				//送信済みの処理要求の確定（コミット）
+				con.commit();
+			}catch(SQLException e){
+				e.printStackTrace();
+				//ロールバック
+				try {
+					con.rollback();
+				}catch(SQLException e2) {
+					e2.printStackTrace();
+				}
+			}finally {
+				//DB接続を切断
+				if(con != null) {
+					try {
+						con.close();
+					}catch(SQLException e3) {
+						e3.printStackTrace();
+					}
+				}
+			}
 		}
 
 	//record  備品入出庫時に使う

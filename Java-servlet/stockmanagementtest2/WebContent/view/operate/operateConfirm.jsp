@@ -7,7 +7,17 @@
 //get scope
 
 %>
+<%
+	 String errorMsg = (String)session.getAttribute("errorMsg");
 
+	 Operating operation = (Operating)session.getAttribute("operation");
+	 StrDateTime strDateTime = (StrDateTime)session.getAttribute("strDateTime");
+	 Staff reStaff = (Staff)session.getAttribute("reStaff");
+	 Goods reGoods = (Goods)session.getAttribute("reGoods");
+	 Occupant reOccupant = (Occupant)session.getAttribute("reOccupant"); //change
+
+
+%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -22,16 +32,14 @@
 <jsp:include page="/view/template/header.jsp"></jsp:include>
 
 <main>
+<% if(errorMsg != null){ %>
+<h3>備品入出庫エラー</h3>
+<p><%= errorMsg %></p>
+
+<p><a href = "/stockmanagementtest/OperateController?value=backFromComfirmError"><button>入力画面へ戻る</button></a></p>
+
+<% } else {  %>
 <h3>備品入出庫確認画面</h3>
-<%
-	 Operating operation = (Operating)session.getAttribute("operation");
-	 StrDateTime strDateTime = (StrDateTime)session.getAttribute("strDateTime");
-	 Staff reStaff = (Staff)session.getAttribute("reStaff");
-	 Goods reGoods = (Goods)session.getAttribute("reGoods");
-	 Occupant reOccupant = (Occupant)session.getAttribute("reOccupant");
-
-
-%>
 <p id= "recordDate">日時：
 <%= strDateTime.getYear() %>年
 <%= strDateTime.getMonth()%>月
@@ -52,7 +60,12 @@
 
 <p>こちらの内容で登録してもよろしいですか？</p>
 <p><a href = "/stockmanagementtest/OperateController?value=complete"><button>登録</button></a></p>
-<p><a href = "/stockmanagementtest/OperateComtroller?value=backFromComfirm"><button>入力画面へ戻る</button></a></p>
+<p><a href = "/stockmanagementtest/OperateController?value=backFromComfirm"><button>入力画面へ戻る</button></a></p>
+<% } %>
+
+<p><a href="/stockmanagementtest/MenuController?value=fromOperateConfirm"><button>メニューへ戻る</button></a></p>
+
+
 </main>
 
 

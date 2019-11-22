@@ -13,7 +13,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>備品情報編集</title>
+<title>入居者情報編集</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
@@ -23,7 +23,7 @@
 <jsp:include page="/view/template/header.jsp"></jsp:include>
 
 	<main>
-		<h3>備品情報編集</h3>
+		<h3>入居者情報編集</h3>
 
 		<table >
 		<tr>
@@ -179,6 +179,8 @@
     	    <% } %>
      	<%}%>
 	</table>
+
+	<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 </div>
 

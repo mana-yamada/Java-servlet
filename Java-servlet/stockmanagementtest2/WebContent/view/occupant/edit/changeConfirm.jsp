@@ -3,6 +3,13 @@
 <%@ page import = "occupantcontroller.OccupantAdd" %>
 <%@ page import = "beans.Occupant" %>
 <%  //login scope  %>
+<%   String errorMsg = (String)session.getAttribute("errorMsg"); // change %>
+<%
+	//変更前の入居者データ1行を保存したインスタンスを取得
+	Occupant editOccupant = (Occupant)session.getAttribute("editOccupant");
+	/*変更後に表示しようとしている入居者名などを保存したインスタンスを取得*/
+	Occupant changeOccupant = (Occupant)session.getAttribute("changeOccupant"); //change
+%>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -19,8 +26,6 @@
 
 
 <main>
-
-<%   String errorMsg = (String)session.getAttribute("errorMsg"); %>
 <%   if(errorMsg != null) { %>
 	<%--エラーがあった場合 --%>
 	<h3>入居者情報入力エラー</h3>
@@ -31,13 +36,6 @@
 <% } else { %>
 	<%-- エラーがなく問題ない場合 --%>
 	<h3>入居者情報 変更確認</h3>
-
-<%
-	//変更前の入居者データ1行を保存したインスタンスを取得
-	Occupant editOccupant = (Occupant)session.getAttribute("editOccupant");
-	/*変更後に表示しようとしている入居者名などを保存したインスタンスを取得*/
-	Occupant changeOccupant = (Occupant)session.getAttribute("changeOccupant");
-%>
 <p>入居者ID：<%= editOccupant.getOccupantId() %></p>
 <p>変更前の入居者名：<%= editOccupant.getOccupantName() %></p>
 <p>変更前の入居フロア：<%= editOccupant.getFloorId() %></p>
@@ -54,7 +52,7 @@
 <p><a href="/stockmanagementtest/OccupantChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
 <p><a href="/stockmanagementtest/OccupantEdit?value=backFromConfirm"><button>入居者情報編集画面へ戻る</button></a></p>
 <% } %>
-
+<p><a href="/stockmanagementtest/MenuController?value=fromOccupantChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

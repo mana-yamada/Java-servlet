@@ -19,7 +19,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>備品入出庫入力画面</title>
+<title>現在の備品残数</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
@@ -29,6 +29,7 @@
 <jsp:include page="/view/template/header.jsp"></jsp:include>
 
 <main>
+<h3>現在の備品残数</h3>
 <div id = "nowstock">
 	<table  border = "1">
 	<tr>
@@ -43,7 +44,7 @@
    <% } %>
 	</table>
 </div>
-<p><a href="#"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

@@ -21,7 +21,7 @@
 <h3>備品情報 変更完了</h3>
 <p>備品情報の変更が完了しました</p>
 <a href="/stockmanagementtest/GoodsEdit"><button>備品情報編集を続ける</button></a>
-<a href="/stockmanagementtest/#?value=fromAddComlete"><button>メニューへ戻る</button></a>
+<a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
 
