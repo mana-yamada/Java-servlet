@@ -2,7 +2,9 @@
 <%@ page import = "beans.Staff" %>
 
 <%-- ログインのセッションスコープを取得 --%>
-
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
 <%
 	//変更前の職員データ1行を保存したインスタンスを取得
 	Staff editStaff = (Staff)session.getAttribute("editStaff");

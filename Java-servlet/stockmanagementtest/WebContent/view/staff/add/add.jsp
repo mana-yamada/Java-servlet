@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%-- ログインのセッションスコープを取得 --%>
-
+<%@ page import = "beans.Staff" %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
 <!DOCTYPE html>
 <html lang="ja">
 <head>

@@ -17,15 +17,19 @@
 </head>
 
 <body>
-<main>
+
 <%-- if login error { --%>
 <% if(errorMsg != null) { %>
+<main>
 <h3>ログインエラー</h3>
  <p><%= errorMsg %></p>
-<p><a href = "/stockmanagementtest/LoginController?value=backFromMenuError">ログイン画面に戻る</a></p>
+ <p><a href = "/stockmanagementtest/LoginController?value=backFromMenuError">ログイン画面に戻る</a></p>
+</main>
+
 <% } else { %>
 	<%-- header --%>
 	<jsp:include page="/view/template/header.jsp"></jsp:include>
+	<main>
 	<h3>メニュー画面</h3>
 	<%-- ログインユーザー全員に見せる--%>
 	<p><a href="/stockmanagementtest/OperateController?value=fromMenu"><button id="">在庫入出庫画面</button></a></p>
@@ -38,7 +42,7 @@
 	<p>備品情報管理</p>
 	<p><a href="/stockmanagementtest/GoodsEdit"><button id="">備品情報編集</button></a>  <a href="/stockmanagementtest/GoodsAdd"><button id="">新規登録</button></a></p>
 	<% } %>
+	</main>
 <%  } %>
-</main>
 </body>
 </html>

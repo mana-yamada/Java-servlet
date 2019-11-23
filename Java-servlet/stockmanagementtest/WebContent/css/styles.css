@@ -1,9 +1,6 @@
 
-/*body内のタグ全体を囲む*/
-/* フッター部の配置用に定義 */
-div #contents{
-	position: relative;
-	min-height: 100%;
+body{
+	margin:0;
 }
 
 header {
@@ -55,17 +52,57 @@ main{
 	margin-top: 100px;
 	margin-left: 20px;
 }
+@media screen and (max-width: 620px) {
 
+	header{
+	  margin:0;
+	  height:100px;
+	  background-color: #72A503;
+	}
 
-
-/*ページのコンテンツ*/
-
-/*フッター*/
-footer{
-	color: white;
-	background-color: #72A503;
+	#menu{
+	/*文字のおおきさ 文字の太さ ボーダー ボーダーの丸み 文字色 メニューボタンの背景*/
+	width:170px;
+	font-size: 100%;
+	border: ridge 3px #203F01;
+	border-radius: 5%;
+	color: #203F01;
+	background-color: white;
 	/*デスクトップでの位置*/
+	position: absolute;
+	top: 20px;
+	left: 5px;
+	margin-left:10px;
+	}
+	header h3{
+		font-size:70%;
+		position: absolute;
+		top: 46px;
+		left: 5px;
+		margin-left:10px;
+		color:white;
+	}
+	#logout{
+		/*文字のおおきさ 文字の太さ ボーダー ボーダーの丸み 文字色 メニューボタンの背景*/
+		font-size: 80%;
+		border: ridge 3px #203F01;
+		border-radius: 5%;
+		color: #203F01;
+		background-color: white;
+		/*デスクトップでの位置*/
+		position: absolute;
+		top: 50px;
+		left: 70%;
+	}
 
+	main{
+		/*デスクトップでの位置*/
+		position: absolute;
+		top: 20px;
+		left: 5px;
+		margin-top: 100px;
+		margin-left: 20px;
+	}
 
 
 }

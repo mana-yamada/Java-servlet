@@ -2,11 +2,9 @@
 
 <%@ page import = "goodscontroller.GoodsAdd" %>
 <%@ page import = "beans.Goods" %>
-
+<%@ page import = "beans.Staff" %>
 <%
-//login scope
-
-
+Staff loginUser = (Staff)session.getAttribute("loginUser");
 %>
 
 <%

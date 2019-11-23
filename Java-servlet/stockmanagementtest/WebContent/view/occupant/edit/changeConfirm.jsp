@@ -3,6 +3,10 @@
 <%@ page import = "occupantcontroller.OccupantAdd" %>
 <%@ page import = "beans.Occupant" %>
 <%  //login scope  %>
+<%@ page import = "beans.Staff" %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
 <%   String errorMsg = (String)session.getAttribute("errorMsg"); // change %>
 <%
 	//変更前の入居者データ1行を保存したインスタンスを取得

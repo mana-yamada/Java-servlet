@@ -1,5 +1,4 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-<%-- ログインのセッションスコープを取得 --%>
 
 <!DOCTYPE html>
 <html lang="ja">
