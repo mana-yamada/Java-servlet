@@ -24,13 +24,86 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <form action ="/stockmanagementtest/OccupantAdd?value=addConfirm" method = "post">
 <p>登録する入居者</p>
 <p>入居者名：(30字以内)<input type= "text" name="occupantName"  minlength="1" maxlength = "30"></p>
-<p>入居フロア(整数)<input type ="text" name = "floorId"></p>
-<p>居室番号(3ケタから4ケタの整数)：<input type="text" name="roomNumber"></p>
+<p>
+入居フロア
+<input type ="radio" value= "1" name = "floorId" onclick = "addFloor();">1F
+<input type ="radio" value= "2" name = "floorId" onclick = "addFloor();">2F
+<input type ="radio" value= "3" name = "floorId" onclick = "addFloor();">3F
+<input type ="radio" value= "nonFloor" style="display:none;" checked="checked" >
+</p>
+<p>居室番号</p>
+	<div id ="client">
+				<div id="select1">
+				<select name = "roomNumber1">
+				<% for(int x = 101; x < 161 ; x++) { %>
+				 <% if( (x-4) % 10 == 0 || (x-9) % 10 == 0) {
+					 continue;
+				 	}
+				 %>
+				 <option value="<%= x %>">
+					<%= x  %>
+				 </option>
+				<% } %>
+				</select>
+				</div>
+
+				<div id="select2">
+				<select name = "roomNumber2">
+				<% for(int x = 201; x < 261 ; x++) { %>
+				 <% if( (x-4) % 10 == 0 || (x-9) % 10 == 0) {
+					 continue;
+				 	}
+				 %>
+				 <option value="<%= x %>">
+					<%= x  %>
+				 </option>
+				<% } %>
+				</select>
+				</div>
+
+				<div id="select3">
+				<select name = "roomNumber3">
+				<% for(int x = 301; x < 361 ; x++) { %>
+				 <% if( (x-4) % 10 == 0 || (x-9) % 10 == 0) {
+					 continue;
+				 	}
+				 %>
+				 <option value="<%= x %>">
+					<%= x  %>
+				 </option>
+				<% } %>
+				</select>
+				</div>
+	 </div>
+
 <button>登録内容確認</button>
 </form>
 <a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
+<script>
+document.getElementById('select1').style.display = "none";
+document.getElementById('select2').style.display = "none";
+document.getElementById('select3').style.display = "none";
 
+function addFloor(){
+	   const name = document.getElementsByName('floorId');
+	   if(name[0].checked){
+		   document.getElementById('select1').style.display = "block";
+		   document.getElementById('select2').style.display = "none";
+		   document.getElementById('select3').style.display = "none";
+	   }else if(name[1].checked){
+		   document.getElementById('select1').style.display = "none";
+		   document.getElementById('select2').style.display = "block";
+		   document.getElementById('select3').style.display = "none";
+	   }else if(name[2].checked){
+		   document.getElementById('select1').style.display = "none";
+		   document.getElementById('select2').style.display = "none";
+		   document.getElementById('select3').style.display = "block";
+   	   }
+}
+
+</script>
+<script src="/stockmanagementtest/js/occupant.js"></script>
 </body>
 </html>

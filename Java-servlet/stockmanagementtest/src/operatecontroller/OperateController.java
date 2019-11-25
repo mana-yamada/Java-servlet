@@ -289,6 +289,8 @@ public class OperateController extends HttpServlet {
 				 Goodslist operate = new Goodslist();
 				 operate.updatingStock(update);
 
+				 //計算テーブルのデータ出庫した数を個数テーブルに入れる
+				 record.getOutshed(); //出庫数
 
 				 session.removeAttribute("operation");
 				 session.removeAttribute("strDateTime");

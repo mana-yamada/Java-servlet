@@ -27,42 +27,18 @@ public class Recordlist {
 	public void inout(Record record) {
 		driverConnect();
 		readFile();
-//		int controlId = 3;
-//		int occupantId = 0;
-//		int goodsId = 1;
-//		//倉庫から備品を出し入れした年・月・日
-//		String strDate = "2019-11-11"; Date date = Date.valueOf(strDate);
-//        //倉庫から備品を出し入れした時・分・秒  //実際には秒は00秒でデータを格納するようにする
-//        String strTime = "23:00:00"; Time time = Time.valueOf(strTime);
-//		int outshed = 0;
-//		int inshed = 10;
 		int stock = 0;
-
 		search(record, stock);
-		//search(controlId, occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
 	}
 
 	//outshed 備品を倉庫から出します
 	public void out(Record record) {
 		driverConnect();
 		readFile();
-//		int controlId = 2;
-//		int occupantId = 1;
-//		int goodsId = 1;
-//		//倉庫から備品を出し入れした年・月・日
-//		String strDate = "2019-11-10"; Date date = Date.valueOf(strDate);
-//        //倉庫から備品を出し入れした時・分・秒  //実際には秒は00秒でデータを格納するようにする
-//        String strTime = "16:00:00"; Time time = Time.valueOf(strTime);
-//		int outshed = 1;
-//		int inshed = 0;
-//		int staffId = 1;
 		int stock = 0;
-//		search(occupantId, goodsId, date, time, outshed, inshed, stock, staffId);
 		search(record, stock);
 	}
 
-
-//	private void inoutshed(int occupantid, int goodsid ,Date date, Time time, int outshed,int inshed,int stock,String staffid ) {
 	private void inoutshed(Record record, int stock) {
 		//DBへの接続
 		try {
@@ -70,10 +46,6 @@ public class Recordlist {
 			con = DriverManager.getConnection(url,userName,pass);
 			con.setAutoCommit(false);
 			//②SQL送信処理
-//			pstmt = con.prepareStatement(""
-//					+ "INSERT INTO recordlist("
-//					+ "occupantid, goodsid, date, time, outshed, inshed, stock, staffId) "
-//					+ "VALUES (?, ?, ?, ?, ?, ? ,?, ?)");
 			pstmt = con.prepareStatement(""
 					+ "INSERT INTO recordlist("
 					+ "occupantid, goodsid, date, time, outshed, inshed, stock, staffId) "
@@ -94,9 +66,9 @@ public class Recordlist {
 			//結果票の処理
 			if(r != 0) {
 				record.setStock(stock);
-				System.out.println("データが正しく登録されました。");
+				System.out.println("備品入出庫データが正しく登録されました。");
 			}else {
-				System.out.println("データが正しく登録されませんでした。");
+				System.out.println("備品入出庫データが正しく登録されませんでした。");
 			}
 			//後片付け
 			pstmt.close();
@@ -131,12 +103,7 @@ public class Recordlist {
 			con.setAutoCommit(false);
 			//SQL送信処理
 			//ひな型
-//			pstmt = con.prepareStatement(
-//					"SELECT goodsid, date, time, outshed, inshed , stock\r\n" +
-//					"FROM recordlist\r\n" +
-//					"WHERE goodsid = ? \r\n" +
-//					"ORDER BY date DESC, time DESC LIMIT 1\r\n" +
-//					"");
+
 			pstmt = con.prepareStatement(
 					"SELECT goodsid, date, time, outshed, inshed , stock\r\n" +
 					"FROM recordlist\r\n" +

@@ -5,13 +5,14 @@ body{
 
 header {
 	position : relative;
+
 }
 
 /*トップメニューへ戻る一番上のボタン*/
 #menu{
 	/*文字のおおきさ 文字の太さ ボーダー ボーダーの丸み 文字色 メニューボタンの背景*/
 	font-size: 150%;
-	font-weight: bold;
+	font-weight:bold;
 	border: ridge 3px #203F01;
 	border-radius: 5%;
 	color: #203F01;

@@ -99,7 +99,9 @@ public class OccupantAdd extends HttpServlet {
 		if(parameter.equals("addConfirm")) {
 			String occupantName = request.getParameter("occupantName");
 			String strFloorId = request.getParameter("floorId");
-			String strRoomNumber = request.getParameter("roomNumber");
+			String strRoomNumber1 = request.getParameter("roomNumber1");
+			String strRoomNumber2 = request.getParameter("roomNumber2");
+			String strRoomNumber3 = request.getParameter("roomNumber3");
 
 			if(occupantName == null || occupantName.length() == 0) {
 
@@ -114,7 +116,19 @@ public class OccupantAdd extends HttpServlet {
 			  try {
 
 				int floorId = Integer.parseInt(strFloorId);
-				int roomNumber = Integer.parseInt(strRoomNumber);
+
+				int roomNumber1 = Integer.parseInt(strRoomNumber1);
+				int roomNumber2 = Integer.parseInt(strRoomNumber2);
+				int roomNumber3 = Integer.parseInt(strRoomNumber3);
+
+				int roomNumber = 0;
+				if(floorId == 1) {
+					roomNumber = roomNumber1;
+				}else if(floorId == 2) {
+					roomNumber = roomNumber2;
+				}else if(floorId == 3) {
+					roomNumber = roomNumber3;
+				}
 
 				//save instance
 				Occupant registerOccupant = new Occupant(floorId, roomNumber ,occupantName);
