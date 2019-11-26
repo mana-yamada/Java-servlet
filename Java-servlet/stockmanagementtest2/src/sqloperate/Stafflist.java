@@ -77,7 +77,7 @@ public class Stafflist {
 				con.setAutoCommit(false);
 				//SQL送信処理
 				//ひな型
-				pstmt = con.prepareStatement("SELECT staffid , password, authority FROM stafflist WHERE staffid = ?");
+				pstmt = con.prepareStatement("SELECT staffname, staffid , password, authority FROM stafflist WHERE staffid = ?");
 				//ひな型に値を流し込み
 				pstmt.setInt(1,staff.getStaffId());
 				//検索系SQL文を自動組み立て、送信
@@ -85,6 +85,7 @@ public class Stafflist {
 				//結果票の処理 //ユーザーが登録されていなかったらエラー文を出す
 				if(rs.next()) {
 					//SQL上のデータをuserインスタンスへ格納
+					staff.setStaffName(rs.getString("staffname"));
 					staff.setStaffId(rs.getInt("staffid"));
 					staff.setAuthority(rs.getString("authority"));
 					try {

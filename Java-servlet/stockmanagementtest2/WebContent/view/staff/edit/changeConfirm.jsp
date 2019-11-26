@@ -1,6 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import = "beans.Staff" %>
 <%  //login scope  %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
 <%   String errorMsg = (String)session.getAttribute("errorMsg"); //change %>
 <%
 	//変更前の職員データ1行を保存したインスタンスを取得

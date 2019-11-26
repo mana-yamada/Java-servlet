@@ -8,6 +8,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%
 	//変更前の職員データ1行を保存したインスタンスを取得
 	Staff editStaff = (Staff)session.getAttribute("editStaff");
+	int staffId = editStaff.getStaffId();
+	String strStaffId = String.format("%05d", staffId);
 %>
 
 
@@ -30,7 +32,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 
 <main>
 <h3>職員情報変更</h3>
-<p>ユーザーID：<%= editStaff.getStaffId() %></p>
+<p>ユーザーID：<%= strStaffId %></p>
 <p>変更前の職員名：<%= editStaff.getStaffName() %></p>
 <p>変更前の管理者権限：
 	<% if(editStaff.getAuthority().equals("YES")){ %>

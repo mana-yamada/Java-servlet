@@ -89,7 +89,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 		<p>入出庫
 		<input type="radio" name = "sheds" value = "insheds"  onclick="inStock();" >入庫
 		<input type="radio" name = "sheds" value = "outsheds" onclick="outStock();"  >出庫
-		<input type="radio" name = "sheds" value = "nonsheds" style = "display:none" checked = "checked">
+		<input type="radio" name = "sheds" value = "nonsheds" style = "display:none;" checked = "checked">
 		</p>
 		</div>
 

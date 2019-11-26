@@ -7,6 +7,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%
 	//削除しようとしている職員データ1行を保存したインスタンスを取得
 	Staff editStaff = (Staff)session.getAttribute("editStaff");
+	int staffId = editStaff.getStaffId();
+	String strStaffId = String.format("%05d", staffId);
 %>
 
 <!DOCTYPE html>
@@ -27,7 +29,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 
 <h3>職員情報 削除確認</h3>
 <p>削除する職員名：<%=  editStaff.getStaffName() %></p>
-<p>ユーザーID：<%= editStaff.getStaffId() %></p>
+<p>ユーザーID：<%= strStaffId %></p>
 
 <p>上記の内容で職員情報を削除してもよろしいですか？</p>
 <p><a href ="/stockmanagementtest/StaffUndisplay?value=undisplayComplete"><button>削除</button></a></p>

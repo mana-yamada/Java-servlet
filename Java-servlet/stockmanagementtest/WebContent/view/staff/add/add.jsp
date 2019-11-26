@@ -27,8 +27,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p>職員名：(30字以内)</p>
 <p><input type= "text" name="staffName"  minlength="1" maxlength = "30"></p>
 
-<p>パスワード：8字以上20字以内</p>
-<p><input type = "password" name="password" minlength = "8" maxlength = "20"></p>
+<p>パスワード：8字以上15字以内</p>
+<p><input type = "password" name="password" minlength = "8" maxlength = "15"></p>
 
 <p>管理者権限</p>
 <p><input type = "radio" name ="authority" value="YES"> 有 <input type = "radio" name = "authority" value="NO" checked="checked" > 無</p>

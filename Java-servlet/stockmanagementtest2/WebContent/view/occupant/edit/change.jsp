@@ -2,7 +2,10 @@
 <%@ page import = "occupantcontroller.OccupantEdit" %>
 <%@ page import = "beans.Occupant" %>
 <%-- ログインのセッションスコープを取得 --%>
-
+<%@ page import = "beans.Staff" %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
 <%
 	//変更前の入居者データ1行を保存したインスタンスを取得
 	Occupant editOccupant = (Occupant)session.getAttribute("editOccupant");

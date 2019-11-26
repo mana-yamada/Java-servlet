@@ -37,7 +37,6 @@ public class StaffChange extends HttpServlet {
 					String staffName = request.getParameter("staffName");
 					String authority = request.getParameter("authority");
 
-
 					//String型で受け取ったid priceをinteger
 					int staffId = Integer.parseInt(strStaffId);
 
@@ -56,7 +55,6 @@ public class StaffChange extends HttpServlet {
 
 				/*変更確認画面から変更確認(エラー文送った場合)*/
 				else if(parameter.equals("reChangeInputByError")) {
-					/*remove scope*/
 					//remove errorMsg instance
 					session.removeAttribute("errorMsg");
 
@@ -68,8 +66,6 @@ public class StaffChange extends HttpServlet {
 
 				/*変更確認画面から変更画面*/
 				else if(parameter.equals("reChangeInput")) {
-
-					/*remove scope*/
 
 					//remove changeStaff instance
 					session.removeAttribute("changeStaff");
@@ -112,6 +108,7 @@ public class StaffChange extends HttpServlet {
 				}
 		}
 	}
+
 
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException{

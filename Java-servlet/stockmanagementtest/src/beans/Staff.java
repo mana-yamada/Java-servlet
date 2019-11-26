@@ -5,6 +5,12 @@ public class Staff {
 	public Staff() {
 
 	}
+	public Staff(String staffName, String password, String authority, String display) {
+		this.staffName = staffName;
+		this.password = password;
+		this.authority = authority;
+	}
+
 
 	public Staff(String staffName, String password, String authority) {
 		this.staffName = staffName;

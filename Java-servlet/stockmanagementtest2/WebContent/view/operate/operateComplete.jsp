@@ -1,11 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
-
-
+<%@ page import = "beans.Staff" %>
 <%
-//ログインのセッションスコープを取得
-
-//get scope
-
+Staff loginUser = (Staff)session.getAttribute("loginUser");
 %>
 
 <!DOCTYPE html>

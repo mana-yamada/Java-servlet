@@ -6,6 +6,11 @@ public class Operating {
 	int countOut;
 	String strSpace;
 
+	Staff staff;
+	Occupant occupant;
+	Goods goods;
+
+
 	public String getStrSheds() {
 		return strSheds;
 	}
@@ -30,6 +35,24 @@ public class Operating {
 	}
 	public void setStrSpace(String strSpace) {
 		this.strSpace = strSpace;
+	}
+	public Staff getStaff() {
+		return staff;
+	}
+	public void setStaff(Staff staff) {
+		this.staff = staff;
+	}
+	public Occupant getOccupant() {
+		return occupant;
+	}
+	public void setOccupant(Occupant occupant) {
+		this.occupant = occupant;
+	}
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
 	}
 
 

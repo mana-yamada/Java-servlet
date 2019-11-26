@@ -1,7 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import = "goodscontroller.GoodsEdit" %>
 <%@ page import = "beans.Goods" %>
-<%-- ログインのセッションスコープを取得 --%>
+<%@ page import = "beans.Staff" %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
+
 
 <%
 	//変更前の備品データ1行を保存したインスタンスを取得

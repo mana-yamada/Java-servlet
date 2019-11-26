@@ -12,7 +12,7 @@
 <head>
 <meta charset="UTF-8">
 <title>メニュー画面</title>
-<meta name="viewport" content="width=device-width initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
 
@@ -27,8 +27,9 @@
 </main>
 
 <% } else { %>
-	<%-- header --%>
+	<%-- header   --%>
 	<jsp:include page="/view/template/header.jsp"></jsp:include>
+
 	<main>
 	<h3>メニュー画面</h3>
 	<%-- ログインユーザー全員に見せる--%>

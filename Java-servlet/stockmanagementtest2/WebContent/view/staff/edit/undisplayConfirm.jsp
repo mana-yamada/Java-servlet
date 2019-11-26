@@ -1,10 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import = "beans.Staff" %>
-
 <%
-//login scope
-
-
+Staff loginUser = (Staff)session.getAttribute("loginUser");
 %>
 
 <%

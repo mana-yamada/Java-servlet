@@ -14,8 +14,8 @@
 <main>
 <h3>ログイン画面</h3>
 <form action ="/stockmanagementtest/LoginController" method="post">
-<p>ユーザーID<input type ="text" name ="userId" minlength = "1" maxlength = "5"></p>
-<p>パスワード(8文字以上20字以内)<input type ="password" name = "password" minlength ="8" maxlength="20"></p>
+<p>ユーザーID(5ケタの数字)<input type ="text" name ="userId" minlength = "5" maxlength = "5"></p>
+<p>パスワード(8文字以上15字以内)<input type ="password" name = "password" minlength ="8" maxlength="15"></p>
 <input type ="submit" value="ログイン">
 </form>
 </main>

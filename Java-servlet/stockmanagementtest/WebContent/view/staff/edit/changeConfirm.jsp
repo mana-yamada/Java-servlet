@@ -10,6 +10,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	Staff editStaff = (Staff)session.getAttribute("editStaff");
 	/*変更後に表示しようとしている職員名、単価を保存したインスタンスを取得*/
 	Staff changeStaff = (Staff)session.getAttribute("changeStaff"); //change
+	int staffId = editStaff.getStaffId();
+	String strStaffId = String.format("%05d", staffId);
 %>
 
 
@@ -39,10 +41,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	<%-- エラーがなく問題ない場合 --%>
 	<h3>職員情報 変更確認</h3>
 
-
-
-
-<p>ユーザーID：<%= editStaff.getStaffId() %></p>
+<p>ユーザーID：<%= strStaffId %></p>
 <p>変更前の職員名：<%= editStaff.getStaffName() %></p>
 <p>変更前の管理者権限：
 	<% if(editStaff.getAuthority().equals("YES")){ %>

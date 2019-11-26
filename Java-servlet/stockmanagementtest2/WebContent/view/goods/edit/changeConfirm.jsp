@@ -2,7 +2,11 @@
 
 <%@ page import = "goodscontroller.GoodsAdd" %>
 <%@ page import = "beans.Goods" %>
-<%  //login scope  %>
+<%@ page import = "beans.Staff" %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
+
 <%   String errorMsg = (String)session.getAttribute("errorMsg"); %>
 <% //change
 	//変更前の備品データ1行を保存したインスタンスを取得

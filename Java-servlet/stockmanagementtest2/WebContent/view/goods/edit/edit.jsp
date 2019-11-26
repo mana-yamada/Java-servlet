@@ -1,12 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="sqloperate.Goodslist,beans.Goods, goodscontroller.GoodsEdit, java.util.ArrayList, java.util.Iterator"%>
-
+<%@ page import = "beans.Staff" %>
 <%
-//ログインのセッションスコープを取得
-
-//get scope
-
-
+Staff loginUser = (Staff)session.getAttribute("loginUser");
 %>
 
 <!DOCTYPE html>
@@ -27,13 +23,10 @@
 		<h3>備品情報編集</h3>
 		<table border="1">
 		<tr>
-		<th>ArrayListのID</th>
-		<th>goodslistのID</th>
 		<th>備品名</th>
 		<th>備品の単価</th>
-		<th>表示or非表示</th>
-		<th>☆変更☆</th>
-		<th>■削除■</th>
+		<th>変更</th>
+		<th>削除</th>
 		</tr>
 		<%
 		ArrayList<Goods> goodsList = new ArrayList<Goods>();
@@ -51,12 +44,9 @@
 			String display = target.getDisplay();
 		%>
 		<tr>
-		    <td><%= listNumber  %></td>
-			<td><%= target.getGoodsId() %></td>
+
 		 	<td><%= target.getGoodsName() %></td>
 		 	<td><%= target.getGoodsPrice()%></td>
-		 	<td><%= target.getDisplay() %></td>
-
 		 	<td>
 		 	<form action="/stockmanagementtest/GoodsChange" method="get">
 			 	<input type="hidden" name="goodsId" value="<%= target.getGoodsId() %>">

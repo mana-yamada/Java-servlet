@@ -45,6 +45,8 @@ public class Stafflist {
 
 	}
 
+
+
 	//get 職員情報の取得
 	public void get(ArrayList<Staff> staffList) {
 		driverConnect();
@@ -209,6 +211,40 @@ public class Stafflist {
 		}
 	}
 
+	//新規登録したユーザーIDを取得
+	public void getId(Staff staff) {
+		try {
+			con = DriverManager.getConnection(url, userName, pass);
+			con.setAutoCommit(false);
+			//画面に表示したい備品だけ表示(購入しなくなった備品については非表示にする)
+			pstmt = con.prepareStatement("SELECT staffid FROM stafflist WHERE staffname = ? && password = ? && authority = ?  && display = '1' ");
+			pstmt.setString(1, staff.getStaffName());
+			pstmt.setString(2, staff.getPassword());
+			pstmt.setString(3, staff.getAuthority());
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				int staffId = rs.getInt("staffid");
+				staff.setStaffId(staffId);
+			}
+			rs.close();
+			pstmt.close();
+			con.commit();
+		}catch(SQLException e) {
+			try {
+				con.rollback();
+			}catch(SQLException e2) {
+				e2.printStackTrace();
+			}
+		}finally {
+			if(con != null) {
+				try {
+					con.close();
+				}catch(SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	//入居者情報をすべて取得
 	private void getTable(ArrayList<Staff> staffList) {
 		try {

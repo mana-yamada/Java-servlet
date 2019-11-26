@@ -2,11 +2,12 @@
 
 <%@ page import = "occupantcontroller.OccupantAdd, beans.Occupant" %>
 <%@ page import = "beans.Goods" %>
+<%@ page import = "beans.Staff" %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
 
 <%
-//login scope
-
-
 //errorMsgインスタンス取得
 String errorMsg = (String) session.getAttribute("errorMsg");
 

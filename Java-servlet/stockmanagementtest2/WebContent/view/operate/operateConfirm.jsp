@@ -1,11 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8"%>
 <%@ page import="sqloperate.Occupantlist,beans.Occupant,sqloperate.Stafflist, beans.Staff, beans.Operating, beans.StrDateTime, beans.Goods, java.util.ArrayList, java.util.Iterator"%>
 
+<%@ page import = "beans.Staff" %>
 <%
-//ログインのセッションスコープを取得
-
-//get scope
-
+Staff loginUser = (Staff)session.getAttribute("loginUser");
 %>
 <%
 	 String errorMsg = (String)session.getAttribute("errorMsg");

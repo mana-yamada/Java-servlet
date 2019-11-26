@@ -2,11 +2,7 @@
 <%@ page import="sqloperate.Stafflist, beans.Staff,java.util.ArrayList, java.util.Iterator"%>
 
 <%
-//ログインのセッションスコープを取得
-
-//get scope
-
-
+Staff loginUser = (Staff)session.getAttribute("loginUser");
 %>
 
 <!DOCTYPE html>
@@ -26,12 +22,11 @@
 		<h3>職員情報編集</h3>
 		<table border="1">
 		<tr>
-		<th>ArrayListのID</th>
 		<th>職員ID</th>
 		<th>職員名</th>
 		<th>管理者権限</th>
-		<th>☆変更☆</th>
-		<th>■削除■</th>
+		<th>変更</th>
+		<th>削除</th>
 		</tr>
 		<%
 		ArrayList<Staff> staffList = new ArrayList<Staff>();
@@ -46,7 +41,6 @@
 
 		%>
 		<tr>
-			<td><%= listNumber %></td>
 		    <td><%= target.getStaffId() %></td>
 		    <td><%= target.getStaffName() %></td>
 			<td><%= target.getAuthority() %></td>

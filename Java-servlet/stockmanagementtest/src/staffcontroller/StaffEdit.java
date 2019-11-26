@@ -15,6 +15,7 @@ import beans.Staff;
 @WebServlet("/StaffEdit")
 public class StaffEdit extends HttpServlet{
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
+
 		HttpSession session = request.getSession();
 		Staff loginUser = (Staff)session.getAttribute("loginUser");
 		if(loginUser == null ) {
@@ -69,6 +70,7 @@ public class StaffEdit extends HttpServlet{
 			dispatcher.forward(request, response);
 		}
 	}
+
 
 public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
 

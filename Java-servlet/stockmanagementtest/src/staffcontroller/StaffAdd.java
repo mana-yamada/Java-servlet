@@ -17,6 +17,7 @@ import sqloperate.Stafflist;
 @WebServlet("/StaffAdd")
 public class StaffAdd extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
+
 		HttpSession session = request.getSession();
 		Staff loginUser = (Staff)session.getAttribute("loginUser");
 		if(loginUser == null ) {
@@ -35,6 +36,7 @@ public class StaffAdd extends HttpServlet {
 			/*メニューから新規登録画面
 			 * 登録完了画面から新規登録画面*/
 			if(parameter == null) {
+				session.removeAttribute("registerStaff");
 				//forward
 				String forwardPath = "view/staff/add/add.jsp";
 				RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
@@ -50,8 +52,10 @@ public class StaffAdd extends HttpServlet {
 				Stafflist register = new Stafflist();
 				register.add(registerStaff);
 
-				//remove instance
-				session.removeAttribute("registerStaff");
+				//registerStaffを引数に、ユーザーIDが何なのかを検索
+				register.getId(registerStaff);
+				//取得したstaffid1を登録するユーザーインスタンスに保存
+				session.setAttribute("registerStaff", registerStaff);
 
 				//forward
 				String forwardPath = "view/staff/add/addComplete.jsp";
@@ -81,6 +85,7 @@ public class StaffAdd extends HttpServlet {
 		}
 	}
 
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException ,IOException{
 		request.setCharacterEncoding("UTF-8");
 		String parameter = request.getParameter("value");
@@ -108,30 +113,14 @@ public class StaffAdd extends HttpServlet {
 					password = usingCrypt.saveToken(password);
 
 					//make instance
-					Staff registerStaff = new Staff(staffName, password, authority);
+					Staff registerStaff = new Staff();
+					registerStaff.setStaffName(staffName);
+					registerStaff.setPassword(password);
+					registerStaff.setAuthority(authority);
+					registerStaff.setDisplay("1");
 					//save instance
 					HttpSession session = request.getSession();
 					session.setAttribute("registerStaff", registerStaff);
-
-					//新規登録時にすでに登録されているユーザーIDを登録しようとしているか確認
-					//UsingMysql check = new UsingMysql();
-					//check.addCheck(person);
-
-					//SQL操作時にユーザーIDが既に登録されている場合
-//					if(check.getUserIdUsedError() != null) {
-//						//保存したインスタンスの削除
-//						session.removeAttribute("target");
-//						//入力されたユーザーIDが既に使われているものならばそのように知らせる
-//						forwardPath = "/view/add/usedIdError.jsp";
-//						RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-//						dispatcher.forward(request, response);
-//					//DBにユーザーIDのかぶりがない時
-//					}else {
-//						//forward
-//						forwardPath = "/view/add/addConfirm.jsp";
-//						RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
-//						dispatcher.forward(request, response);
-//					}
 
 					//forward
 					String forwardPath = "/view/staff/add/addConfirm.jsp";

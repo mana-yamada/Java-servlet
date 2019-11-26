@@ -2,7 +2,10 @@
 
 <%@ page import = "staffcontroller.StaffAdd, beans.Staff" %>
 <%@ page import = "beans.Goods" %>
-
+<%@ page import = "beans.Staff" %>
+<%
+Staff loginUser = (Staff)session.getAttribute("loginUser");
+%>
 <%
 //login scope
 // errorMsgインスタンス取得

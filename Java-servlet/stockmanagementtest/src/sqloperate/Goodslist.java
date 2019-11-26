@@ -38,8 +38,8 @@ public class Goodslist  {
 		updateStock(stock);
 	}
 
-	//stockError 残数0のgoodsを出庫しようとした場合
-	public void stockError(Stock stock) {
+	//stockError 残数0のgoodsを出庫していないか検証
+	public void stockJudge(Stock stock) {
 		driverConnect();
 		readFile();
 		rollBack(stock);

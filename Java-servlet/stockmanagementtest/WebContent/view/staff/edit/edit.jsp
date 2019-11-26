@@ -36,17 +36,19 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 		for(Staff target : staffList){
 			//ArrayList 内でのインデックス番号
 			int listNumber = staffList.indexOf(target);
+			int staffId = target.getStaffId();
+			String strStaffId = String.format("%05d", staffId);
 
 			//DBに格納した1行の各列を取得
 
 		%>
 		<tr>
-		    <td><%= target.getStaffId() %></td>
+		    <td><%= strStaffId %></td>
 		    <td><%= target.getStaffName() %></td>
 			<td><%= target.getAuthority() %></td>
 			<td>
 		 	<form action="/stockmanagementtest/StaffChange" method="get">
-			 	<input type="hidden" name="staffId" value="<%= target.getStaffId() %>">
+			 	<input type="hidden" name="staffId" value="<%= strStaffId %>">
 			 	<input type="hidden" name="staffName" value="<%= target.getStaffName() %>">
 			 	<input type="hidden" name="authority" value="<%= target.getAuthority() %>">
 			 	<button id="#">変更</button>
@@ -55,7 +57,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 
 		    <td>
 		    <form action="/stockmanagementtest/StaffUndisplay" method="get">
-				<input type="hidden" name="staffId" value="<%= target.getStaffId() %>">
+				<input type="hidden" name="staffId" value="<%= strStaffId %>">
 			 	<input type="hidden" name="staffName" value="<%= target.getStaffName() %>">
 			 	<input type="hidden" name="authority" value="<%= target.getAuthority() %>">
 			 	<button id="#">削除</button>
