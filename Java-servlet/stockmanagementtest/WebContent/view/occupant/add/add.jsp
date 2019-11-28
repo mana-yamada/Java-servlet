@@ -26,13 +26,14 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p>入居者名：(30字以内)<input type= "text" name="occupantName"  minlength="1" maxlength = "30"></p>
 <p>
 入居フロア
-<input type ="radio" value= "1" name = "floorId" onclick = "addFloor();">1F
+<input type ="radio" value= "1" name = "floorId" onclick = "addFloor();" >1F
 <input type ="radio" value= "2" name = "floorId" onclick = "addFloor();">2F
 <input type ="radio" value= "3" name = "floorId" onclick = "addFloor();">3F
 <input type ="radio" value= "nonFloor" style="display:none;" checked="checked" >
 </p>
-<p>居室番号</p>
+
 	<div id ="client">
+	<p>居室番号</p>
 				<div id="select1">
 				<select name = "roomNumber1">
 				<% for(int x = 101; x < 161 ; x++) { %>
@@ -74,6 +75,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 				<% } %>
 				</select>
 				</div>
+
 	 </div>
 
 <button>登録内容確認</button>

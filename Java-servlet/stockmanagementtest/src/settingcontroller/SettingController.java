@@ -117,6 +117,14 @@ public class SettingController  extends HttpServlet{
 					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
 					dispatcher.forward(request, response);
 				}catch(Exception e) {
+					String errorMsg = "正しく暗号化されていません。恐れ入りますがもう一度最初から入力し直してください。";
+					//save instance
+					HttpSession session = request.getSession();
+					session.setAttribute("errorMsg", errorMsg);
+					//forward
+					String forwardPath = "/view/setting/staffAddConfirm.jsp";
+					RequestDispatcher dispatcher = request.getRequestDispatcher(forwardPath);
+					dispatcher.forward(request, response);
 					System.out.println("正しく暗号化されていません");
 				}
 			}

@@ -3,6 +3,7 @@
 
 <%
 Staff loginUser = (Staff)session.getAttribute("loginUser");
+
 %>
 
 <!DOCTYPE html>
@@ -38,6 +39,12 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 			int listNumber = staffList.indexOf(target);
 			int staffId = target.getStaffId();
 			String strStaffId = String.format("%05d", staffId);
+			String kengenn = "";
+			if(target.getAuthority().equals("YES")){
+				 kengenn = "有";
+			}else if(target.getAuthority().equals("NO")){
+				 kengenn = "無";
+			}
 
 			//DBに格納した1行の各列を取得
 
@@ -45,7 +52,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 		<tr>
 		    <td><%= strStaffId %></td>
 		    <td><%= target.getStaffName() %></td>
-			<td><%= target.getAuthority() %></td>
+			<td><%= kengenn %></td>
 			<td>
 		 	<form action="/stockmanagementtest/StaffChange" method="get">
 			 	<input type="hidden" name="staffId" value="<%= strStaffId %>">

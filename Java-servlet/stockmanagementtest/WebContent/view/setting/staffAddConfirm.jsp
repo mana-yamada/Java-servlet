@@ -20,7 +20,7 @@ Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>職員情報登録確認</title>
+<title>初期設定</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
@@ -34,14 +34,13 @@ Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 	<p><a href="/stockmanagementtest/SettingController?value=backFromAddError"><button>入力画面へ戻る</button></a></p>
 <% } else { %>
 <%-- エラーがなければ職員情報 登録確認    floorId, roomNumber ,staffName--%>
+	<h1>初期設定</h1>
 	<h3>職員情報 登録確認</h3>
 	<p>職員名：<%= registerStaff.getStaffName() %></p>
 	<p>パスワード：＊＊＊＊＊＊＊＊＊＊＊＊</p>
 
 	<% if(registerStaff.getAuthority().equals("YES")){ %>
 			<p>管理者権限：有</p>
-	<% }else { %>
-		    <p>管理者権限：無</p>
 	<% }%>
 
 	<p><a href ="/stockmanagementtest/SettingController?value=addAction"><button>登録</button></a></p>

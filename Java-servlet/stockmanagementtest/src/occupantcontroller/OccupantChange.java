@@ -69,10 +69,6 @@ public class OccupantChange  extends HttpServlet{
 		/*変更確認画面から変更画面*/
 		else if(parameter.equals("reChangeInput")) {
 
-			/*remove scope*/
-
-
-
 			//remove changeOccupant instance
 			session.removeAttribute("changeOccupant");
 
@@ -127,13 +123,15 @@ public class OccupantChange  extends HttpServlet{
 					throw new NullPointerException("氏名未入力");
 				}
 
-
 				String strOccupantFloor = request.getParameter("occupantFloor");
 				int occupantFloor = Integer.parseInt(strOccupantFloor);
 
 
 				String strRoomNumber = request.getParameter("roomNumber");
 				int roomNumber = Integer.parseInt(strRoomNumber);
+				if(roomNumber < 0) {
+					throw new NumberFormatException("居室番号がマイナスです");
+				}
 
 				/*取得したを新しいインスタンスに保存*/
 				Occupant changeOccupant = new Occupant();
@@ -160,10 +158,10 @@ public class OccupantChange  extends HttpServlet{
 				dispatcher.forward(request, response);
 				e.printStackTrace();
 			}
-			/*単価の入力欄で0~9以外の文字列が入っていた場合*/
+			/*整数を入力させる入力欄で0~9以外の文字列が入っていた場合*/
 			catch(NumberFormatException e) {
 				/* 変更画面から変更確認画面(エラー表示)*/
-				String errorMsg = "変更後の入居フロアか居室番号が正しく入力されていません。恐れ入りますがもう一度最初から編集画面に戻って操作をやり直してください。";
+				String errorMsg = "変更後の入居フロアや居室番号が正しく入力されていません。恐れ入りますがもう一度最初から編集画面に戻って操作をやり直してください。";
 				HttpSession session = request.getSession();
 				session.setAttribute("errorMsg", errorMsg);
 				//forward

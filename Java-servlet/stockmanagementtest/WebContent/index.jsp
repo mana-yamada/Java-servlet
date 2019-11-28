@@ -11,5 +11,7 @@
 <body>
 <p><a href= "/stockmanagementtest/LoginController">ログイン画面</a></p>
 
+<p>※初めに使用する方は下記のリンクから初期設定をしてください。</p>
+<p><a href= "/stockmanagementtest/SettingController">初期設定</a></p>
 </body>
 </html>

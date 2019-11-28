@@ -45,13 +45,13 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p id ="nameForm"><input type= "text" name="occupantName" value="<%= editOccupant.getOccupantName() %>"  maxlength = "30"></p><!-- scriptタグで表示設定 -->
 
 <%--入居フロア  --%>
-<p>入居フロア</p>
+<p>入居フロア(1F:1 2F:2 3F:3)</p>
 <p><input type="radio" name="occupantFloorChange" value="unchange" onclick="floorChange();">変更なし</p>
 <p><input type="radio" name="occupantFloorChange" value="change"   onclick="floorChange();" checked = "checked">変更あり</p>
-<p id ="floorForm" ><input  type="text" name="occupantFloor" value="<%= editOccupant.getFloorId() %>"  maxlength = "7"></p><!-- scriptタグで表示設定 -->
+<p id ="floorForm" ><input  type="text" name="occupantFloor" value="<%= editOccupant.getFloorId() %>"  maxlength = "1"></p><!-- scriptタグで表示設定 -->
 
 <%--居室番号  --%>
-<p>居室番号</p>
+<p>居室番号(数字で正しく入力ください)</p>
 <p><input type="radio" name="roomNumberChange" value="unchange" onclick="roomChange();">変更なし</p>
 <p><input type="radio" name="roomNumberChange" value="change"   onclick="roomChange();" checked = "checked">変更あり</p>
 <p id ="roomNumberForm" ><input  type="text" name="roomNumber" value="<%= editOccupant.getRoomNumber() %>"  maxlength = "7"></p><!-- scriptタグで表示設定 -->

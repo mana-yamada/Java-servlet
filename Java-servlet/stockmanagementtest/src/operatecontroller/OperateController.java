@@ -100,7 +100,7 @@ public class OperateController extends HttpServlet {
 						strSheds = "入庫";
 						strCountOut = "0";
 						strSpace = "倉庫";
-						String strOccupantId = "0";
+						String strOccupantId = "1";
 						//確認画面で出力したいものをインスタンスに保存
 						Operating operation = new Operating();
 						operation.setStrSheds(strSheds);
@@ -186,7 +186,7 @@ public class OperateController extends HttpServlet {
 										/*共用部の場合*/
 										if(strSpace.equals("shareSpace")){
 											strSpace = "共用部";
-											strOccupantId = "0";
+											strOccupantId = "1";
 										}
 										/*利用者の居室の場合*/
 										else if(strSpace.equals("possSpace")){

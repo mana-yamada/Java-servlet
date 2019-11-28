@@ -8,7 +8,7 @@
 <html lang="ja">
 <head>
 <meta charset="UTF-8">
-<title>職員情報新規登録</title>
+<title>初期設定</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
 <link rel = "stylesheet" href="/stockmanagementtest/css/styles.css">
 </head>
@@ -19,7 +19,8 @@
 
 <%-- 初期設定 --%>
 <main>
-<p>こちらのシステムを初めて使う際には、この画面から管理者権限の有るユーザーを登録していただいてからログインしてください。</p>
+<p>こちらのシステムを初めて施設で使う際には、この画面から管理者権限の有る職員のユーザーを登録しログインしていただきます。</p>
+<h1>初期設定</h1>
 <h3>職員情報新規登録</h3>
 <form action ="/stockmanagementtest/SettingController?value=addConfirm" method = "post">
 
@@ -30,7 +31,7 @@
 <p><input type = "password" name="password" minlength = "8" maxlength = "15"></p>
 
 <p>管理者権限</p>
-<p><input type = "radio" name ="authority" value="YES"> 有 <input type = "radio" name = "authority" value="NO" checked="checked" > 無</p>
+<p><input type = "radio" name ="authority" value="YES" checked="checked"> 有</p>
 
 <p><button>登録内容確認</button></p>
 

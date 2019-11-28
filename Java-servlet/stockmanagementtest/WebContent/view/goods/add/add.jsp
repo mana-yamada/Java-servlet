@@ -24,7 +24,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <form action ="/stockmanagementtest/GoodsAdd?value=addconfirm" method = "post">
 <p>品目</p>
 <p>備品名：(30字以内)<input type= "text" name="goodsname"  minlength="1" maxlength = "30"></p>
-<p>備品の単価：<input type="text" name="goodsprice" minlength="1" maxlength = "7">円</p>
+<p>備品の単価(1～7ケタの半角数字)：<input type="text" name="goodsprice" minlength="1" maxlength = "7">円</p>
 <p><button>登録内容確認</button></p>
 </form>
 <p><a href="/stockmanagementtest/MenuController"><button>メニューへ戻る</button></a></p>
