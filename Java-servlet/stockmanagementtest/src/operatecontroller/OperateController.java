@@ -95,8 +95,9 @@ public class OperateController extends HttpServlet {
 					//使用場所 居室 or 共用部(確認画面のみ)
 					String strSpace = request.getParameter("space");
 
-					/*入庫の場合*/
+
 					if(strSheds.equals("insheds")){
+					/*入庫の場合*/
 						strSheds = "入庫";
 						strCountOut = "0";
 						strSpace = "倉庫";
@@ -121,7 +122,8 @@ public class OperateController extends HttpServlet {
 						String path = "/view/operate/operateConfirm.jsp";
 						RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 						dispatcher.forward(request, response);
-					}else {
+					}else if(strSheds.equals("outsheds")){
+					/*出庫の場合*/
 						/*使用場所未選択の場合*/
 						if(strSpace.equals("nonSpace")) {
 							session.removeAttribute("strDateTime");
@@ -134,8 +136,58 @@ public class OperateController extends HttpServlet {
 							String path = "/view/operate/operateConfirm.jsp";
 							RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 							dispatcher.forward(request, response);
-						/*出庫の場合*/
-						}else {
+						}else if(strSpace.equals("shareSpace")) {
+
+							Stock stock = new Stock();
+							stock.setGoodsId(Integer.parseInt(strGoodsId));
+
+							Goodslist block = new Goodslist();
+							block.stockJudge(stock);
+								/*出庫数が残数よりも多い場合*/
+								if(stock.getStock() < Integer.parseInt(strCountOut)) {
+									session.removeAttribute("strDateTime");
+									session.removeAttribute("reStaff");
+									session.removeAttribute("reGoods");
+									String errorMsg = "";
+									/*nowstockが0の場合*/
+									if(stock.getStock() <= 0) {
+										 errorMsg = "選択した備品の在庫はありません。";
+									}else if(stock.getStock() < Integer.parseInt(strCountOut)) {
+										 errorMsg = "選択した出庫数は残数よりも大きく出庫できません。";
+									}
+									session.setAttribute("errorMsg", errorMsg);
+									//forward
+									String path = "/view/operate/operateConfirm.jsp";
+									RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+									dispatcher.forward(request, response);
+								}else {
+									strSpace = "共用部";
+									strSheds = "出庫";
+									strCountIn = "0";
+									String strOccupantId = "1";
+
+									//確認画面で出力したいものをインスタンスに保存
+									Operating operation = new Operating();
+									operation.setStrSheds(strSheds);
+									operation.setCountIn(Integer.parseInt(strCountIn));
+									operation.setCountOut(Integer.parseInt(strCountOut));
+									operation.setStrSpace(strSpace);
+									session.setAttribute("operation", operation);
+
+									//入居者名と居室番号を取得
+									Occupant reOccupant = new Occupant();
+									reOccupant.setOccupantId(Integer.parseInt(strOccupantId));
+									Occupantlist ocTable = new Occupantlist();
+									ocTable.search(reOccupant);
+									session.setAttribute("reOccupant", reOccupant);
+
+									//forward
+									String path = "/view/operate/operateConfirm.jsp";
+									RequestDispatcher dispatcher = request.getRequestDispatcher(path);
+									dispatcher.forward(request, response);
+								}
+
+						}else if(strSpace.equals("possSpace")){
 							//居室フロア
 							String floor = request.getParameter("floor");
 							if(floor.equals("nonFloor")) {
@@ -180,34 +232,26 @@ public class OperateController extends HttpServlet {
 										String path = "/view/operate/operateConfirm.jsp";
 										RequestDispatcher dispatcher = request.getRequestDispatcher(path);
 										dispatcher.forward(request, response);
-									}else {
-										strSheds = "出庫";
-										strCountIn = "0";
-										/*共用部の場合*/
-										if(strSpace.equals("shareSpace")){
-											strSpace = "共用部";
-											strOccupantId = "1";
+									} else {
+										strSpace = "居室";
+										/*1Fの場合*/
+										if(floor.equals("1")) {
+											strOccupantId = strOccupant1;
 										}
-										/*利用者の居室の場合*/
-										else if(strSpace.equals("possSpace")){
-											strSpace = "居室";
-											/*利用者の居室に出庫する場合 1F or 2F or 3F or 未選択*/
-											/*1Fの場合*/
-											if(floor.equals("1")) {
-												strOccupantId = strOccupant1;
-											}
-											/*2Fの場合*/
-											else if(floor.equals("2")) {
-												strOccupantId = strOccupant2;
-											}
-											/*3Fの場合*/
-											else if(floor.equals("3")) {
-												strOccupantId = strOccupant3;
-											}
+										/*2Fの場合*/
+										else if(floor.equals("2")) {
+											strOccupantId = strOccupant2;
 										}
+										/*3Fの場合*/
+										else if(floor.equals("3")) {
+											strOccupantId = strOccupant3;
+										}
+
 										//確認画面で出力したいものをインスタンスに保存
 										Operating operation = new Operating();
+										strSheds = "出庫";
 										operation.setStrSheds(strSheds);
+										strCountIn = "0";
 										operation.setCountIn(Integer.parseInt(strCountIn));
 										operation.setCountOut(Integer.parseInt(strCountOut));
 										operation.setStrSpace(strSpace);

@@ -105,11 +105,12 @@ public class Recordlist {
 			//ひな型
 
 			pstmt = con.prepareStatement(
-					"SELECT goodsid, date, time, outshed, inshed , stock\r\n" +
-					"FROM recordlist\r\n" +
-					"WHERE goodsid = ? \r\n" +
-					"ORDER BY date DESC, time DESC LIMIT 1\r\n" +
-					"");
+//					"SELECT goodsid, date, time, outshed, inshed , stock\r\n" +
+//					"FROM recordlist\r\n" +
+//					"WHERE goodsid = ? \r\n" +
+//					"ORDER BY date DESC, time DESC LIMIT 1\r\n" +
+					"SELECT goodsid, date, time, outshed, inshed , stock FROM recordlist WHERE goodsid = ? ORDER BY controlid DESC LIMIT 1"
+					);
 			//ひな型に値を流し込み
 			pstmt.setInt(1,record.getGoodsId());
 			//検索系SQL文を自動組み立て、送信
