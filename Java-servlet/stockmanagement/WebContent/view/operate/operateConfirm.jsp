@@ -34,7 +34,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <h3>備品入出庫エラー</h3>
 <p><%= errorMsg %></p>
 
-<p><a href = "/OperateController?value=backFromComfirmError"><button>入力画面へ戻る</button></a></p>
+<p><a href = "/stockmanagement/OperateController?value=backFromComfirmError"><button>入力画面へ戻る</button></a></p>
 
 <% } else {  %>
 <h3>備品入出庫確認画面</h3>
@@ -59,11 +59,11 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p>使用場所：<%= reOccupant.getRoomNumber() %>  <%= reOccupant.getOccupantName() %>様居室</p>
 <% }  %>
 <p>こちらの内容で登録してもよろしいですか？</p>
-<p><a href = "/OperateController?value=complete"><button>登録</button></a></p>
-<p><a href = "/OperateController?value=backFromComfirm"><button>入力画面へ戻る</button></a></p>
+<p><a href = "/stockmanagement/OperateController?value=complete"><button>登録</button></a></p>
+<p><a href = "/stockmanagement/OperateController?value=backFromComfirm"><button>入力画面へ戻る</button></a></p>
 <% } %>
 
-<p><a href="/MenuController?value=fromOperateConfirm"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromOperateConfirm"><button>メニューへ戻る</button></a></p>
 
 
 </main>

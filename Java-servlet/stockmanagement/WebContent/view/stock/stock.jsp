@@ -40,7 +40,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
    <% } %>
 	</table>
 </div>
-<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

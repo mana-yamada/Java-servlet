@@ -43,11 +43,11 @@ String errorMsg = (String) request.getAttribute("errorMsg");
 	<p>備品名：<%= goods.getGoodsName() %></p>
 	<p>備品の単価：<%= goods.getGoodsPrice() %>円</p>
 	<p>上記の内容で備品情報を登録してもよろしいですか？</p>
-	<p><a href ="/GoodsAdd?value=addgoods"><button>登録</button></a></p>
+	<p><a href="/stockmanagement/GoodsAdd?value=addgoods"><button>登録</button></a></p>
 
 <% } %>
-<p><a href="/GoodsAdd?value=reinput"><button>入力画面へ戻る</button></a></p>
-<p><a href="/MenuController?value=fromGoodsAddConfirm"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/GoodsAdd?value=reinput"><button>入力画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromGoodsAddConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

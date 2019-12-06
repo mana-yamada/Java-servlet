@@ -32,10 +32,10 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p>ユーザーID：<%= strStaffId %></p>
 
 <p>上記の内容で職員情報を削除してもよろしいですか？</p>
-<p><a href ="/StaffUndisplay?value=undisplayComplete"><button>削除</button></a></p>
+<p><a href ="/stockmanagement/StaffUndisplay?value=undisplayComplete"><button>削除</button></a></p>
 
-<p><a href="/StaffEdit?value=backFromUndisplay"><button>編集画面へ戻る</button></a></p>
-<p><a href="/MenuController?value=fromStaffEditing"><button id ="#">メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/StaffEdit?value=backFromUndisplay"><button>編集画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromStaffEditing"><button id ="#">メニューへ戻る</button></a></p>
 </main>
 
 </body>

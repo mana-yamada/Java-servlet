@@ -21,13 +21,13 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%-- 備品情報新規登録 --%>
 <main>
 <h3>備品情報新規登録</h3>
-<form action ="/GoodsAdd?value=addconfirm" method = "post">
+<form action ="/stockmanagement/GoodsAdd?value=addconfirm" method = "post">
 <p>品目</p>
 <p>備品名：(30字以内)<input type= "text" name="goodsname"  minlength="1" maxlength = "30"></p>
 <p>備品の単価(1～7ケタの半角数字)：<input type="text" name="goodsprice" minlength="1" maxlength = "7">円</p>
 <p><button>登録内容確認</button></p>
 </form>
-<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

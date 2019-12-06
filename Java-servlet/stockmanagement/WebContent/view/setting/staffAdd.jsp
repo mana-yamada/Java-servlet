@@ -22,7 +22,7 @@
 <p>こちらのシステムを初めて施設で使う際には、この画面から管理者権限の有る職員のユーザーを登録しログインしていただきます。</p>
 <h1>初期設定</h1>
 <h3>職員情報新規登録</h3>
-<form action ="/SettingController?value=addConfirm" method = "post">
+<form action ="/stockmanagement/SettingController?value=addConfirm" method = "post">
 
 <p>職員名：(30字以内)</p>
 <p><input type= "text" name="staffName"  minlength="1" maxlength = "30"></p>

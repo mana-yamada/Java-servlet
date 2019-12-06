@@ -48,7 +48,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 		 	<td><%= target.getGoodsName() %></td>
 		 	<td><%= target.getGoodsPrice()%></td>
 		 	<td>
-		 	<form action="/GoodsChange" method="get">
+		 	<form action="stockmanagement/GoodsChange" method="get">
 			 	<input type="hidden" name="goodsId" value="<%= target.getGoodsId() %>">
 			 	<input type="hidden" name="goodsName" value="<%= target.getGoodsName() %>">
 			 	<input type="hidden" name="goodsPrice" value="<%= target.getGoodsPrice() %>">
@@ -57,7 +57,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 		 	</td>
 
 		    <td>
-		    <form action="/GoodsUndisplay" method="get">
+		    <form action="stockmanagement/GoodsUndisplay" method="get">
 			 	<input type="hidden" name="goodsId" value="<%= target.getGoodsId() %>">
 			 	<input type="hidden" name="goodsName" value="<%= target.getGoodsName() %>">
 			 	<input type="hidden" name="goodsPrice" value="<%= target.getGoodsPrice() %>">
@@ -69,7 +69,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	    </tr>
 
 		</table>
-		<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+		<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 </div>
 

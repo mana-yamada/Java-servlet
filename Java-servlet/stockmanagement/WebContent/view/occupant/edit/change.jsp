@@ -36,7 +36,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 
 
 
-<form action ="/OccupantChange?value=changeConfirm" method ="post">
+<form action ="/stockmanagement/OccupantChange?value=changeConfirm" method ="post">
 
 <%--入居者名 --%>
 <p>入居者名</p>
@@ -61,8 +61,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <button>変更内容確認</button>
 </form>
 
-<p><a href="/OccupantEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
-<p><a href="/MenuController?value=fromOccupantEditing"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/OccupantEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromOccupantEditing"><button>メニューへ戻る</button></a></p>
 </main>
 
 <script type="text/javascript" src="/js/occupant.js"></script>

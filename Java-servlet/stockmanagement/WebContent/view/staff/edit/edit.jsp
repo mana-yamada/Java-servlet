@@ -54,7 +54,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 		    <td><%= target.getStaffName() %></td>
 			<td><%= kengenn %></td>
 			<td>
-		 	<form action="/StaffChange" method="get">
+		 	<form action="/stockmanagement/StaffChange" method="get">
 			 	<input type="hidden" name="staffId" value="<%= strStaffId %>">
 			 	<input type="hidden" name="staffName" value="<%= target.getStaffName() %>">
 			 	<input type="hidden" name="authority" value="<%= target.getAuthority() %>">
@@ -63,7 +63,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 		 	</td>
 
 		    <td>
-		    <form action="/StaffUndisplay" method="get">
+		    <form action="/stockmanagement/StaffUndisplay" method="get">
 				<input type="hidden" name="staffId" value="<%= strStaffId %>">
 			 	<input type="hidden" name="staffName" value="<%= target.getStaffName() %>">
 			 	<input type="hidden" name="authority" value="<%= target.getAuthority() %>">
@@ -75,7 +75,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	    </tr>
 
 		</table>
-		<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+		<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 </div>
 

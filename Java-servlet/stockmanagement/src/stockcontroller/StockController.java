@@ -19,7 +19,7 @@ public class StockController extends HttpServlet{
 		Staff loginUser = (Staff)session.getAttribute("loginUser");
 		if(loginUser == null) {
 			//redirect
-			String path = "/view/login/login.jsp";
+			String path = "/stockmanagement/view/login/login.jsp";
 			response.sendRedirect(path);
 		}else {
 			request.setCharacterEncoding("UTF-8");

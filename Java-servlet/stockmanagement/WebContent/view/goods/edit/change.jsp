@@ -34,7 +34,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p>変更前の備品名：<%= editGoods.getGoodsName() %></p>
 <p>変更前の単価：<%= editGoods.getGoodsPrice() %>円</p>
 
-<form action ="/GoodsChange?value=changeConfirm" method ="post">
+<form action ="/stockmanagement/GoodsChange?value=changeConfirm" method ="post">
 
 <%--備品名 --%>
 <p>備品名</p>
@@ -52,8 +52,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <button>変更内容確認</button>
 </form>
 
-<p><a href="/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
-<p><a href="/MenuController?-value=fromGoodsEditing"><button>メニューへ戻る</button></a></p>
+<p><a href="stockmanagement/GoodsEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
+<p><a href="stockmanagement/MenuController?-value=fromGoodsEditing"><button>メニューへ戻る</button></a></p>
 </main>
 
 <script type="text/javascript" src="/js/goods.js">

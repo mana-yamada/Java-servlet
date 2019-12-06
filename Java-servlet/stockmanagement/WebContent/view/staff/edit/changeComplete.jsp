@@ -24,8 +24,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%-- 職員情報変更完了 --%>
 <h3>職員情報 変更完了</h3>
 <p>職員情報の変更が完了しました</p>
-<a href="/StaffEdit"><button>職員情報編集を続ける</button></a>
-<a href="/MenuController"><button>メニューへ戻る</button></a>
+<a href="/stockmanagement/StaffEdit"><button>職員情報編集を続ける</button></a>
+<a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
 

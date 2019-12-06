@@ -42,7 +42,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	<% }%>
 </p>
 
-<form action ="/StaffChange?value=changeConfirm" method ="post">
+<form action ="/stockmanagement/StaffChange?value=changeConfirm" method ="post">
 
 <%--職員名 --%>
 <p>職員名</p>
@@ -58,8 +58,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <button>変更内容確認</button>
 </form>
 
-<p><a href="/StaffEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
-<p><a href="/MenuController?value=fromStaffEditing"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/StaffEdit?value=backFromChange"><button>編集画面に戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromStaffEditing"><button>メニューへ戻る</button></a></p>
 </main>
 
 <script type="text/javascript" src="/js/staff.js">

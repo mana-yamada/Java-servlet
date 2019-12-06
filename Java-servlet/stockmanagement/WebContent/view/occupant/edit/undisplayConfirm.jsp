@@ -34,8 +34,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p>上記の内容で入居者情報を削除してもよろしいですか？</p>
 <p><a href ="/OccupantUndisplay?value=undisplayComplete"><button>削除</button></a></p>
 
-<p><a href="/OccupantEdit?value=backFromUndisplay"><button>編集画面へ戻る</button></a></p>
-<p><a href="/MenuController?value=fromOccupantEditing"><button id ="#">メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/OccupantEdit?value=backFromUndisplay"><button>編集画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromOccupantEditing"><button id ="#">メニューへ戻る</button></a></p>
 </main>
 
 </body>

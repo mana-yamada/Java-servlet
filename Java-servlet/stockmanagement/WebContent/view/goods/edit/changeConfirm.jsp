@@ -34,8 +34,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	<h3>備品情報入力エラー</h3>
 	<p><%= errorMsg %></p>
 
-	<a href="/GoodsChange?value=reChangeInputByError"><button>入力画面へ戻る</button></a>
-	<a href="/GoodsEdit?value=backFromConfirmByError"><button>備品情報編集画面へ戻る</button></a>
+	<a href="/stockmanagement/GoodsChange?value=reChangeInputByError"><button>入力画面へ戻る</button></a>
+	<a href="/stockmanagement/GoodsEdit?value=backFromConfirmByError"><button>備品情報編集画面へ戻る</button></a>
 <% } else { %>
 	<%-- エラーがなく問題ない場合 --%>
 	<h3>備品情報 変更確認</h3>
@@ -45,12 +45,12 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <p>変更後の単価：<%= changeGoods.getGoodsPrice() %></p>
 <p>上記の内容で備品情報を変更してもよろしいですか？</p>
 
-<p><a href="/GoodsChange?value=changeAction"><button>変更</button></a></p>
+<p><a href="/stockmanagement/GoodsChange?value=changeAction"><button>変更</button></a></p>
 
-<p><a href="/GoodsChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
-<p><a href="/GoodsEdit?value=backFromConfirm"><button>備品情報編集画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/GoodsChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/GoodsEdit?value=backFromConfirm"><button>備品情報編集画面へ戻る</button></a></p>
 <% } %>
-<p><a href="/MenuController?value=fromGoodsChangeConfirm"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromGoodsChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

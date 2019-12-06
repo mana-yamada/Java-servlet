@@ -21,7 +21,7 @@ public class LogoutController extends HttpServlet {
 		Staff loginUser = (Staff)session.getAttribute("loginUser");
 		if(loginUser == null) {
 			//redirect
-			path = "/view/login/login.jsp";
+			path = "/stockmanagement/view/login/login.jsp";
 			response.sendRedirect(path);
 		}else {
 			String parameter ="";

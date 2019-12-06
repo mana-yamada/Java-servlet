@@ -35,8 +35,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	<h3>職員情報入力エラー</h3>
 	<p><%= errorMsg %></p>
 
-	<a href="/StaffChange?value=reChangeInputByError"><button>入力画面へ戻る</button></a>
-	<a href="/StaffEdit?value=backFromConfirmByError"><button>職員情報編集画面へ戻る</button></a>
+	<a href="/stockmanagement/StaffChange?value=reChangeInputByError"><button>入力画面へ戻る</button></a>
+	<a href="/stockmanagement/StaffEdit?value=backFromConfirmByError"><button>職員情報編集画面へ戻る</button></a>
 <% } else { %>
 	<%-- エラーがなく問題ない場合 --%>
 	<h3>職員情報 変更確認</h3>
@@ -61,12 +61,12 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 
 <p>上記の内容で職員情報を変更してもよろしいですか？</p>
 
-<p><a href="/StaffChange?value=changeAction"><button>変更</button></a></p>
+<p><a href="/stockmanagement/StaffChange?value=changeAction"><button>変更</button></a></p>
 
-<p><a href="/StaffChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
-<p><a href="/StaffEdit?value=backFromConfirm"><button>職員情報編集画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/StaffChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/StaffEdit?value=backFromConfirm"><button>職員情報編集画面へ戻る</button></a></p>
 <% } %>
-<p><a href="/MenuController?value=fromStaffChangeConfirm"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromStaffChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

@@ -37,17 +37,17 @@ Occupant registerOccupant = (Occupant)session.getAttribute("registerOccupant");
 <% if(errorMsg != null){ %>
 	<h3>入居者情報 入力エラー</h3>
 	<p><%= errorMsg %></p>
-	<a href="/OccupantAdd?value=backFromAddError"><button>入力画面へ戻る</button></a>
+	<a href="/stockmanagement/OccupantAdd?value=backFromAddError"><button>入力画面へ戻る</button></a>
 <% } else { %>
 <%-- エラーがなければ入居者情報 登録確認    floorId, roomNumber ,occupantName--%>
 	<h3>入居者情報 登録確認</h3>
 	<p>入居フロア：<%= registerOccupant.getFloorId() %></p>
 	<p>居室番号：<%= registerOccupant.getRoomNumber() %></p>
 	<p>入居者名：<%= registerOccupant.getOccupantName() %></p>
-	<a href ="/OccupantAdd?value=addAction"><button>登録</button></a>
-	<a href="/OccupantAdd?value=backFromAdd"><button>入力画面へ戻る</button></a>
+	<a href ="/stockmanagement/OccupantAdd?value=addAction"><button>登録</button></a>
+	<a href ="/stockmanagement/OccupantAdd?value=backFromAdd"><button>入力画面へ戻る</button></a>
 <% } %>
-<a href="/MenuController?value=fromOccupantAddConfirm"><button>メニューへ戻る</button></a>
+<a href="/stockmanagement/MenuController?value=fromOccupantAddConfirm"><button>メニューへ戻る</button></a>
 </main>
 
 </body>

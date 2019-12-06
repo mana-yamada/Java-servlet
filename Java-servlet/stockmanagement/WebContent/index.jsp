@@ -9,9 +9,9 @@
 <link rel = "stylesheet" href="/css/styles.css">
 </head>
 <body>
-<p><a href= "/LoginController">ログイン画面</a></p>
+<p><a href= "/stockmanagement/LoginController">ログイン画面</a></p>
 
 <p>※初めに使用する方は下記のリンクから初期設定をしてください。</p>
-<p><a href= "/SettingController">初期設定</a></p>
+<p><a href= "/stockmanagement/SettingController">初期設定</a></p>
 </body>
 </html>

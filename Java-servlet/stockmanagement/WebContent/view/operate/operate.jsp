@@ -21,7 +21,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	<main>
 	<h3>備品入出庫入力</h3>
 
-	<form action ="/OperateController" method = "get">
+	<form action ="/stockmanagement/OperateController" method = "get">
 
 
 		<div id = "recordDate">
@@ -190,7 +190,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	<button>入力内容確認</button>
 	</form>
 
-    <p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+    <p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 
 	<script src="/js/operate.js">

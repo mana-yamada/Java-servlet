@@ -38,8 +38,8 @@ String strStaffId = String.format("%05d",staffId );
 		    <p>管理者権限：無</p>
 	<% }%>
 
-<p><a href="/StaffAdd"><button>登録を続ける</button></a></p>
-<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/StaffAdd"><button>登録を続ける</button></a></p>
+<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

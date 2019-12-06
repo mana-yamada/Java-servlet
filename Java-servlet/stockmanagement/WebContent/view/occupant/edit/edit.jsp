@@ -66,7 +66,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 			 	<td><%= target.getOccupantName() %></td>
 
 			 	<td>
-			 	<form action="/OccupantChange" method="get">
+			 	<form action="/stockmanagement/OccupantChange" method="get">
 				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
 			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
 				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
@@ -76,7 +76,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 			 	</td>
 
 			    <td>
-			    <form action="/OccupantUndisplay" method="get">
+			    <form action="/stockmanagement/OccupantUndisplay" method="get">
 				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
 			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
 				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
@@ -109,7 +109,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 			 	<td><%= target.getOccupantName() %></td>
 
 			 	<td>
-			 	<form action="/OccupantChange" method="get">
+			 	<form action="/stockmanagement/OccupantChange" method="get">
 				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
 			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
 				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
@@ -119,7 +119,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 			 	</td>
 
 			    <td>
-			    <form action="/OccupantUndisplay" method="get">
+			    <form action="/stockmanagement/OccupantUndisplay" method="get">
 				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
 			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
 				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
@@ -154,7 +154,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 			 	<td><%= target.getOccupantName() %></td>
 
 			 	<td>
-			 	<form action="/OccupantChange" method="get">
+			 	<form action="/stockmanagement/OccupantChange" method="get">
 				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
 			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
 				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
@@ -164,7 +164,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 			 	</td>
 
 			    <td>
-			    <form action="/OccupantUndisplay" method="get">
+			    <form action="/stockmanagement/OccupantUndisplay" method="get">
 				 	<input type="hidden" name="occupantId" value="<%= target.getOccupantId() %>">
 			 		<input type="hidden" name="floorId" value="<%= target.getFloorId() %>">
 				 	<input type="hidden" name="roomNumber" value="<%= target.getRoomNumber() %>">
@@ -177,7 +177,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
      	<%}%>
 	</table>
 
-	<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+	<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 	</main>
 </div>
 

@@ -23,8 +23,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%-- 入居者情報変更完了 --%>
 <h3>入居者情報 変更完了</h3>
 <p>入居者情報の変更が完了しました</p>
-<a href="/OccupantEdit"><button>入居者情報編集を続ける</button></a>
-<a href="/MenuController"><button>メニューへ戻る</button></a>
+<a href="/stockmanagement/OccupantEdit"><button>入居者情報編集を続ける</button></a>
+<a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
 

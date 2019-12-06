@@ -35,8 +35,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 	<h3>入居者情報入力エラー</h3>
 	<p><%= errorMsg %></p>
 
-	<a href="/OccupantChange?value=reChangeInputByError"><button>入力画面へ戻る</button></a>
-	<a href="/OccupantEdit?value=backFromConfirmByError"><button>入居者情報編集画面へ戻る</button></a>
+	<a href="/stockmanagement/OccupantChange?value=reChangeInputByError"><button>入力画面へ戻る</button></a>
+	<a href="/stockmanagement/OccupantEdit?value=backFromConfirmByError"><button>入居者情報編集画面へ戻る</button></a>
 <% } else { %>
 	<%-- エラーがなく問題ない場合 --%>
 	<h3>入居者情報 変更確認</h3>
@@ -51,12 +51,12 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 
 <p>上記の内容で入居者情報を変更してもよろしいですか？</p>
 
-<p><a href="/OccupantChange?value=changeAction"><button>変更</button></a></p>
+<p><a href="/stockmanagement/OccupantChange?value=changeAction"><button>変更</button></a></p>
 
-<p><a href="/OccupantChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
-<p><a href="/OccupantEdit?value=backFromConfirm"><button>入居者情報編集画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/OccupantChange?value=reChangeInput"><button>入力画面へ戻る</button></a></p>
+<p><a href="/stockmanagement/OccupantEdit?value=backFromConfirm"><button>入居者情報編集画面へ戻る</button></a></p>
 <% } %>
-<p><a href="/MenuController?value=fromOccupantChangeConfirm"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromOccupantChangeConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

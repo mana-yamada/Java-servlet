@@ -21,7 +21,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%-- 入居者情報新規登録 --%>
 <main>
 <h3>入居者情報新規登録</h3>
-<form action ="/OccupantAdd?value=addConfirm" method = "post">
+<form action ="/stockmanagement/OccupantAdd?value=addConfirm" method = "post">
 <p>登録する入居者</p>
 <p>入居者名：(30字以内)<input type= "text" name="occupantName"  minlength="1" maxlength = "30"></p>
 <p>
@@ -80,7 +80,7 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 
 <button>登録内容確認</button>
 </form>
-<a href="/MenuController"><button>メニューへ戻る</button></a>
+<a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a>
 </main>
 
 <script>

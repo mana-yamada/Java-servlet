@@ -22,13 +22,13 @@ public class GoodsUndisplay extends HttpServlet {
 		Staff loginUser = (Staff)session.getAttribute("loginUser");
 		if(loginUser == null ) {
 			//redirect
-			String path = "/view/login/login.jsp";
+			String path = "/stockmanagement/view/login/login.jsp";
 			response.sendRedirect(path);
 
 		} else if(loginUser.getAuthority().equals("NO")) {
 			session.removeAttribute("loginUser");
 			//redirect
-			String path = "/view/login/login.jsp";
+			String path = "/stockmanagement/view/login/login.jsp";
 			response.sendRedirect(path);
 		} else {
 			request.setCharacterEncoding("UTF-8");

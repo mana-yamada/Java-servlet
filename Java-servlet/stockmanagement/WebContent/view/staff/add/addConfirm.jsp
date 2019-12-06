@@ -38,7 +38,7 @@ Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 <%if(errorMsg != null){ %>
 	<h3>職員情報 入力エラー</h3>
 	<p><%= errorMsg %></p>
-	<p><a href="/StaffAdd?value=backFromAddError"><button>入力画面へ戻る</button></a></p>
+	<p><a href="/stockmanagement/StaffAdd?value=backFromAddError"><button>入力画面へ戻る</button></a></p>
 <% } else { %>
 <%-- エラーがなければ職員情報 登録確認    floorId, roomNumber ,staffName--%>
 	<h3>職員情報 登録確認</h3>
@@ -51,10 +51,10 @@ Staff registerStaff = (Staff)session.getAttribute("registerStaff");
 		    <p>管理者権限：無</p>
 	<% }%>
 
-	<p><a href ="/StaffAdd?value=addAction"><button>登録</button></a></p>
-	<p><a href="/StaffAdd?value=backFromAdd"><button>入力画面へ戻る</button></a></p>
+	<p><a href="/stockmanagement/StaffAdd?value=addAction"><button>登録</button></a></p>
+	<p><a href="/stockmanagement/StaffAdd?value=backFromAdd"><button>入力画面へ戻る</button></a></p>
 <% } %>
-<p><a href="/MenuController?value=fromStaffAddConfirm"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/MenuController?value=fromStaffAddConfirm"><button>メニューへ戻る</button></a></p>
 </main>
 
 </body>

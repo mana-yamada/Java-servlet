@@ -153,7 +153,8 @@ public class Recordlist {
 
 	private void driverConnect() {
 		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
+//			Class.forName("com.mysql.cj.jdbc.Driver");
+			Class.forName("com.mysql.jdbc.Driver");
 		}catch(ClassNotFoundException e) {
 			System.out.println("ドライバーが正しくセットされていません");
 		}
@@ -163,7 +164,7 @@ public class Recordlist {
 	private void readFile() {
 		//1つのprivateメソッドにする
 		try {
-			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagementtest\\MySQLdocs.properties");
+			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagement\\MySQLdocs.properties");
 			Properties p = new Properties();
 			p.load(fr);
 			 url = p.getProperty("url");

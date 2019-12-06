@@ -23,8 +23,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%-- 備品情報登録完了 --%>
 <h3>備品情報 登録完了</h3>
 <p>備品情報の新規登録が完了しました</p>
-<p><a href="/GoodsAdd"><button>登録を続ける</button></a></p>
-<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/GoodsAdd"><button>登録を続ける</button></a></p>
+<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

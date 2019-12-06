@@ -23,8 +23,8 @@ Staff loginUser = (Staff)session.getAttribute("loginUser");
 <%-- 職員情報削除完了 --%>
 <h3>職員情報 削除完了</h3>
 <p>職員情報の削除が完了しました</p>
-<p><a href="/StaffEdit"><button>職員情報編集を続ける</button></a></p>
-<p><a href="/MenuController"><button>メニューへ戻る</button></a></p>
+<p><a href="/stockmanagement/StaffEdit"><button>職員情報編集を続ける</button></a></p>
+<p><a href="/stockmanagement/MenuController"><button>メニューへ戻る</button></a></p>
 </main>
 
 

@@ -57,7 +57,7 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("errorMsg", errorMsg);
 
 			//redirect
-			String path = "/view/menu/menu.jsp";
+			String path = "/stockmanagement/view/menu/menu.jsp";
 			response.sendRedirect(path);
 		}else {
 		    try {
@@ -87,7 +87,7 @@ public class LoginController extends HttpServlet {
 					session.removeAttribute("loginUser");
 
 					//redirect
-					String path = "/view/menu/menu.jsp";
+					String path = "/stockmanagement/view/menu/menu.jsp";
 					response.sendRedirect(path);
 				}else {
 					//SQLで検索したデータをloginUserインスタンスの参照に保存
@@ -96,7 +96,7 @@ public class LoginController extends HttpServlet {
 					//参照を変えたloginUserインスタンスに格納された復号パスワードと入力されたパスワード文字列が位置しているか確認
 					if(password.equals(loginUser.getPassword())) {
 						//リダイレクト
-						String path = "/view/menu/menu.jsp";
+						String path = "/stockmanagement/view/menu/menu.jsp";
 						response.sendRedirect(path);
 					}else {
 						//入力されたユーザーIDのデータがない場合やパスワードとIDが一致しない場合は全てエラー文を出す
@@ -105,7 +105,7 @@ public class LoginController extends HttpServlet {
 						//インスタンスの削除
 						session.removeAttribute("loginUser");
 						//リダイレクト
-						String path = "/view/menu/menu.jsp";
+						String path = "/stockmanagement/view/menu/menu.jsp";
 						response.sendRedirect(path);
 					}
 				}
@@ -119,7 +119,7 @@ public class LoginController extends HttpServlet {
 				session.setAttribute("errorMsg", errorMsg);
 
 				//リダイレクト
-				String path = "/view/menu/menu.jsp";
+				String path = "/stockmanagement/view/menu/menu.jsp";
 				response.sendRedirect(path);
 			}
 		}

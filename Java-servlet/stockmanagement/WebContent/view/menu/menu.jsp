@@ -23,7 +23,7 @@
 <main>
 <h3>ログインエラー</h3>
  <p><%= errorMsg %></p>
- <p><a href = "/LoginController?value=backFromMenuError">ログイン画面に戻る</a></p>
+ <p><a href = "/stockmanagement/LoginController?value=backFromMenuError">ログイン画面に戻る</a></p>
 </main>
 
 <% } else { %>
@@ -33,15 +33,15 @@
 	<main>
 	<h3>メニュー画面</h3>
 	<%-- ログインユーザー全員に見せる--%>
-	<p><a href="/OperateController?value=fromMenu"><button id="">在庫入出庫画面</button></a></p>
-	<p><a href="/StockController"><button id="">現在の備品残数</button></a></p>
+	<p><a href="/stockmanagement/OperateController?value=fromMenu"><button id="">在庫入出庫画面</button></a></p>
+	<p><a href="/stockmanagement/StockController"><button id="">現在の備品残数</button></a></p>
 	<% if (loginUser.getAuthority().equals("YES") ) { %>
 	<p>職員（担当者）情報管理</p>
-	<p><a href="/StaffEdit"><button id="">職員情報編集</button></a>  <a href="/StaffAdd"><button id="">新規登録</button></a></p>
+	<p><a href="/stockmanagement//StaffEdit"><button id="">職員情報編集</button></a>  <a href="/StaffAdd"><button id="">新規登録</button></a></p>
 	<p>入居者情報管理</p>
-	<p><a href="/OccupantEdit"><button id="">入居者情報編集</button></a>  <a href="/OccupantAdd"><button id="">新規登録</button></a></p>
+	<p><a href="/stockmanagement/OccupantEdit"><button id="">入居者情報編集</button></a>  <a href="/OccupantAdd"><button id="">新規登録</button></a></p>
 	<p>備品情報管理</p>
-	<p><a href="/GoodsEdit"><button id="">備品情報編集</button></a>  <a href="/GoodsAdd"><button id="">新規登録</button></a></p>
+	<p><a href="/stockmanagement/GoodsEdit"><button id="">備品情報編集</button></a>  <a href="/GoodsAdd"><button id="">新規登録</button></a></p>
 	<% } %>
 	</main>
 <%  } %>

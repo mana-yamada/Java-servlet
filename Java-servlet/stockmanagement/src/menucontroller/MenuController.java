@@ -22,7 +22,7 @@ public class MenuController extends HttpServlet {
 		HttpSession session = request.getSession();
 		Staff loginUser = (Staff)session.getAttribute("loginUser");
 		if(loginUser == null) {
-			path = "/view/login/login.jsp";
+			path = "/stockmanagement/view/login/login.jsp";
 			response.sendRedirect(path);
 		}else {
 			String parameter ="";

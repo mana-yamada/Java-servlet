@@ -34,8 +34,8 @@
 	<% } %>
 
 
-<p><a href="/SettingController"><button>登録を続ける</button></a></p>
-<p><a href="/LoginController"><button>ログイン画面</button></a></p>
+<p><a href="/stockmanagement/SettingController"><button>登録を続ける</button></a></p>
+<p><a href="/stockmanagement/LoginController"><button>ログイン画面</button></a></p>
 </main>
 
 </body>

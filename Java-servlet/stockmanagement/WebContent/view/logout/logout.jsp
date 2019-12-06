@@ -17,7 +17,7 @@
 <main>
 <h3>ログアウト</h3>
 <p>ログアウトしました</p>
-<p><a href = "/LoginController">ログイン画面に戻る</a></p>
+<p><a href = "/stockmanagement/LoginController">ログイン画面に戻る</a></p>
 </main>
 
 
