@@ -14,7 +14,7 @@ String strStaffId = String.format("%05d",staffId );
 <meta charset="UTF-8">
 <title>職員情報登録完了</title>
 <meta name="viewport" content="width=device-width initial-scale=1">
-<link rel = "stylesheet" href="/css/styles.css">
+<link rel = "stylesheet" href="/stockmanagement/css/styles.css">
 </head>
 
 <body>

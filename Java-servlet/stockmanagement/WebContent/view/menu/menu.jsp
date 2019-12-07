@@ -13,7 +13,7 @@
 <meta charset="UTF-8">
 <title>メニュー画面</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel = "stylesheet" href="/css/styles.css">
+<link rel = "stylesheet" href="/stockmanagement/css/styles.css">
 </head>
 
 <body>
@@ -37,11 +37,11 @@
 	<p><a href="/stockmanagement/StockController"><button id="">現在の備品残数</button></a></p>
 	<% if (loginUser.getAuthority().equals("YES") ) { %>
 	<p>職員（担当者）情報管理</p>
-	<p><a href="/stockmanagement/StaffEdit"><button id="">職員情報編集</button></a>  <a href="/StaffAdd"><button id="">新規登録</button></a></p>
+	<p><a href="/stockmanagement/StaffEdit"><button id="">職員情報編集</button></a>  <a href="/stockmanagement/StaffAdd"><button id="">新規登録</button></a></p>
 	<p>入居者情報管理</p>
-	<p><a href="/stockmanagement/OccupantEdit"><button id="">入居者情報編集</button></a>  <a href="/OccupantAdd"><button id="">新規登録</button></a></p>
+	<p><a href="/stockmanagement/OccupantEdit"><button id="">入居者情報編集</button></a>  <a href="/stockmanagement/OccupantAdd"><button id="">新規登録</button></a></p>
 	<p>備品情報管理</p>
-	<p><a href="/stockmanagement/GoodsEdit"><button id="">備品情報編集</button></a>  <a href="/GoodsAdd"><button id="">新規登録</button></a></p>
+	<p><a href="/stockmanagement/GoodsEdit"><button id="">備品情報編集</button></a>  <a href="/stockmanagement/GoodsAdd"><button id="">新規登録</button></a></p>
 	<% } %>
 	</main>
 <%  } %>
