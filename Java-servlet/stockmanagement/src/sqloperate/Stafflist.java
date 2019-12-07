@@ -1,10 +1,15 @@
 package sqloperate;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.Reader;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
 
 import beans.Staff;
 import model.UsingCrypt;
@@ -367,27 +372,28 @@ public class Stafflist {
 	}
 
 	//DB接続先のファイル読み込み
-	private void readFile() {
-		url = "jdbc:mysql://localhost:3306/stockmanagement";
-		userName = "root";
-		pass = "@Stockmana01";
-	}
 //	private void readFile() {
-//		//1つのprivateメソッドにする
-//		try {
-//			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagement\\MySQLdocs.properties");
-//			Properties p = new Properties();
-//			p.load(fr);
-//			url = p.getProperty("url");
-//			userName = p.getProperty("userName");
-//			pass = p.getProperty("pass");
-//			fr.close();
-//		}catch(FileNotFoundException e) {
-//			e.printStackTrace();
-//		}catch(IOException e) {
-//			e.printStackTrace();
-//		}
+//		url = "jdbc:mysql://localhost:3306/stockmanagement";
+//		url = "jdbc:mysql://52.194.227.6:3306/stockmanagement";
+//		userName = "root";
+//		pass = "@Stockmana01";
 //	}
+	private void readFile() {
+		//1つのprivateメソッドにする
+		try {
+			Reader fr = new FileReader("C:\\Users\\mana-koba\\Java-servlet\\Java-servlet\\stockmanagement\\MySQLdocs.properties");
+			Properties p = new Properties();
+			p.load(fr);
+			url = p.getProperty("url");
+			userName = p.getProperty("userName");
+			pass = p.getProperty("pass");
+			fr.close();
+		}catch(FileNotFoundException e) {
+			e.printStackTrace();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 
 
